@@ -1,19 +1,28 @@
-require('dotenv').config()
-const express = require('express')
-const app = express()
-const userRoute = require('./route/userRoute');
-const videoRoute = require('./route/videoRoute');
-const commentRoute = require('./route/commentRoute');
+require('dotenv').config();
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
+const userRoute = require('./routes/userRoute');
+const videoRoute = require('./routes/videoRoute');
+const commentRoute = require('./routes/commentRoute');
 
-//middlewares
+//middleware
 app.use(express.json());
 
-//routes
-app.use('/api/user', userRoute); //user routes
-app.use('/api/video', videoRoute); //video routes
-app.use('/api/comment', commentRoute); //comment routes
+//* routes
+app.use('/api/user', userRoute);
+app.use('/api/video', videoRoute);
+app.use('/api/comment', commentRoute);
 
-app.listen(process.env.PORT || 5000, () => {
-    console.log(`listenning on port ${process.env.PORT}... `);
-})
-
+//* connect to database and start server
+mongoose
+    .connect(process.env.MONGODB_URL)
+    .then(() => {
+        app.listen(process.env.PORT || 5000, () => {
+            console.log('connect to database successfully');
+            console.log(`listening on port ${process.env.PORT}... `);
+        });
+    })
+    .catch((error) => {
+        console.log(error);
+    });

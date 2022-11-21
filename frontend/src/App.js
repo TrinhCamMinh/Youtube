@@ -37,12 +37,12 @@ function App() {
                             <Routes>
                                 <Route path='/'>
                                     <Route index element={<Home />} />
-                                    <Route path='signin' element={<SignIn />} />
-                                    <Route path='liked' element={<LikedVideo />} />
-                                    <Route path='later' element={<WatchLater />} />
-                                    <Route path='history' element={<History />} />
-                                    <Route path='Profile' element={<Profile />} />
-                                    <Route path='video'>
+                                    <Route path='/signin' element={<SignIn />} />
+                                    <Route path='/liked' element={<LikedVideo />} />
+                                    <Route path='/later' element={<WatchLater />} />
+                                    <Route path='/history' element={<History />} />
+                                    <Route path='/Profile' element={<Profile />} />
+                                    <Route path='/video'>
                                         <Route path=':id' element={<Video />} />
                                     </Route>
                                 </Route>

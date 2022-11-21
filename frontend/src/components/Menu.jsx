@@ -17,6 +17,8 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import SettingsBrightnessOutlinedIcon from '@mui/icons-material/SettingsBrightnessOutlined';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import { Link } from 'react-router-dom';
 const Container = styled.div`
     flex: 1;
@@ -24,6 +26,7 @@ const Container = styled.div`
     height: 100vh;
     color: ${({ theme }) => theme.text};
     font-size: 14px;
+    font-weight: 300;
     position: sticky;
     top: 0;
 `;
@@ -34,7 +37,8 @@ const Logo = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 500;
     margin-bottom: 25px;
 `;
 
@@ -47,7 +51,8 @@ const Item = styled.div`
     align-items: center;
     gap: 20px;
     cursor: pointer;
-    padding: 7.5px 0px;
+    padding: 7.5px;
+    border-radius: 10px;
     &:hover {
         background-color: ${({ theme }) => theme.soft};
     }
@@ -60,12 +65,12 @@ const Hr = styled.hr`
 
 const Login = styled.div``;
 const Button = styled.button`
-    padding: 5px 15px;
+    padding: 10px 15px;
     background-color: transparent;
     border: 1px solid #3ea6ff;
     color: #3ea6ff;
-    border-radius: 3px;
-    font-weight: 500;
+    border-radius: 30px;
+    font-weight: 300;
     margin-top: 10px;
     cursor: pointer;
     display: flex;
@@ -74,7 +79,7 @@ const Button = styled.button`
 `;
 
 const Title = styled.h2`
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     color: #aaaaaa;
     margin-bottom: 20px;
@@ -87,7 +92,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
                 <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Logo>
                         <Img src={LamaTube} />
-                        LamaTube
+                        DMT
                     </Logo>
                 </Link>
                 <Item>
@@ -107,22 +112,36 @@ const Menu = ({ darkMode, setDarkMode }) => {
                     <VideoLibraryOutlinedIcon />
                     Library
                 </Item>
-                <Item>
-                    <HistoryOutlinedIcon />
-                    History
-                </Item>
+                <Link to='history' style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Item>
+                        <HistoryOutlinedIcon />
+                        History
+                    </Item>
+                </Link>
+                <Link to='later' style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Item>
+                        <ScheduleIcon />
+                        Watch later
+                    </Item>
+                </Link>
+                <Link to='liked' style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Item>
+                        <ThumbUpOutlinedIcon />
+                        Liked videos
+                    </Item>
+                </Link>
                 <Hr />
                 <Login>
                     Sign in to like videos, comment, and subscribe.
                     <Link to='signin' style={{ textDecoration: 'none' }}>
                         <Button>
                             <AccountCircleOutlinedIcon />
-                            SIGN IN
+                            Sign In
                         </Button>
                     </Link>
                 </Login>
                 <Hr />
-                <Title>BEST OF LAMATUBE</Title>
+                <Title>Collections</Title>
                 <Item>
                     <LibraryMusicOutlinedIcon />
                     Music

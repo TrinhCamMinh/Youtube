@@ -7,7 +7,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Video from './pages/Video';
 import SignIn from './pages/SignIn';
-
+import LikedVideo from './pages/LikedVideo';
+import WatchLater from './pages/WatchLater';
+import Profile from './pages/Profile';
+import History from './pages/History';
 const Container = styled.div`
     display: flex;
 `;
@@ -35,6 +38,10 @@ function App() {
                                 <Route path='/'>
                                     <Route index element={<Home />} />
                                     <Route path='signin' element={<SignIn />} />
+                                    <Route path='liked' element={<LikedVideo />} />
+                                    <Route path='later' element={<WatchLater />} />
+                                    <Route path='history' element={<History />} />
+                                    <Route path='Profile' element={<Profile />} />
                                     <Route path='video'>
                                         <Route path=':id' element={<Video />} />
                                     </Route>

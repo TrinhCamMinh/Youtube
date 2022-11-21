@@ -67,8 +67,8 @@ const ChannelInfo = styled.div`
 `;
 
 const Image = styled.img`
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
 `;
 
@@ -157,13 +157,6 @@ const Video = () => {
                 <Comments />
             </Content>
             <Recommendation>
-                <Card type='sm' />
-                <Card type='sm' />
-                <Card type='sm' />
-                <Card type='sm' />
-                <Card type='sm' />
-                <Card type='sm' />
-                <Card type='sm' />
                 <Card type='sm' />
                 <Card type='sm' />
                 <Card type='sm' />

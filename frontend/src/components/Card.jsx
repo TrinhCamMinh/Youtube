@@ -15,11 +15,12 @@ const Image = styled.img`
     height: ${(props) => (props.type === 'sm' ? '120px' : '202px')};
     background-color: #999;
     flex: 1;
+    border-radius: 15px;
 `;
 
 const Details = styled.div`
     display: flex;
-    margin-top: ${(props) => props.type !== 'sm' && '16px'};
+    margin-top: ${(props) => props.type !== 'sm' && '14px'};
     gap: 12px;
     flex: 1;
 `;
@@ -34,20 +35,23 @@ const ChannelImage = styled.img`
 
 const Texts = styled.div``;
 
-const Title = styled.h1`
+const Title = styled.p`
     font-size: 16px;
+    margin: 0;
     font-weight: 500;
     color: ${({ theme }) => theme.text};
 `;
 
 const ChannelName = styled.h2`
     font-size: 14px;
+    font-weight: 400;
     color: ${({ theme }) => theme.textSoft};
-    margin: 9px 0px;
+    margin: 2px 0px;
 `;
 
 const Info = styled.div`
     font-size: 14px;
+    font-weight: 300;
     color: ${({ theme }) => theme.textSoft};
 `;
 
@@ -59,8 +63,8 @@ const Card = ({ type }) => {
                 <Details type={type}>
                     <ChannelImage type={type} src='https://picsum.photos/200' />
                     <Texts>
-                        <Title>Test Video</Title>
-                        <ChannelName>Lama Dev</ChannelName>
+                        <Title>4 MẸO CHO DEV TRẺ ĐỂ TRỞ NÊN XỊN HƠN | SOFTWARE ENGINEER GUIDE</Title>
+                        <ChannelName>DMT</ChannelName>
                         <Info>660,908 views • 1 day ago</Info>
                     </Texts>
                 </Details>

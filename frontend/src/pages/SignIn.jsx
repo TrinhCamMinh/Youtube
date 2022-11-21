@@ -8,6 +8,7 @@ const Container = styled.div`
     justify-content: center;
     height: calc(100vh - 56px);
     color: ${({ theme }) => theme.text};
+    border-radius: 15px;
 `;
 
 const Wrapper = styled.div`
@@ -18,6 +19,8 @@ const Wrapper = styled.div`
     border: 1px solid ${({ theme }) => theme.soft};
     padding: 20px 50px;
     gap: 10px;
+    border-radius: 15px;
+    width: calc(100vw -50px);
 `;
 
 const Title = styled.h1`
@@ -36,6 +39,7 @@ const Input = styled.input`
     background-color: transparent;
     width: 100%;
     color: ${({ theme }) => theme.text};
+    border-radius: 5px;
 `;
 
 const Button = styled.button`
@@ -68,7 +72,7 @@ const SignIn = () => {
         <Container>
             <Wrapper>
                 <Title>Sign in</Title>
-                <SubTitle>to continue to LamaTube</SubTitle>
+                <SubTitle>to continue to DMT</SubTitle>
                 <Input placeholder='username' />
                 <Input type='password' placeholder='password' />
                 <Button>Sign in</Button>

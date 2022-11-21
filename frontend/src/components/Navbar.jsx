@@ -16,7 +16,7 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: flex-end;
     height: 100%;
-    padding: 0px 20px;
+    padding: 5px 20px;
     position: relative;
 `;
 
@@ -29,9 +29,10 @@ const Search = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+    padding: 10px 15px;
+    border: 1px solid #303030;
+    border-radius: 30px;
+    font-size: 24px;
 `;
 
 const Input = styled.input`
@@ -42,12 +43,12 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-    padding: 5px 15px;
+    padding: 10px 15px;
     background-color: transparent;
-    border: 1px solid #3ea6ff;
+    border: 1px solid #303030;
     color: #3ea6ff;
-    border-radius: 3px;
-    font-weight: 500;
+    border-radius: 30px;
+    font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -59,12 +60,12 @@ const Navbar = () => {
             <Wrapper>
                 <Search>
                     <Input placeholder='Search' />
-                    <SearchOutlinedIcon />
+                    <SearchOutlinedIcon style={{ color: 'white' }} />
                 </Search>
                 <Link to='signin' style={{ textDecoration: 'none' }}>
                     <Button>
                         <AccountCircleOutlinedIcon />
-                        SIGN IN
+                        Sign in
                     </Button>
                 </Link>
             </Wrapper>

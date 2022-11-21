@@ -6,7 +6,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    width: 2vw;
+    width: 20vw;
 `;
 
 const PageHeading = styled.h1`

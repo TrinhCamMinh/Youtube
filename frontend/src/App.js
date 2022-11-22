@@ -2,15 +2,18 @@ import { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import Menu from './components/Menu';
 import Navbar from './components/Navbar';
-import { darkTheme, lightTheme } from './utils/Theme';
+import { darkTheme, lightTheme, theme } from './utils/Theme';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Video from './pages/Video';
-import SignIn from './pages/SignIn';
 import LikedVideo from './pages/LikedVideo';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 import WatchLater from './pages/WatchLater';
 import Profile from './pages/Profile';
 import History from './pages/History';
+import { ChakraProvider } from '@chakra-ui/react';
+
 const Container = styled.div`
     display: flex;
 `;
@@ -24,34 +27,37 @@ const Wrapper = styled.div`
 `;
 
 function App() {
-    const [darkMode, setDarkMode] = useState(true);
+    const [lightMode, setLightMode] = useState(true);
 
     return (
-        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-            <Container>
-                <BrowserRouter>
-                    <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
-                    <Main>
-                        <Navbar />
-                        <Wrapper>
-                            <Routes>
-                                <Route path='/'>
-                                    <Route index element={<Home />} />
-                                    <Route path='/signin' element={<SignIn />} />
-                                    <Route path='/liked' element={<LikedVideo />} />
-                                    <Route path='/later' element={<WatchLater />} />
-                                    <Route path='/history' element={<History />} />
-                                    <Route path='/Profile' element={<Profile />} />
-                                    <Route path='/video'>
-                                        <Route path=':id' element={<Video />} />
+        <ChakraProvider theme={theme}>
+            <ThemeProvider theme={lightMode ? lightTheme : darkTheme}>
+                <Container>
+                    <BrowserRouter>
+                        <Menu lightMode={lightMode} setLightMode={setLightMode} />
+                        <Main>
+                            <Navbar />
+                            <Wrapper>
+                                <Routes>
+                                    <Route path='/'>
+                                        <Route index element={<Home />} />
+                                        <Route path='/signin' element={<SignIn />} />
+                                        <Route path='/signup' element={<SignUp />} />
+                                        <Route path='/liked' element={<LikedVideo />} />
+                                        <Route path='/later' element={<WatchLater />} />
+                                        <Route path='/history' element={<History />} />
+                                        <Route path='/Profile' element={<Profile />} />
+                                        <Route path='/video'>
+                                            <Route path=':id' element={<Video />} />
+                                        </Route>
                                     </Route>
-                                </Route>
-                            </Routes>
-                        </Wrapper>
-                    </Main>
-                </BrowserRouter>
-            </Container>
-        </ThemeProvider>
+                                </Routes>
+                            </Wrapper>
+                        </Main>
+                    </BrowserRouter>
+                </Container>
+            </ThemeProvider>
+        </ChakraProvider>
     );
 }
 

@@ -1,3 +1,5 @@
+import { extendTheme } from '@chakra-ui/react';
+
 export const darkTheme = {
     bg: '#0f0f0f',
     bgLighter: '#0f0f0f',
@@ -12,3 +14,23 @@ export const lightTheme = {
     textSoft: '#606060',
     soft: '#f5f5f5',
 };
+
+export const theme = extendTheme({
+    initialColorMode: 'dark',
+    useSystemColorMode: false,
+    fonts: {
+        heading: `'Be Vietnam Pro', sans-serif`,
+        body: `'Be Vietnam Pro', sans-serif`,
+    },
+    styles: {
+        global: {
+            // styles for the `a`
+            h1: {
+                color: 'teal.500',
+                _hover: {
+                    textDecoration: 'underline',
+                },
+            },
+        },
+    },
+});

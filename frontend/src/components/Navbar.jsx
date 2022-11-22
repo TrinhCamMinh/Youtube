@@ -32,7 +32,7 @@ const Search = styled.div`
     padding: 10px 15px;
     border: 1px solid #303030;
     border-radius: 30px;
-    font-size: 24px;
+    font-size: 16px;
 `;
 
 const Input = styled.input`
@@ -60,7 +60,7 @@ const Navbar = () => {
             <Wrapper>
                 <Search>
                     <Input placeholder='Search' />
-                    <SearchOutlinedIcon style={{ color: 'white' }} />
+                    <SearchOutlinedIcon style={{ color: 'text' }} />
                 </Search>
                 <Link to='signin' style={{ textDecoration: 'none' }}>
                     <Button>

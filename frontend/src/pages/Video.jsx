@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { setState } from 'react';
 import styled from 'styled-components';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbDownOffAltOutlinedIcon from '@mui/icons-material/ThumbDownOffAltOutlined';
@@ -104,7 +104,29 @@ const Subscribe = styled.button`
     cursor: pointer;
 `;
 
-const Video = () => {
+const Video = (openModal) => {
+    // const [anonymous, setAnonymous] = setState(false);
+    const anonymous = false;
+    const [openLoginModal, setOpenLoginModal] = setState(false);
+
+    const LikeVideo = () => {
+        if (anonymous) {
+            setOpenLoginModal(true);
+        }
+    };
+
+    const CommentVideo = () => {
+        if (anonymous) {
+            setOpenLoginModal(true);
+        }
+    };
+
+    const SubcribeChannel = () => {
+        if (anonymous) {
+            setOpenLoginModal(true);
+        }
+    };
+
     return (
         <Container>
             <Content>
@@ -123,7 +145,7 @@ const Video = () => {
                 <Details>
                     <Info>7,948,154 views • Jun 22, 2022</Info>
                     <Buttons>
-                        <Button>
+                        <Button onClick={() => LikeVideo()}>
                             <ThumbUpOutlinedIcon /> 123
                         </Button>
                         <Button>
@@ -151,10 +173,20 @@ const Video = () => {
                             </Description>
                         </ChannelDetail>
                     </ChannelInfo>
-                    <Subscribe>SUBSCRIBE</Subscribe>
+                    <Subscribe
+                        onClick={() => {
+                            SubcribeChannel();
+                        }}
+                    >
+                        SUBSCRIBE
+                    </Subscribe>
                 </Channel>
                 <Hr />
-                <Comments />
+                <Comments
+                    onClick={() => {
+                        CommentVideo();
+                    }}
+                />
             </Content>
             <Recommendation>
                 <Card type='sm' />

@@ -20,6 +20,8 @@ import SettingsBrightnessOutlinedIcon from '@mui/icons-material/SettingsBrightne
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import { Link } from 'react-router-dom';
+import { useColorMode } from '@chakra-ui/react';
+
 const Container = styled.div`
     flex: 1;
     background-color: ${({ theme }) => theme.bgLighter};
@@ -85,7 +87,9 @@ const Title = styled.h2`
     margin-bottom: 20px;
 `;
 
-const Menu = ({ darkMode, setDarkMode }) => {
+const Menu = ({ lightMode, setLightMode }) => {
+    const { colorMode, toggleColorMode } = useColorMode();
+
     return (
         <Container>
             <Wrapper>
@@ -169,21 +173,14 @@ const Menu = ({ darkMode, setDarkMode }) => {
                     Live
                 </Item>
                 <Hr />
-                <Item>
-                    <SettingsOutlinedIcon />
-                    Settings
-                </Item>
-                <Item>
-                    <FlagOutlinedIcon />
-                    Report
-                </Item>
-                <Item>
-                    <HelpOutlineOutlinedIcon />
-                    Help
-                </Item>
-                <Item onClick={() => setDarkMode(!darkMode)}>
+                <Item
+                    onClick={() => {
+                        setLightMode(!lightMode);
+                        toggleColorMode();
+                    }}
+                >
                     <SettingsBrightnessOutlinedIcon />
-                    {darkMode ? 'Light' : 'Dark'} Mode
+                    {lightMode ? 'Light' : 'Dark'} Mode
                 </Item>
             </Wrapper>
         </Container>

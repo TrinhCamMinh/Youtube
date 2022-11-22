@@ -1,97 +1,64 @@
-import React from 'react';
-import styled from 'styled-components';
+import {
+    Flex,
+    Box,
+    FormControl,
+    FormLabel,
+    Input,
+    Checkbox,
+    Stack,
+    Link,
+    Button,
+    Heading,
+    Text,
+    useColorModeValue,
+} from '@chakra-ui/react';
+import { Link as LinkRouter } from 'react-router-dom';
 
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: calc(100vh - 56px);
-    color: ${({ theme }) => theme.text};
-    border-radius: 15px;
-`;
-
-const Wrapper = styled.div`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-color: ${({ theme }) => theme.bgLighter};
-    border: 1px solid ${({ theme }) => theme.soft};
-    padding: 20px 50px;
-    gap: 10px;
-    border-radius: 15px;
-    width: calc(100vw -50px);
-`;
-
-const Title = styled.h1`
-    font-size: 24px;
-`;
-
-const SubTitle = styled.h2`
-    font-size: 20px;
-    font-weight: 300;
-`;
-
-const Input = styled.input`
-    border: 1px solid ${({ theme }) => theme.soft};
-    border-radius: 3px;
-    padding: 10px;
-    background-color: transparent;
-    width: 100%;
-    color: ${({ theme }) => theme.text};
-    border-radius: 5px;
-`;
-
-const Button = styled.button`
-    border-radius: 3px;
-    border: none;
-    padding: 10px 20px;
-    font-weight: 500;
-    cursor: pointer;
-    background-color: ${({ theme }) => theme.soft};
-    color: ${({ theme }) => theme.textSoft};
-`;
-
-const More = styled.div`
-    display: flex;
-    margin-top: 10px;
-    font-size: 12px;
-    color: ${({ theme }) => theme.textSoft};
-`;
-
-const Links = styled.div`
-    margin-left: 50px;
-`;
-
-const Link = styled.span`
-    margin-left: 30px;
-`;
-
-const SignIn = () => {
+export default function SimpleCard() {
     return (
-        <Container>
-            <Wrapper>
-                <Title>Sign in</Title>
-                <SubTitle>to continue to DMT</SubTitle>
-                <Input placeholder='username' />
-                <Input type='password' placeholder='password' />
-                <Button>Sign in</Button>
-                <Title>or</Title>
-                <Input placeholder='username' />
-                <Input placeholder='email' />
-                <Input type='password' placeholder='password' />
-                <Button>Sign up</Button>
-            </Wrapper>
-            <More>
-                English(USA)
-                <Links>
-                    <Link>Help</Link>
-                    <Link>Privacy</Link>
-                    <Link>Terms</Link>
-                </Links>
-            </More>
-        </Container>
+        <Flex minH={'90vh'} align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'black.200')}>
+            <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+                <Stack align={'center'}>
+                    <Heading fontSize={'4xl'}>Sign in to your account</Heading>
+                    <Text fontSize={'lg'} color={'gray.600'}>
+                        to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
+                    </Text>
+                </Stack>
+                <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
+                    <Stack spacing={4}>
+                        <FormControl id='email'>
+                            <FormLabel>Email address</FormLabel>
+                            <Input type='email' />
+                        </FormControl>
+                        <FormControl id='password'>
+                            <FormLabel>Password</FormLabel>
+                            <Input type='password' />
+                        </FormControl>
+                        <Stack spacing={10}>
+                            <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}>
+                                <Checkbox>Remember me</Checkbox>
+                                <Link color={'blue.400'}>Forgot password?</Link>
+                            </Stack>
+                            <Button
+                                bg={'blue.400'}
+                                color={'white'}
+                                _hover={{
+                                    bg: 'blue.500',
+                                }}
+                            >
+                                Sign in
+                            </Button>
+                            <Stack pt={6}>
+                                <LinkRouter to='/signup'>
+                                    <Text align={'center'}>
+                                        Not a user? <Link color={'blue.400'}>Signup</Link>
+                                    </Text>
+                                </LinkRouter>
+                            </Stack>
+                        </Stack>
+                    </Stack>
+                </Box>
+            </Stack>
+        </Flex>
     );
-};
-
-export default SignIn;
+}

@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { VideoDataMock } from '../data';
 
 const Container = styled.div`
     width: ${(props) => props.type !== 'sm' && '360px'};
@@ -55,87 +56,73 @@ const Info = styled.div`
     color: ${({ theme }) => theme.textSoft};
 `;
 
-const VideoDataMock = [
-    {
-        id: 1,
-        image: 'https://i.ytimg.com/vi/y66RgYMAgSo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCvtAGde-6UOzNKyisfsy-tIdTwJQ',
-        creatorAvatar:
-            'https://yt3.ggpht.com/ytc/AMLnZu9U1YR60O4hjCfJHtYSjlpRNJx07bOADEDb6X-d=s68-c-k-c0x00ffffff-no-rj',
-        title: 'React NodeJS Ecommerce App Fullstack',
-        creator: 'lamadev',
-        viewCount: '1000000',
-        createTime: '1 days ago',
-    },
-    {
-        id: 2,
-        image: 'https://i.ytimg.com/vi/y66RgYMAgSo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCvtAGde-6UOzNKyisfsy-tIdTwJQ',
-        creatorAvatar:
-            'https://yt3.ggpht.com/ytc/AMLnZu9U1YR60O4hjCfJHtYSjlpRNJx07bOADEDb6X-d=s68-c-k-c0x00ffffff-no-rj',
-        title: 'React NodeJS Ecommerce App Fullstack',
-        creator: 'lamadev',
-        viewCount: '1000000',
-        createTime: '1 days ago',
-    },
-    {
-        id: 3,
-        image: 'https://i.ytimg.com/vi/y66RgYMAgSo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCvtAGde-6UOzNKyisfsy-tIdTwJQ',
-        creatorAvatar:
-            'https://yt3.ggpht.com/ytc/AMLnZu9U1YR60O4hjCfJHtYSjlpRNJx07bOADEDb6X-d=s68-c-k-c0x00ffffff-no-rj',
-        title: 'React NodeJS Ecommerce App Fullstack',
-        creator: 'lamadev',
-        viewCount: '1000000',
-        createTime: '1 days ago',
-    },
-];
-
 const Card = () => {
-    const [videos, setVideos] = useState([]);
+    const [videos, setVideos] = useState(null);
 
-    const getVideos = () => {
+    useEffect(() => {
         setVideos(VideoDataMock);
-    };
+    }, []);
 
-    useLayoutEffect(() => {
-        getVideos();
-    });
+    // const DisplayVideos = (videos) => {
+    //     if (!videos.length) return null;
 
-    const DisplayVideos = (videos) => {
-        if (!videos.length) return null;
+    //     console.log(videos.length);
 
-        console.log(videos.length);
+    //     return videos.map((video, index) => (
+    //         <CardItem
+    //             key={index}
+    //             // link={video.link}
+    //             creatorAvatar={video.creatorAvatar}
+    //             creator={video.creator}
+    //             createTime={video.createTime}
+    //             viewCount={video.viewCount}
+    //             title={video.title}
+    //             image={video.imageSrc}
+    //         />
+    //     ));
+    // };
 
-        return videos.map((video, index) => (
-            <CardItem
-                key={index}
-                // link={video.link}
-                creatorAvatar={video.creatorAvatar}
-                creator={video.creator}
-                createTime={video.createTime}
-                viewCount={video.viewCount}
-                title={video.title}
-                image={video.imageSrc}
-            />
-        ));
-    };
+    // const CardItem = (video, { type }) => {
+    // <Link to='/video/test' style={{ textDecoration: 'none' }}>
+    //     <Container type={type} key={video.id}>
+    //         <Image type={type} src={video.image} />
+    //         <Details type={type}>
+    //             <ChannelImage type={type} src={video.creatorAvatar} />
+    //             <Texts>
+    //                 <Title>{video.title}</Title>
+    //                 <ChannelName>{video.creator}</ChannelName>
+    //                 <Info>
+    //                     {video.viewCount} views • {video.createTime}
+    //                 </Info>
+    //             </Texts>
+    //         </Details>
+    //     </Container>
+    // </Link>;
+    // };
 
-    const CardItem = (video,{type}) => {
-        <Link to='/video/test' style={{ textDecoration: 'none' }}>
-            <Container type={type} key={video.id}>
-                <Image type={type} src={video.image} />
-                <Details type={type}>
-                    <ChannelImage type={type} src={video.creatorAvatar} />
-                    <Texts>
-                        <Title>{video.title}</Title>
-                        <ChannelName>{video.creator}</ChannelName>
-                        <Info>
-                            {video.viewCount} views • {video.createTime}
-                        </Info>
-                    </Texts>
-                </Details>
-            </Container>
-        </Link>;
-    };
-
-    return <>{DisplayVideos(videos)}</>;
+    return (
+        <>
+            {videos &&
+                videos.map((video) => {
+                    return (
+                        <Link key={video.id} to='/video/test' style={{ textDecoration: 'none' }}>
+                            <Container>
+                                <Image src={video.image} />
+                                <Details>
+                                    <ChannelImage src={video.creatorAvatar} />
+                                    <Texts>
+                                        <Title>{video.title}</Title>
+                                        <ChannelName>{video.creator}</ChannelName>
+                                        <Info>
+                                            {video.viewCount} views • {video.createTime}
+                                        </Info>
+                                    </Texts>
+                                </Details>
+                            </Container>
+                        </Link>
+                    );
+                })}
+        </>
+    );
 };
 export default Card;

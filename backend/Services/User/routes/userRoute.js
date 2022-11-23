@@ -33,6 +33,6 @@ router.post('/watchLater', watchLaterVideo);
 router.post('/watched', watchedVideo);
 
 //* [PUT] methods
-router.put('/update', updateUserAccount);
+router.put('/update/:id', updateUserAccount);
 
 module.exports = router;

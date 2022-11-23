@@ -22,10 +22,12 @@ const videoSchema = new Schema(
         like: {
             type: String,
             require: true,
+            default: 0,
         },
         view: {
             type: String,
             require: true,
+            default: 0,
         },
         description: {
             type: String,

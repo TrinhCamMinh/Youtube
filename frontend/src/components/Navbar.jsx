@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { Link } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Container = styled.div`
     position: sticky;
@@ -55,6 +56,7 @@ const Button = styled.button`
     gap: 5px;
 `;
 const Navbar = () => {
+    const { user } = useAuthContext();
     return (
         <Container>
             <Wrapper>
@@ -63,10 +65,14 @@ const Navbar = () => {
                     <SearchOutlinedIcon style={{ color: 'text' }} />
                 </Search>
                 <Link to='signin' style={{ textDecoration: 'none' }}>
-                    <Button>
-                        <AccountCircleOutlinedIcon />
-                        Sign in
-                    </Button>
+                    {user ? (
+                        <h1>{user.userName}</h1>
+                    ) : (
+                        <Button>
+                            <AccountCircleOutlinedIcon />
+                            Sign in
+                        </Button>
+                    )}
                 </Link>
             </Wrapper>
         </Container>

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getVideo, postVideo, updateVideoLike } = require('../controller/videoController');
+const { getVideo, getSpecificVideo, postVideo, updateVideoLike } = require('../controller/videoController');
 const { getSubscribeChannel, postSubscribe } = require('../controller/subscribedController');
 const { getLikeVideo, postLike } = require('../controller/likedVideoController');
 const { getWatchedVideo, postWatchedVideo } = require('../controller/watchedVideoController');
@@ -8,6 +8,7 @@ const { getWatchLateVideo, postWatchLateVideo } = require('../controller/watchLa
 
 //* [GET] methods
 router.get('/', getVideo);
+router.get('/:id', getSpecificVideo);
 router.get('/like/:userID', getLikeVideo);
 router.get('/watched/:userID', getWatchedVideo);
 router.get('/watchLater/:userID', getWatchLateVideo);

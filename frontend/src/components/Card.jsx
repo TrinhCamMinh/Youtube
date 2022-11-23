@@ -1,7 +1,7 @@
+import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { VideoDataMock } from '../data';
+import { useVideo } from '../hooks/useVideo';
 
 const Container = styled.div`
     width: ${(props) => props.type !== 'sm' && '360px'};
@@ -58,66 +58,24 @@ const Info = styled.div`
 
 const Card = () => {
     const [videos, setVideos] = useState(null);
+    const { getVideo } = useVideo();
 
     const getData = async () => {
-        const response = await fetch(`/api/video/`);
-        const json = await response.json();
-        if (!response.ok) {
-            console.log('fetch error');
-            return;
-        } else {
-            setVideos(json);
-            console.log('fetch successfully');
-        }
+        const data = await getVideo();
+        setVideos(data);
     };
 
     useEffect(() => {
         getData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    // const DisplayVideos = (videos) => {
-    //     if (!videos.length) return null;
-
-    //     console.log(videos.length);
-
-    //     return videos.map((video, index) => (
-    //         <CardItem
-    //             key={index}
-    //             // link={video.link}
-    //             creatorAvatar={video.creatorAvatar}
-    //             creator={video.creator}
-    //             createTime={video.createTime}
-    //             viewCount={video.viewCount}
-    //             title={video.title}
-    //             image={video.imageSrc}
-    //         />
-    //     ));
-    // };
-
-    // const CardItem = (video, { type }) => {
-    // <Link to='/video/test' style={{ textDecoration: 'none' }}>
-    //     <Container type={type} key={video.id}>
-    //         <Image type={type} src={video.image} />
-    //         <Details type={type}>
-    //             <ChannelImage type={type} src={video.creatorAvatar} />
-    //             <Texts>
-    //                 <Title>{video.title}</Title>
-    //                 <ChannelName>{video.creator}</ChannelName>
-    //                 <Info>
-    //                     {video.viewCount} views • {video.createTime}
-    //                 </Info>
-    //             </Texts>
-    //         </Details>
-    //     </Container>
-    // </Link>;
-    // };
 
     return (
         <>
             {videos &&
                 videos.map((video, index) => {
                     return (
-                        <Link key={index} to='/video/test' style={{ textDecoration: 'none' }}>
+                        <Link key={index} to={`/video/${video._id}`} style={{ textDecoration: 'none' }}>
                             <Container>
                                 <Image src={`https://img.youtube.com/vi/${video.thumbnail}/maxresdefault.jpg`} />
                                 <Details>

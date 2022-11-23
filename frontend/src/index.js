@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import { theme } from './utils/Theme';
-
 import { ColorModeScript } from '@chakra-ui/react';
+import { AuthProvider } from './contexts/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
+    <AuthProvider>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <App />
-    </React.StrictMode>,
+    </AuthProvider>,
 );

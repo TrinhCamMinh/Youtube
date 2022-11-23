@@ -13,8 +13,10 @@ const VideoContainer = styled.div`
 
 const Section = styled.h1`
     font-size: 30px;
+    font-weight: bold;
     margin-top: 20px;
     margin-bottom: 10px;
+    color: red
 `;
 
 const Home = () => {

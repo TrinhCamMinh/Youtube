@@ -53,7 +53,7 @@ const Item = styled.div`
     padding: 7.5px;
     border-radius: 10px;
     &:hover {
-        background-color: ${({ theme }) => theme.soft};
+        background-color: rgba(9,9,9,.2);
     }
 `;
 
@@ -66,10 +66,10 @@ const Login = styled.div``;
 const Button = styled.button`
     padding: 10px 15px;
     background-color: transparent;
-    border: 1px solid #3ea6ff;
+    border: 2px solid #3ea6ff;
     color: #3ea6ff;
     border-radius: 30px;
-    font-weight: 300;
+    font-weight: 500;
     margin-top: 10px;
     cursor: pointer;
     display: flex;
@@ -79,9 +79,9 @@ const Button = styled.button`
 
 const Title = styled.h2`
     font-size: 16px;
-    font-weight: 500;
-    color: #aaaaaa;
-    margin-bottom: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: red
 `;
 
 const Menu = ({ lightMode, setLightMode }) => {
@@ -90,101 +90,101 @@ const Menu = ({ lightMode, setLightMode }) => {
     return (
         <Box bg={useColorModeValue('white', 'black.200')}>
             {/* <Container> */}
-                <Wrapper>
-                    <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
-                        <Logo>
-                            <Img src={LamaTube} />
-                            DMTube
-                        </Logo>
+            <Wrapper>
+                <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Logo>
+                        <Img src={LamaTube} />
+                        DMTube
+                    </Logo>
+                </Link>
+                <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Item>
+                        <HomeIcon />
+                        Home
+                    </Item>
+                </Link>
+                <Item>
+                    <ExploreOutlinedIcon />
+                    Explore
+                </Item>
+                <Item>
+                    <SubscriptionsOutlinedIcon />
+                    Subscriptions
+                </Item>
+                <Hr />
+                <Item>
+                    <VideoLibraryOutlinedIcon />
+                    Library
+                </Item>
+                <Link to='history' style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Item>
+                        <HistoryOutlinedIcon />
+                        History
+                    </Item>
+                </Link>
+                <Link to='later' style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Item>
+                        <ScheduleIcon />
+                        Watch later
+                    </Item>
+                </Link>
+                <Link to='liked' style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Item>
+                        <ThumbUpOutlinedIcon />
+                        Liked videos
+                    </Item>
+                </Link>
+                <Hr />
+                <Login>
+                    Sign in to do more
+                    <Link to='signin' style={{ textDecoration: 'none' }}>
+                        <Button>
+                            <AccountCircleOutlinedIcon />
+                            Sign In
+                        </Button>
                     </Link>
-                    <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
-                        <Item>
-                            <HomeIcon />
-                            Home
-                        </Item>
-                    </Link>
-                    <Item>
-                        <ExploreOutlinedIcon />
-                        Explore
-                    </Item>
-                    <Item>
-                        <SubscriptionsOutlinedIcon />
-                        Subscriptions
-                    </Item>
-                    <Hr />
-                    <Item>
-                        <VideoLibraryOutlinedIcon />
-                        Library
-                    </Item>
-                    <Link to='history' style={{ textDecoration: 'none', color: 'inherit' }}>
-                        <Item>
-                            <HistoryOutlinedIcon />
-                            History
-                        </Item>
-                    </Link>
-                    <Link to='later' style={{ textDecoration: 'none', color: 'inherit' }}>
-                        <Item>
-                            <ScheduleIcon />
-                            Watch later
-                        </Item>
-                    </Link>
-                    <Link to='liked' style={{ textDecoration: 'none', color: 'inherit' }}>
-                        <Item>
-                            <ThumbUpOutlinedIcon />
-                            Liked videos
-                        </Item>
-                    </Link>
-                    <Hr />
-                    <Login>
-                        Sign in to do more
-                        <Link to='signin' style={{ textDecoration: 'none' }}>
-                            <Button>
-                                <AccountCircleOutlinedIcon />
-                                Sign In
-                            </Button>
-                        </Link>
-                    </Login>
-                    <Hr />
-                    <Title>Subcribed Channel</Title>
-                    <Item></Item>
-                    <Item></Item>
-                    <Hr />
-                    <Title>Collections</Title>
-                    <Item>
-                        <LibraryMusicOutlinedIcon />
-                        Music
-                    </Item>
-                    <Item>
-                        <SportsBasketballOutlinedIcon />
-                        Sports
-                    </Item>
-                    <Item>
-                        <SportsEsportsOutlinedIcon />
-                        Gaming
-                    </Item>
-                    <Item>
-                        <MovieOutlinedIcon />
-                        Movies
-                    </Item>
-                    <Item>
-                        <ArticleOutlinedIcon />
-                        News
-                    </Item>
-                    <Item>
-                        <LiveTvOutlinedIcon />
-                        Live
-                    </Item>
-                    <Hr />
-                    <Item
-                        onClick={() => {
-                            setLightMode(lightMode);
-                            toggleColorMode();
-                        }}
-                    >
-                        <SettingsBrightnessOutlinedIcon />
-                        {colorMode === 'light' ? 'Light' : 'Dark'} Mode
-                    </Item>
-                </Wrapper>
+                </Login>
+                <Hr />
+                <Title>Subcribed Channel</Title>
+                <Item></Item>
+                <Item></Item>
+                <Hr />
+                <Title>Collections</Title>
+                <Item>
+                    <LibraryMusicOutlinedIcon />
+                    Music
+                </Item>
+                <Item>
+                    <SportsBasketballOutlinedIcon />
+                    Sports
+                </Item>
+                <Item>
+                    <SportsEsportsOutlinedIcon />
+                    Gaming
+                </Item>
+                <Item>
+                    <MovieOutlinedIcon />
+                    Movies
+                </Item>
+                <Item>
+                    <ArticleOutlinedIcon />
+                    News
+                </Item>
+                <Item>
+                    <LiveTvOutlinedIcon />
+                    Live
+                </Item>
+                <Hr />
+                <Item
+                    onClick={() => {
+                        setLightMode(lightMode);
+                        toggleColorMode();
+                    }}
+                >
+                    <SettingsBrightnessOutlinedIcon />
+                    {colorMode === 'light' ? 'Light' : 'Dark'} Mode
+                </Item>
+            </Wrapper>
             {/* </Container> */}
         </Box>
     );

@@ -62,7 +62,7 @@ export default function SimpleCard() {
                             <Stack pt={6}>
                                 <LinkRouter to='/signup'>
                                     <Text align={'center'}>
-                                        Not a user? <Link color={'blue.400'}>Signup</Link>
+                                        Not a user? <Link color={'blue.400'}>Sign up</Link>
                                     </Text>
                                 </LinkRouter>
                             </Stack>

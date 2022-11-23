@@ -35,7 +35,9 @@ const getSubscribedChannel = (req, res) => {
 
 //* [POST] methods
 const signup = async (req, res) => {
-    const { userName, channelName, password, email, gender, birthDate, avatar, phoneNumber, location } = req.body;
+    const avatar = req.file;
+    const path = `/avatar/${avatar.filename}`;
+    const { userName, channelName, password, email, gender, birthDate, phoneNumber, location } = req.body;
     try {
         if (!validator.isEmail(email)) {
             return res.status(500).json('Email invalid');
@@ -52,7 +54,7 @@ const signup = async (req, res) => {
             email,
             gender,
             birthDate,
-            avatar,
+            avatar: path,
             phoneNumber,
             location,
         });

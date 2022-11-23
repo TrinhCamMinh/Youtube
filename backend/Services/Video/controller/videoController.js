@@ -9,11 +9,21 @@ const getVideo = async (req, res) => {
     }
 };
 
+const getSpecificVideo = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = await VideoModel.findById(id);
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+};
+
 //* [POST] methods
 const postVideo = async (req, res) => {
     try {
         const { video, thumbnail, ownerID, title, description } = req.body;
-        if (!video || !thumbnail || !ownerID || !title | !description)
+        if (!video || !thumbnail || !ownerID || !title || !description)
             return res.status(500).json('All filed must be filled');
         const data = await VideoModel.create({ video, thumbnail, ownerID, title, description });
         res.status(200).json(data);
@@ -35,6 +45,7 @@ const updateVideoLike = async (req, res) => {
 
 module.exports = {
     getVideo,
+    getSpecificVideo,
     postVideo,
     updateVideoLike,
 };

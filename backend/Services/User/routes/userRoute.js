@@ -15,6 +15,7 @@ const {
     updateUserAccount,
     searchVideo,
 } = require('../controller/userController');
+const upload = require('../middleware/uploadFiles');
 
 //* [GET] methods
 router.get('/watched/:userId', getWatchedVideo);
@@ -25,7 +26,7 @@ router.get('/search/:query', searchVideo);
 router.get('/:userId', getUser);
 
 //* [POST] methods
-router.post('/signup', signup);
+router.post('/signup', upload.single('avatar'), signup);
 router.post('/login', login);
 router.post('/like', likeVideo);
 router.post('/subscribe', subscribeVideo);

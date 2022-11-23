@@ -1,26 +1,16 @@
-import {
-    Flex,
-    Box,
-    FormControl,
-    FormLabel,
-    Input,
-    InputGroup,
-    HStack,
-    InputRightElement,
-    Stack,
-    Button,
-    Heading,
-    Text,
-    useColorModeValue,
-    Link,
-} from '@chakra-ui/react';
-import { useState } from 'react';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { Flex, Box, HStack, Stack, Button, Heading, Text, useColorModeValue, Link } from '@chakra-ui/react';
 import { Link as LinkRouter } from 'react-router-dom';
+import { useSignUp } from '../hooks/useSignUp';
 
-export default function SignupCard() {
-    const [showPassword, setShowPassword] = useState(false);
-
+export default function SignUp() {
+    const { signUp, error } = useSignUp();
+    const handleSubmit = async (e) => {
+        console.log('submitting...');
+        e.preventDefault();
+        const form = document.querySelector('#form');
+        const formData = new FormData(form);
+        await signUp(formData);
+    };
     return (
         <Flex minH={'90vh'} align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'black.200')}>
             <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
@@ -36,36 +26,39 @@ export default function SignupCard() {
                     <Stack spacing={4}>
                         <HStack>
                             <Box>
-                                <FormControl id='firstName' isRequired>
-                                    <FormLabel>First Name</FormLabel>
-                                    <Input type='text' />
-                                </FormControl>
-                            </Box>
-                            <Box>
-                                <FormControl id='lastName'>
-                                    <FormLabel>Last Name</FormLabel>
-                                    <Input type='text' />
-                                </FormControl>
+                                <form id='form' encType='multipart/form-data' onSubmit={handleSubmit}>
+                                    <label htmlFor='userName'>Username</label>
+                                    <input type='text' name='userName' id='userName' />
+                                    <br />
+                                    <label htmlFor='channelName'>channelName</label>
+                                    <input type='text' name='channelName' id='channelName' />
+                                    <br />
+                                    <label htmlFor='password'>password</label>
+                                    <input type='password' name='password' id='password' />
+                                    <br />
+                                    <label htmlFor='email'>Email</label>
+                                    <input type='email' name='email' id='email' />
+                                    <br />
+                                    <input type='radio' id='Male' name='gender' value='true' />
+                                    <label htmlFor='Male'>Male</label>
+                                    <input type='radio' id='Female' name='gender' value='false' />
+                                    <label htmlFor='Female'>Female</label>
+                                    <br />
+                                    <label htmlFor='avatar'>Avatar</label>
+                                    <input type='file' name='avatar' id='avatar' />
+                                    <label htmlFor='birthDate'>birthDate</label>
+                                    <input type='date' name='birthDate' id='birthDate' />
+                                    <br />
+                                    <label htmlFor='phoneNumber'>phoneNumber</label>
+                                    <input type='text' name='phoneNumber' id='phoneNumber' />
+                                    <br />
+                                    <label htmlFor='location'>Location</label>
+                                    <input type='text' name='location' id='location' />
+                                    <br />
+                                    <input type='submit' value='Submit' />
+                                </form>
                             </Box>
                         </HStack>
-                        <FormControl id='email' isRequired>
-                            <FormLabel>Email address</FormLabel>
-                            <Input type='email' />
-                        </FormControl>
-                        <FormControl id='password' isRequired>
-                            <FormLabel>Password</FormLabel>
-                            <InputGroup>
-                                <Input type={showPassword ? 'text' : 'password'} />
-                                <InputRightElement h={'full'}>
-                                    <Button
-                                        variant={'ghost'}
-                                        onClick={() => setShowPassword((showPassword) => !showPassword)}
-                                    >
-                                        {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                                    </Button>
-                                </InputRightElement>
-                            </InputGroup>
-                        </FormControl>
                         <Stack spacing={10} pt={2}>
                             <Button
                                 loadingText='Submitting'
@@ -86,6 +79,7 @@ export default function SignupCard() {
                                 </Text>
                             </LinkRouter>
                         </Stack>
+                        {error && <h1>{error}</h1>}
                     </Stack>
                 </Box>
             </Stack>

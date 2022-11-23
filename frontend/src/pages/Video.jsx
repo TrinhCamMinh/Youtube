@@ -8,6 +8,19 @@ import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
 import AddTaskOutlinedIcon from '@mui/icons-material/AddTaskOutlined';
 import Comments from '../components/Comments';
 import Card from '../components/Card';
+import {format} from 'timeago.js';
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    Button as ButtonCU,
+    useDisclosure,
+} from '@chakra-ui/react';
+
 
 const Container = styled.div`
     display: flex;
@@ -17,7 +30,9 @@ const Container = styled.div`
 const Content = styled.div`
     flex: 5;
 `;
-const VideoWrapper = styled.div``;
+const VideoWrapper = styled.div`
+    width: 50vw;
+`;
 
 const Title = styled.h1`
     font-size: 18px;
@@ -111,6 +126,12 @@ const Video = () => {
     const { getSpecificVideo } = useVideo();
     const [video, setVideo] = useState(null);
 
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+
+                
+
+
     const fetchVideo = async () => {
         const data = await getSpecificVideo(id);
         setVideo(data);
@@ -126,23 +147,42 @@ const Video = () => {
             <Content>
                 {video && (
                     <>
+                        {/* This is modal not display in normal view */}
+                        <Modal isCentered isOpen={isOpen} onClose={onClose}>
+                            <ModalOverlay />
+                            <ModalContent>
+                                <ModalHeader>Login required</ModalHeader>
+                                <ModalCloseButton />
+                                <ModalBody>You need to sign in to do this function</ModalBody>
+
+                                <ModalFooter>
+                                    <ButtonCU colorScheme='blue' mr={3} onClick={onClose}>
+                                        Close
+                                    </ButtonCU>
+                                    <ButtonCU variant='ghost'>Login</ButtonCU>
+                                </ModalFooter>
+                            </ModalContent>
+                        </Modal>
+                        {/* end modal */}
                         <VideoWrapper>
                             <iframe
                                 width='900'
                                 height='506'
                                 src={`https://www.youtube.com/embed/${video.video}`}
-                                title='Learn CSS Position In 9 Minutes'
+                                title={video.title}
                                 frameborder='0'
                                 allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                                 allowfullscreen
                             ></iframe>
                         </VideoWrapper>
-                        <Title>Test Video</Title>
+                        <Title>{video.title}</Title>
                         <Details>
-                            <Info>7,948,154 views • Jun 22, 2022</Info>
+                            <Info>
+                                {video.view} views • {format(video.createdAt)}
+                            </Info>
                             <Buttons>
-                                <Button>
-                                    <ThumbUpOutlinedIcon /> 123
+                                <Button onClick={onOpen}>
+                                    <ThumbUpOutlinedIcon /> {video.like}
                                 </Button>
                                 <Button>
                                     <ThumbDownOffAltOutlinedIcon /> Dislike
@@ -162,22 +202,21 @@ const Video = () => {
                                 <ChannelDetail>
                                     <ChannelName>DMT Channel</ChannelName>
                                     <ChannelCounter>200K subscribers</ChannelCounter>
-                                    <Description>
-                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus laborum
-                                        delectus unde quaerat dolore culpa sit aliquam at. Vitae facere ipsum totam
-                                        ratione exercitationem. Suscipit animi accusantium dolores ipsam ut.
-                                    </Description>
+                                    <Description>{video.description}</Description>
                                 </ChannelDetail>
                             </ChannelInfo>
-                            <Subscribe>SUBSCRIBE</Subscribe>
+                            <Subscribe onClick={onOpen}>SUBSCRIBE</Subscribe>
                         </Channel>
                         <Hr />
-                        <Comments />
+                        <Comments onClick={onOpen} />
                     </>
                 )}
             </Content>
             <Recommendation>
-                <Card />
+                <Card type='sm' />
+                <Card type='sm' />
+                <Card type='sm' />
+                <Card type='sm' />
             </Recommendation>
         </Container>
     );

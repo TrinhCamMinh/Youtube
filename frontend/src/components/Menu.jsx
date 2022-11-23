@@ -93,7 +93,7 @@ const Menu = ({ lightMode, setLightMode }) => {
                 <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Logo>
                         <Img src={LamaTube} />
-                        DMT
+                        DMTube
                     </Logo>
                 </Link>
                 <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>

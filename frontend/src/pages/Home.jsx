@@ -5,8 +5,9 @@ import Carousel from '../components/Carousel';
 
 const VideoContainer = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
+    gap: 19px;
 `;
 
 const Section = styled.h1`
@@ -22,6 +23,14 @@ const Home = () => {
             <Carousel />
             <Section>Videos</Section>
             <VideoContainer>
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
                 <Card />
             </VideoContainer>
         </>

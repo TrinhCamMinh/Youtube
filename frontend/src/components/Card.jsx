@@ -75,42 +75,6 @@ const Card = () => {
         getData();
     }, []);
 
-    // const DisplayVideos = (videos) => {
-    //     if (!videos.length) return null;
-
-    //     console.log(videos.length);
-
-    //     return videos.map((video, index) => (
-    //         <CardItem
-    //             key={index}
-    //             // link={video.link}
-    //             creatorAvatar={video.creatorAvatar}
-    //             creator={video.creator}
-    //             createTime={video.createTime}
-    //             viewCount={video.viewCount}
-    //             title={video.title}
-    //             image={video.imageSrc}
-    //         />
-    //     ));
-    // };
-
-    // const CardItem = (video, { type }) => {
-    // <Link to='/video/test' style={{ textDecoration: 'none' }}>
-    //     <Container type={type} key={video.id}>
-    //         <Image type={type} src={video.image} />
-    //         <Details type={type}>
-    //             <ChannelImage type={type} src={video.creatorAvatar} />
-    //             <Texts>
-    //                 <Title>{video.title}</Title>
-    //                 <ChannelName>{video.creator}</ChannelName>
-    //                 <Info>
-    //                     {video.viewCount} views • {video.createTime}
-    //                 </Info>
-    //             </Texts>
-    //         </Details>
-    //     </Container>
-    // </Link>;
-    // };
 
     return (
         <>

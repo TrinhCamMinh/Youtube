@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import Card from '../components/Card';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 
 const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    width: 20vw;
+    width: 25vw;
 `;
 
 const PageHeading = styled.h1`
-    color: white;
-    margin-bottom: 50px;
+    font-size: 32px;
 `;
 
 const DateGroup = styled.h3`
@@ -25,7 +25,7 @@ const Container = styled.div``;
 
 const Home = () => {
     return (
-        <>
+        <Box bg={useColorModeValue('white', 'black.200')}>
             <PageHeading>Watch Later</PageHeading>
             <Container>
                 <Short></Short>
@@ -39,7 +39,7 @@ const Home = () => {
                     <Card type='sm' />
                 </Wrapper>
             </Container>
-        </>
+        </Box>
     );
 };
 

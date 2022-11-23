@@ -88,7 +88,6 @@ const FormStep2 = () => {
                     multipleFiles={false}
                     accept='application/img'
                     hideClearButton={false}
-                    bg={useColorModeValue('gray.50', 'black.200')}
                 />
             </FormControl>
             <FormControl id='birthDate' isRequired>
@@ -181,10 +180,10 @@ export default function SignUp() {
                                     <Button
                                         w='7rem'
                                         variant='solid'
-                                        bg={'blue.400'}
+                                        bg={'red.400'}
                                         color={'white'}
                                         _hover={{
-                                            bg: 'blue.500',
+                                            bg: 'red.500',
                                         }}
                                         onClick={() => {
                                             handleSubmit();
@@ -205,7 +204,7 @@ export default function SignUp() {
                         <Stack pt={6}>
                             <LinkRouter to='/signin'>
                                 <Text align={'center'}>
-                                    Already a user? <Link color={'blue.400'}>Sign in</Link>
+                                    Already a user? <Link color={'red.400'}>Sign in</Link>
                                 </Text>
                             </LinkRouter>
                         </Stack>

@@ -6,13 +6,12 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    width: 20vw;
+    width: 25vw;
     gap: 10;
 `;
 
 const PageHeading = styled.h1`
-    color: white;
-    margin-bottom: 50px;
+    font-size: 32px;
 `;
 
 const DateGroup = styled.h3`

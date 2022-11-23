@@ -27,7 +27,6 @@ const UserInfo = styled.div`
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    color: white;
     margin-left: 20px;
 `;
 
@@ -35,7 +34,6 @@ const ChannelName = styled.p`
     margin: 0;
     font-weight: 400;
     font-size: 24px;
-    color: inherit;
 `;
 
 const Username = styled.p`
@@ -78,7 +76,7 @@ const Home = () => {
                     <Button>Channel Manager</Button>
                 </Profile>
             </Profile>
-            <h2 style={{ color: 'white', margin: '50px 0 10px 0' }}>Uploaded Video</h2>
+            <h2 style={{ 'font-size': '32px', 'font-weight': 'bold', 'margin-top': '50px' }}>Uploaded Video</h2>
             <Wrapper>
                 <Card />
                 <Card />

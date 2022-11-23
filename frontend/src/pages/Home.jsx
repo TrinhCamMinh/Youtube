@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Card from '../components/Card';
 import Carousel from '../components/Carousel';
+import {Box, useColorModeValue} from '@chakra-ui/react';
 
 const VideoContainer = styled.div`
     display: flex;
@@ -12,13 +13,13 @@ const VideoContainer = styled.div`
 
 const Section = styled.h1`
     font-size: 30px;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 10px;
 `;
 
 const Home = () => {
     return (
-        <>
+        <Box bg={useColorModeValue('gray.50', 'black.200')}>
             <Section>Shorts</Section>
             <Carousel />
             <Section>Videos</Section>
@@ -33,7 +34,7 @@ const Home = () => {
                 <Card />
                 <Card />
             </VideoContainer>
-        </>
+        </Box>
     );
 };
 

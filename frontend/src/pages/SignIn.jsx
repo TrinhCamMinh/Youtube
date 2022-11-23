@@ -16,7 +16,7 @@ import { Link as LinkRouter } from 'react-router-dom';
 import { useRef } from 'react';
 import { useLogin } from '../hooks/useLogin';
 
-export default function SimpleCard() {
+export default function SignIn() {
     const userNameRef = useRef();
     const passwordRef = useRef();
     const { login, error } = useLogin();
@@ -30,8 +30,8 @@ export default function SimpleCard() {
             <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                 <Stack align={'center'}>
                     <Heading fontSize={'4xl'}>Sign in to your account</Heading>
-                    <Text fontSize={'lg'} color={'gray.600'}>
-                        to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
+                    <Text fontSize={'lg'}>
+                        to enjoy all of our cool <Link color={'red.400'}>features</Link> ✌️
                     </Text>
                 </Stack>
                 <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
@@ -47,14 +47,14 @@ export default function SimpleCard() {
                         <Stack spacing={10}>
                             <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}>
                                 <Checkbox>Remember me</Checkbox>
-                                <Link color={'blue.400'}>Forgot password?</Link>
+                                <Link color={'red.400'}>Forgot password?</Link>
                             </Stack>
                             <Button
                                 onClick={handleLogin}
-                                bg={'blue.400'}
+                                bg={'red.400'}
                                 color={'white'}
                                 _hover={{
-                                    bg: 'blue.500',
+                                    bg: 'red.500',
                                 }}
                             >
                                 Sign in
@@ -62,7 +62,7 @@ export default function SimpleCard() {
                             <Stack pt={6}>
                                 <LinkRouter to='/signup'>
                                     <Text align={'center'}>
-                                        Not a user? <Link color={'blue.400'}>Sign up</Link>
+                                        Not a user? <Link color={'red.400'}>Sign up</Link>
                                     </Text>
                                 </LinkRouter>
                             </Stack>

@@ -8,7 +8,7 @@ import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
 import AddTaskOutlinedIcon from '@mui/icons-material/AddTaskOutlined';
 import Comments from '../components/Comments';
 import Card from '../components/Card';
-import {format} from 'timeago.js';
+import { format } from 'timeago.js';
 import {
     Modal,
     ModalOverlay,
@@ -19,8 +19,10 @@ import {
     ModalCloseButton,
     Button as ButtonCU,
     useDisclosure,
+    Box,
+    useColorModeValue,
 } from '@chakra-ui/react';
-
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     display: flex;
@@ -39,7 +41,7 @@ const Title = styled.h1`
     font-weight: 400;
     margin-top: 20px;
     margin-bottom: 10px;
-    color: ${({ theme }) => theme.text};
+    ${'' /* color: ${({ theme }) => theme.text}; */}
 `;
 
 const Details = styled.div`
@@ -49,13 +51,13 @@ const Details = styled.div`
 `;
 
 const Info = styled.span`
-    color: ${({ theme }) => theme.textSoft};
+    ${'' /* color: ${({ theme }) => theme.textSoft}; */}
 `;
 
 const Buttons = styled.div`
     display: flex;
     gap: 20px;
-    color: ${({ theme }) => theme.text};
+    ${'' /* color: ${({ theme }) => theme.text}; */}
 `;
 
 const Button = styled.div`
@@ -92,7 +94,7 @@ const Image = styled.img`
 const ChannelDetail = styled.div`
     display: flex;
     flex-direction: column;
-    color: ${({ theme }) => theme.text};
+    ${'' /* color: ${({ theme }) => theme.text}; */}
 `;
 
 const ChannelName = styled.span`
@@ -102,7 +104,7 @@ const ChannelName = styled.span`
 const ChannelCounter = styled.span`
     margin-top: 5px;
     margin-bottom: 20px;
-    color: ${({ theme }) => theme.textSoft};
+    ${'' /* color: ${({ theme }) => theme.textSoft}; */}
     font-size: 12px;
 `;
 
@@ -128,10 +130,6 @@ const Video = () => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-
-                
-
-
     const fetchVideo = async () => {
         const data = await getSpecificVideo(id);
         setVideo(data);
@@ -143,82 +141,86 @@ const Video = () => {
     }, []);
 
     return (
-        <Container>
-            <Content>
-                {video && (
-                    <>
-                        {/* This is modal not display in normal view */}
-                        <Modal isCentered isOpen={isOpen} onClose={onClose}>
-                            <ModalOverlay />
-                            <ModalContent>
-                                <ModalHeader>Login required</ModalHeader>
-                                <ModalCloseButton />
-                                <ModalBody>You need to sign in to do this function</ModalBody>
+        <Box bg={useColorModeValue('gray.50', 'black.200')}>
+            <Container>
+                <Content>
+                    {video && (
+                        <>
+                            {/* This is modal not display in normal view */}
+                            <Modal size={'md'} isCentered isOpen={isOpen} onClose={onClose}>
+                                <ModalOverlay />
+                                <ModalContent>
+                                    <ModalHeader color={'red.500'}>LOGIN REQUIRED!!!</ModalHeader>
+                                    <ModalCloseButton />
+                                    <ModalBody>You need to sign in to do this function</ModalBody>
 
-                                <ModalFooter>
-                                    <ButtonCU colorScheme='blue' mr={3} onClick={onClose}>
-                                        Close
-                                    </ButtonCU>
-                                    <ButtonCU variant='ghost'>Login</ButtonCU>
-                                </ModalFooter>
-                            </ModalContent>
-                        </Modal>
-                        {/* end modal */}
-                        <VideoWrapper>
-                            <iframe
-                                width='900'
-                                height='506'
-                                src={`https://www.youtube.com/embed/${video.video}`}
-                                title={video.title}
-                                frameborder='0'
-                                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                                allowfullscreen
-                            ></iframe>
-                        </VideoWrapper>
-                        <Title>{video.title}</Title>
-                        <Details>
-                            <Info>
-                                {video.view} views • {format(video.createdAt)}
-                            </Info>
-                            <Buttons>
-                                <Button onClick={onOpen}>
-                                    <ThumbUpOutlinedIcon /> {video.like}
-                                </Button>
-                                <Button>
-                                    <ThumbDownOffAltOutlinedIcon /> Dislike
-                                </Button>
-                                <Button>
-                                    <ReplyOutlinedIcon /> Share
-                                </Button>
-                                <Button>
-                                    <AddTaskOutlinedIcon /> Save
-                                </Button>
-                            </Buttons>
-                        </Details>
-                        <Hr />
-                        <Channel>
-                            <ChannelInfo>
-                                <Image src='https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo' />
-                                <ChannelDetail>
-                                    <ChannelName>DMT Channel</ChannelName>
-                                    <ChannelCounter>200K subscribers</ChannelCounter>
-                                    <Description>{video.description}</Description>
-                                </ChannelDetail>
-                            </ChannelInfo>
-                            <Subscribe onClick={onOpen}>SUBSCRIBE</Subscribe>
-                        </Channel>
-                        <Hr />
-                        <Comments onClick={onOpen} />
-                    </>
-                )}
-            </Content>
-            <Recommendation>
-                <Card type='sm' />
-                <Card type='sm' />
-                <Card type='sm' />
-                <Card type='sm' />
-            </Recommendation>
-        </Container>
+                                    <ModalFooter>
+                                        <ButtonCU variant='ghost'>Close</ButtonCU>
+                                        <Link to='/signin'>
+                                            <ButtonCU colorScheme='red' mr={3} onClick={onClose}>
+                                                Sign in
+                                            </ButtonCU>
+                                        </Link>
+                                    </ModalFooter>
+                                </ModalContent>
+                            </Modal>
+                            {/* end modal */}
+                            <VideoWrapper>
+                                <iframe
+                                    width='1032'
+                                    height='580'
+                                    src={`https://www.youtube.com/embed/${video.video}`}
+                                    title={video.title}
+                                    frameborder='0'
+                                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                                    allowfullscreen
+                                ></iframe>
+                            </VideoWrapper>
+                            <Title>{video.title}</Title>
+                            <Details>
+                                <Info>
+                                    {video.view} views • {format(video.createdAt)}
+                                </Info>
+                                <Buttons>
+                                    <Button onClick={onOpen}>
+                                        <ThumbUpOutlinedIcon /> {video.like}
+                                    </Button>
+                                    <Button>
+                                        <ThumbDownOffAltOutlinedIcon /> Dislike
+                                    </Button>
+                                    <Button>
+                                        <ReplyOutlinedIcon /> Share
+                                    </Button>
+                                    <Button>
+                                        <AddTaskOutlinedIcon /> Save
+                                    </Button>
+                                </Buttons>
+                            </Details>
+                            <Hr />
+                            <Channel>
+                                <ChannelInfo>
+                                    <Image src='https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo' />
+                                    <ChannelDetail>
+                                        <ChannelName>DMT Channel</ChannelName>
+                                        <ChannelCounter>200K subscribers</ChannelCounter>
+                                        <Description>{video.description}</Description>
+                                    </ChannelDetail>
+                                </ChannelInfo>
+                                <Subscribe onClick={onOpen}>SUBSCRIBE</Subscribe>
+                            </Channel>
+                            <Hr />
+                            <Comments onClick={onOpen} />
+                        </>
+                    )}
+                </Content>
+                <Recommendation>
+                    <Card type='sm' />
+                    <Card type='sm' />
+                    <Card type='sm' />
+                    <Card type='sm' />
+                </Recommendation>
+            </Container>
+        </Box>
     );
 };
 

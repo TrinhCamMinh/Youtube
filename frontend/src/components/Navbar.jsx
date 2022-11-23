@@ -4,11 +4,12 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 
 const Container = styled.div`
     position: sticky;
     top: 0;
-    background-color: ${({ theme }) => theme.bgLighter};
+    ${'' /* background-color: ${({ theme }) => theme.bgLighter}; */}
     height: 56px;
 `;
 
@@ -40,7 +41,7 @@ const Input = styled.input`
     border: none;
     background-color: transparent;
     outline: none;
-    color: ${({ theme }) => theme.text};
+    ${'' /* color: ${({ theme }) => theme.text}; */}
 `;
 
 const Button = styled.button`
@@ -58,24 +59,26 @@ const Button = styled.button`
 const Navbar = () => {
     const { user } = useAuthContext();
     return (
-        <Container>
-            <Wrapper>
-                <Search>
-                    <Input placeholder='Search' />
-                    <SearchOutlinedIcon style={{ color: 'text' }} />
-                </Search>
-                <Link to='signin' style={{ textDecoration: 'none' }}>
-                    {user ? (
-                        <h1>{user.userName}</h1>
-                    ) : (
-                        <Button>
-                            <AccountCircleOutlinedIcon />
-                            Sign in
-                        </Button>
-                    )}
-                </Link>
-            </Wrapper>
-        </Container>
+        <Box bg={useColorModeValue('white', 'black.200')}>
+            <Container>
+                <Wrapper>
+                    <Search>
+                        <Input placeholder='Search' />
+                        <SearchOutlinedIcon style={{ color: 'text' }} />
+                    </Search>
+                    <Link to='signin' style={{ textDecoration: 'none' }}>
+                        {user ? (
+                            <h1>{user.userName}</h1>
+                        ) : (
+                            <Button>
+                                <AccountCircleOutlinedIcon />
+                                Sign in
+                            </Button>
+                        )}
+                    </Link>
+                </Wrapper>
+            </Container>
+        </Box>
     );
 };
 

@@ -17,7 +17,7 @@ import SettingsBrightnessOutlinedIcon from '@mui/icons-material/SettingsBrightne
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import { Link } from 'react-router-dom';
-import { useColorMode } from '@chakra-ui/react';
+import { Box, useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 const Container = styled.div`
     flex: 1;
@@ -88,103 +88,105 @@ const Menu = ({ lightMode, setLightMode }) => {
     const { colorMode, toggleColorMode } = useColorMode();
 
     return (
-        <Container>
-            <Wrapper>
-                <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <Logo>
-                        <Img src={LamaTube} />
-                        DMTube
-                    </Logo>
-                </Link>
-                <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <Item>
-                        <HomeIcon />
-                        Home
-                    </Item>
-                </Link>
-                <Item>
-                    <ExploreOutlinedIcon />
-                    Explore
-                </Item>
-                <Item>
-                    <SubscriptionsOutlinedIcon />
-                    Subscriptions
-                </Item>
-                <Hr />
-                <Item>
-                    <VideoLibraryOutlinedIcon />
-                    Library
-                </Item>
-                <Link to='history' style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <Item>
-                        <HistoryOutlinedIcon />
-                        History
-                    </Item>
-                </Link>
-                <Link to='later' style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <Item>
-                        <ScheduleIcon />
-                        Watch later
-                    </Item>
-                </Link>
-                <Link to='liked' style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <Item>
-                        <ThumbUpOutlinedIcon />
-                        Liked videos
-                    </Item>
-                </Link>
-                <Hr />
-                <Login>
-                    Sign in to like videos, comment, and subscribe.
-                    <Link to='signin' style={{ textDecoration: 'none' }}>
-                        <Button>
-                            <AccountCircleOutlinedIcon />
-                            Sign In
-                        </Button>
+        <Box bg={useColorModeValue('white', 'black.200')}>
+            {/* <Container> */}
+                <Wrapper>
+                    <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Logo>
+                            <Img src={LamaTube} />
+                            DMTube
+                        </Logo>
                     </Link>
-                </Login>
-                <Hr />
-                <Title>Subcribed Channel</Title>
-                <Item></Item>
-                <Item></Item>
-                <Hr />
-                <Title>Collections</Title>
-                <Item>
-                    <LibraryMusicOutlinedIcon />
-                    Music
-                </Item>
-                <Item>
-                    <SportsBasketballOutlinedIcon />
-                    Sports
-                </Item>
-                <Item>
-                    <SportsEsportsOutlinedIcon />
-                    Gaming
-                </Item>
-                <Item>
-                    <MovieOutlinedIcon />
-                    Movies
-                </Item>
-                <Item>
-                    <ArticleOutlinedIcon />
-                    News
-                </Item>
-                <Item>
-                    <LiveTvOutlinedIcon />
-                    Live
-                </Item>
-                <Hr />
-                <Item
-                    onClick={() => {
-                        setLightMode(lightMode);
-                        toggleColorMode();
-                    }}
-                >
-                    <SettingsBrightnessOutlinedIcon />
-                    {colorMode === 'light' ? 'Light' : 'Dark'} Mode
-                </Item>
-            </Wrapper>
-        </Container>
+                    <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Item>
+                            <HomeIcon />
+                            Home
+                        </Item>
+                    </Link>
+                    <Item>
+                        <ExploreOutlinedIcon />
+                        Explore
+                    </Item>
+                    <Item>
+                        <SubscriptionsOutlinedIcon />
+                        Subscriptions
+                    </Item>
+                    <Hr />
+                    <Item>
+                        <VideoLibraryOutlinedIcon />
+                        Library
+                    </Item>
+                    <Link to='history' style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Item>
+                            <HistoryOutlinedIcon />
+                            History
+                        </Item>
+                    </Link>
+                    <Link to='later' style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Item>
+                            <ScheduleIcon />
+                            Watch later
+                        </Item>
+                    </Link>
+                    <Link to='liked' style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Item>
+                            <ThumbUpOutlinedIcon />
+                            Liked videos
+                        </Item>
+                    </Link>
+                    <Hr />
+                    <Login>
+                        Sign in to do more
+                        <Link to='signin' style={{ textDecoration: 'none' }}>
+                            <Button>
+                                <AccountCircleOutlinedIcon />
+                                Sign In
+                            </Button>
+                        </Link>
+                    </Login>
+                    <Hr />
+                    <Title>Subcribed Channel</Title>
+                    <Item></Item>
+                    <Item></Item>
+                    <Hr />
+                    <Title>Collections</Title>
+                    <Item>
+                        <LibraryMusicOutlinedIcon />
+                        Music
+                    </Item>
+                    <Item>
+                        <SportsBasketballOutlinedIcon />
+                        Sports
+                    </Item>
+                    <Item>
+                        <SportsEsportsOutlinedIcon />
+                        Gaming
+                    </Item>
+                    <Item>
+                        <MovieOutlinedIcon />
+                        Movies
+                    </Item>
+                    <Item>
+                        <ArticleOutlinedIcon />
+                        News
+                    </Item>
+                    <Item>
+                        <LiveTvOutlinedIcon />
+                        Live
+                    </Item>
+                    <Hr />
+                    <Item
+                        onClick={() => {
+                            setLightMode(lightMode);
+                            toggleColorMode();
+                        }}
+                    >
+                        <SettingsBrightnessOutlinedIcon />
+                        {colorMode === 'light' ? 'Light' : 'Dark'} Mode
+                    </Item>
+                </Wrapper>
+            {/* </Container> */}
+        </Box>
     );
 };
 

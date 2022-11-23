@@ -9,8 +9,9 @@ html {
 }
 
 .swiper {
-    width: 80vw;
+    width: 78vw;
     height: 200px;
+    z-index: 0;
 }
 
 .swiper-slide {

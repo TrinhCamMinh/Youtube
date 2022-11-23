@@ -1,4 +1,4 @@
-import React, { setState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbDownOffAltOutlinedIcon from '@mui/icons-material/ThumbDownOffAltOutlined';
@@ -105,25 +105,27 @@ const Subscribe = styled.button`
 `;
 
 const Video = (openModal) => {
-    // const [anonymous, setAnonymous] = setState(false);
-    const anonymous = false;
-    const [openLoginModal, setOpenLoginModal] = setState(false);
+    const [anonymous, setAnonymous] = useState(true);
+    const [openLoginModal, setOpenLoginModal] = useState('');
 
     const LikeVideo = () => {
         if (anonymous) {
             setOpenLoginModal(true);
+            console.log('login needed area clicked');
         }
     };
 
     const CommentVideo = () => {
         if (anonymous) {
             setOpenLoginModal(true);
+            console.log('login needed area clicked');
         }
     };
 
     const SubcribeChannel = () => {
         if (anonymous) {
             setOpenLoginModal(true);
+            console.log('login needed area clicked');
         }
     };
 
@@ -134,11 +136,11 @@ const Video = (openModal) => {
                     <iframe
                         width='100%'
                         height='720'
-                        src='https://www.youtube.com/embed/k3Vfj-e1Ma4'
+                        src='https://youtube.com/embed/5QseBzvcb8w'
                         title='YouTube video player'
-                        frameborder='0'
+                        frameBorder='0'
                         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                        allowfullscreen
+                        allowFullScreen
                     ></iframe>
                 </VideoWrapper>
                 <Title>Test Video</Title>
@@ -164,7 +166,7 @@ const Video = (openModal) => {
                     <ChannelInfo>
                         <Image src='https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo' />
                         <ChannelDetail>
-                            <ChannelName>Lama Dev</ChannelName>
+                            <ChannelName>DMT Channel</ChannelName>
                             <ChannelCounter>200K subscribers</ChannelCounter>
                             <Description>
                                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus laborum delectus

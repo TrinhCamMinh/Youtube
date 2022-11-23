@@ -12,7 +12,7 @@ import SignUp from './pages/SignUp';
 import WatchLater from './pages/WatchLater';
 import Profile from './pages/Profile';
 import History from './pages/History';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, useColorMode } from '@chakra-ui/react';
 
 const Container = styled.div`
     display: flex;
@@ -28,10 +28,11 @@ const Wrapper = styled.div`
 
 function App() {
     const [lightMode, setLightMode] = useState(true);
+    const { colorMode, toggleColorMode } = useColorMode();
 
     return (
         <ChakraProvider theme={theme}>
-            <ThemeProvider theme={lightMode ? lightTheme : darkTheme}>
+            <ThemeProvider theme={colorMode === 'light' ? lightTheme : darkTheme}>
                 <Container>
                     <BrowserRouter>
                         <Menu lightMode={lightMode} setLightMode={setLightMode} />

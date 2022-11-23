@@ -13,9 +13,6 @@ import MovieOutlinedIcon from '@mui/icons-material/MovieOutlined';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import SettingsBrightnessOutlinedIcon from '@mui/icons-material/SettingsBrightnessOutlined';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
@@ -147,6 +144,10 @@ const Menu = ({ lightMode, setLightMode }) => {
                     </Link>
                 </Login>
                 <Hr />
+                <Title>Subcribed Channel</Title>
+                <Item></Item>
+                <Item></Item>
+                <Hr />
                 <Title>Collections</Title>
                 <Item>
                     <LibraryMusicOutlinedIcon />
@@ -175,12 +176,12 @@ const Menu = ({ lightMode, setLightMode }) => {
                 <Hr />
                 <Item
                     onClick={() => {
-                        setLightMode(!lightMode);
+                        setLightMode(lightMode);
                         toggleColorMode();
                     }}
                 >
                     <SettingsBrightnessOutlinedIcon />
-                    {lightMode ? 'Light' : 'Dark'} Mode
+                    {colorMode === 'light' ? 'Light' : 'Dark'} Mode
                 </Item>
             </Wrapper>
         </Container>

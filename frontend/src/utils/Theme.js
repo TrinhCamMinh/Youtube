@@ -16,7 +16,7 @@ export const lightTheme = {
 };
 
 export const theme = extendTheme({
-    initialColorMode: 'dark',
+    initialColorMode: 'light',
     useSystemColorMode: false,
     fonts: {
         heading: `'Be Vietnam Pro', sans-serif`,
@@ -25,12 +25,7 @@ export const theme = extendTheme({
     styles: {
         global: {
             // styles for the `a`
-            h1: {
-                color: 'teal.500',
-                _hover: {
-                    textDecoration: 'underline',
-                },
-            },
+            h1: {},
         },
     },
 });

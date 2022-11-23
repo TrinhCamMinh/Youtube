@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -7,7 +7,7 @@ const Container = styled.div`
     margin-bottom: ${(props) => (props.type === 'sm' ? '10px' : '45px')};
     cursor: pointer;
     display: ${(props) => props.type === 'sm' && 'flex'};
-    gap: 10px;
+    gap: 5px;
 `;
 
 const Image = styled.img`
@@ -55,22 +55,87 @@ const Info = styled.div`
     color: ${({ theme }) => theme.textSoft};
 `;
 
-const Card = ({ type }) => {
-    return (
+const VideoDataMock = [
+    {
+        id: 1,
+        image: 'https://i.ytimg.com/vi/y66RgYMAgSo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCvtAGde-6UOzNKyisfsy-tIdTwJQ',
+        creatorAvatar:
+            'https://yt3.ggpht.com/ytc/AMLnZu9U1YR60O4hjCfJHtYSjlpRNJx07bOADEDb6X-d=s68-c-k-c0x00ffffff-no-rj',
+        title: 'React NodeJS Ecommerce App Fullstack',
+        creator: 'lamadev',
+        viewCount: '1000000',
+        createTime: '1 days ago',
+    },
+    {
+        id: 2,
+        image: 'https://i.ytimg.com/vi/y66RgYMAgSo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCvtAGde-6UOzNKyisfsy-tIdTwJQ',
+        creatorAvatar:
+            'https://yt3.ggpht.com/ytc/AMLnZu9U1YR60O4hjCfJHtYSjlpRNJx07bOADEDb6X-d=s68-c-k-c0x00ffffff-no-rj',
+        title: 'React NodeJS Ecommerce App Fullstack',
+        creator: 'lamadev',
+        viewCount: '1000000',
+        createTime: '1 days ago',
+    },
+    {
+        id: 3,
+        image: 'https://i.ytimg.com/vi/y66RgYMAgSo/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCvtAGde-6UOzNKyisfsy-tIdTwJQ',
+        creatorAvatar:
+            'https://yt3.ggpht.com/ytc/AMLnZu9U1YR60O4hjCfJHtYSjlpRNJx07bOADEDb6X-d=s68-c-k-c0x00ffffff-no-rj',
+        title: 'React NodeJS Ecommerce App Fullstack',
+        creator: 'lamadev',
+        viewCount: '1000000',
+        createTime: '1 days ago',
+    },
+];
+
+const Card = () => {
+    const [videos, setVideos] = useState([]);
+
+    const getVideos = () => {
+        setVideos(VideoDataMock);
+    };
+
+    useLayoutEffect(() => {
+        getVideos();
+    });
+
+    const DisplayVideos = (videos) => {
+        if (!videos.length) return null;
+
+        console.log(videos.length);
+
+        return videos.map((video, index) => (
+            <CardItem
+                key={index}
+                // link={video.link}
+                creatorAvatar={video.creatorAvatar}
+                creator={video.creator}
+                createTime={video.createTime}
+                viewCount={video.viewCount}
+                title={video.title}
+                image={video.imageSrc}
+            />
+        ));
+    };
+
+    const CardItem = (video,{type}) => {
         <Link to='/video/test' style={{ textDecoration: 'none' }}>
-            <Container type={type}>
-                <Image type={type} src='https://picsum.photos/200/300' />
+            <Container type={type} key={video.id}>
+                <Image type={type} src={video.image} />
                 <Details type={type}>
-                    <ChannelImage type={type} src='https://picsum.photos/200' />
+                    <ChannelImage type={type} src={video.creatorAvatar} />
                     <Texts>
-                        <Title>4 MẸO CHO DEV TRẺ ĐỂ TRỞ NÊN XỊN HƠN | SOFTWARE ENGINEER GUIDE</Title>
-                        <ChannelName>DMT</ChannelName>
-                        <Info>660,908 views • 1 day ago</Info>
+                        <Title>{video.title}</Title>
+                        <ChannelName>{video.creator}</ChannelName>
+                        <Info>
+                            {video.viewCount} views • {video.createTime}
+                        </Info>
                     </Texts>
                 </Details>
             </Container>
-        </Link>
-    );
-};
+        </Link>;
+    };
 
+    return <>{DisplayVideos(videos)}</>;
+};
 export default Card;

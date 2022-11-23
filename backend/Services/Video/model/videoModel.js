@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const videoSchema = new Schema(
     {
-        videoID: {
+        video: {
             type: String,
             require: true,
         },
-        thumbnailID: {
+        thumbnail: {
             type: String,
             require: true,
         },

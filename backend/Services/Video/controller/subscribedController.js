@@ -1,5 +1,6 @@
 const subscribeModel = require('../model/subscribedModel');
 
+//* [GET] methods
 const getSubscribeChannel = async (req, res) => {
     try {
         const data = await subscribeModel.find({});
@@ -9,6 +10,7 @@ const getSubscribeChannel = async (req, res) => {
     }
 };
 
+//* [POST] methods
 const postSubscribe = async (req, res) => {
     try {
         const { userID, videoID } = req.body;

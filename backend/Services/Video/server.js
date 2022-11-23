@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 const cors = require('cors');
 const videoRoute = require('./routes/videoRoute');
 
@@ -12,7 +13,14 @@ app.use(cors());
 app.use('/api/video', videoRoute);
 
 //* connect to database and start server
-app.listen(process.env.PORT || 5000, () => {
-    console.log('connect to database successfully');
-    console.log(`listening on port ${process.env.PORT}... `);
-});
+mongoose
+    .connect(process.env.MONGODB_URL)
+    .then(() => {
+        app.listen(process.env.PORT, () => {
+            console.log('connect to database successfully');
+            console.log(`listening on port ${process.env.PORT}... `);
+        });
+    })
+    .catch((error) => {
+        console.log(error);
+    });

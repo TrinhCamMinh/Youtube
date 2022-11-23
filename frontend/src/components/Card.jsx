@@ -59,8 +59,20 @@ const Info = styled.div`
 const Card = () => {
     const [videos, setVideos] = useState(null);
 
+    const getData = async () => {
+        const response = await fetch(`/api/video/`);
+        const json = await response.json();
+        if (!response.ok) {
+            console.log('fetch error');
+            return;
+        } else {
+            setVideos(json);
+            console.log('fetch successfully');
+        }
+    };
+
     useEffect(() => {
-        setVideos(VideoDataMock);
+        getData();
     }, []);
 
     // const DisplayVideos = (videos) => {
@@ -103,18 +115,18 @@ const Card = () => {
     return (
         <>
             {videos &&
-                videos.map((video) => {
+                videos.map((video, index) => {
                     return (
-                        <Link key={video.id} to='/video/test' style={{ textDecoration: 'none' }}>
+                        <Link key={index} to='/video/test' style={{ textDecoration: 'none' }}>
                             <Container>
-                                <Image src={video.image} />
+                                <Image src={`https://img.youtube.com/vi/${video.thumbnail}/maxresdefault.jpg`} />
                                 <Details>
-                                    <ChannelImage src={video.creatorAvatar} />
+                                    <ChannelImage src='https://img.youtube.com/vi/QPxwXAWLji4/maxresdefault.jpg' />
                                     <Texts>
                                         <Title>{video.title}</Title>
-                                        <ChannelName>{video.creator}</ChannelName>
+                                        <ChannelName>Test channel</ChannelName>
                                         <Info>
-                                            {video.viewCount} views • {video.createTime}
+                                            {video.view} views • {video.createdAt}
                                         </Info>
                                     </Texts>
                                 </Details>

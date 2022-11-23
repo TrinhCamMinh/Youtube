@@ -9,6 +9,6 @@ router.get('/:videoId', getComment);
 router.post('/', postComment);
 
 //* [PUT] methods
-router.put('/like/:commentId', putCommentLike);
+router.put('/like/:id', putCommentLike);
 
 module.exports = router;

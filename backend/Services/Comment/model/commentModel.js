@@ -14,6 +14,7 @@ const commentSchema = new Schema(
         like: {
             type: Number,
             require: true,
+            default: 0,
         },
         comment: {
             type: Array,

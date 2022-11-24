@@ -21,7 +21,6 @@ const Container = styled.div`
 
 const Main = styled.div`
     flex: 7;
-    ${'' /* background-color: ${({ theme }) => theme.bg}; */}
 `;
 const Wrapper = styled.div`
     padding: 22px 96px;
@@ -29,11 +28,9 @@ const Wrapper = styled.div`
 
 function App() {
     const [lightMode, setLightMode] = useState(true);
-    const { colorMode, toggleColorMode } = useColorMode();
 
     return (
         <ChakraProvider theme={theme}>
-            {/* <ThemeProvider theme={colorMode === 'light' ? lightTheme : darkTheme}> */}
             <Container>
                 <BrowserRouter>
                     <Menu lightMode={lightMode} setLightMode={setLightMode} />
@@ -59,7 +56,6 @@ function App() {
                     </Main>
                 </BrowserRouter>
             </Container>
-            {/* </ThemeProvider> */}
         </ChakraProvider>
     );
 }

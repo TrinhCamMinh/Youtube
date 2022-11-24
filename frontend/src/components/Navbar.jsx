@@ -77,7 +77,7 @@ const Navbar = () => {
                         {user ? (
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                 <img
-                                    src={user.avatar}
+                                    src={`http://localhost:5000/${user.avatar}`}
                                     alt='user avatar'
                                     style={{ width: '27px', height: '25px', borderRadius: '6px' }}
                                 />

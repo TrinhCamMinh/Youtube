@@ -73,8 +73,8 @@ const Navbar = () => {
                         <Input placeholder='Search' />
                         <SearchOutlinedIcon style={{ color: 'text' }} />
                     </Search>
-                    <Link to='signin' style={{ textDecoration: 'none' }}>
-                        {user ? (
+                    {user ? (
+                        <Link to='profile' style={{ textDecoration: 'none' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                 <img
                                     src={`http://localhost:5000/${user.avatar}`}
@@ -88,13 +88,15 @@ const Navbar = () => {
                                     onClick={handleLogOut}
                                 ></i>
                             </div>
-                        ) : (
+                        </Link>
+                    ) : (
+                        <Link to='signin' style={{ textDecoration: 'none' }}>
                             <Button>
                                 <AccountCircleOutlinedIcon />
                                 Sign in
                             </Button>
-                        )}
-                    </Link>
+                        </Link>
+                    )}
                 </Wrapper>
             </Container>
         </Box>

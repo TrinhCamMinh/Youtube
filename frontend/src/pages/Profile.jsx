@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Card from '../components/Card';
+import { useAuthContext } from '../hooks/useAuthContext';
+
 
 const Container = styled.div``;
 
@@ -20,6 +22,7 @@ const UserAvatar = styled.img`
     height: 88px;
     width: 88px;
     border-radius: 50px;
+    background-image: cover;
 `;
 
 const UserInfo = styled.div`
@@ -60,14 +63,16 @@ const Button = styled.div`
 `;
 
 const Home = () => {
+    const { user } = useAuthContext();
+
     return (
         <Container>
             <Profile>
                 <Profile>
-                    <UserAvatar src='https://yt3.ggpht.com/ytc/AMLnZu9MVaiIkAm5yL-93ZWLNrhOUBCfy1mgt59pVVNr-Dk=s88-c-k-c0x00ffffff-no-rj' />
+                    <UserAvatar src={`http://localhost:5000/${user.avatar}`} />
                     <UserInfo>
-                        <ChannelName>tgound</ChannelName>
-                        <Username>@tgound1403</Username>
+                        <ChannelName>{user.channelName}</ChannelName>
+                        <Username>@{user.userName}</Username>
                         <SubcriberCount>1000 subcribers</SubcriberCount>
                     </UserInfo>
                 </Profile>

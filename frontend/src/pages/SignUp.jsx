@@ -1,4 +1,5 @@
 import {
+    FormErrorMessage,
     Progress,
     ButtonGroup,
     Flex,
@@ -24,103 +25,139 @@ import { Link as LinkRouter } from 'react-router-dom';
 import { useSignUp } from '../hooks/useSignUp';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import FilePicker from 'chakra-ui-file-picker';
-
-const FormStep1 = () => {
-    const [showPassword, setShowPassword] = useState(false);
-    return (
-        <>
-            <FormControl id='userName' isRequired>
-                <FormLabel>Username</FormLabel>
-                <Input type='text' />
-            </FormControl>
-            <FormControl id='channelName' isRequired>
-                <FormLabel>Channel's name</FormLabel>
-                <Input type='text' />
-            </FormControl>
-            <FormControl id='email' isRequired>
-                <FormLabel>Email address</FormLabel>
-                <Input type='email' />
-            </FormControl>
-            <FormControl id='password' isRequired>
-                <FormLabel>Password</FormLabel>
-                <InputGroup>
-                    <Input type={showPassword ? 'text' : 'password'} />
-                    <InputRightElement h={'full'}>
-                        <Button variant={'ghost'} onClick={() => setShowPassword((showPassword) => !showPassword)}>
-                            {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                        </Button>
-                    </InputRightElement>
-                </InputGroup>
-            </FormControl>
-            <FormControl id='retypePassword' isRequired>
-                <FormLabel>Retype Password</FormLabel>
-                <InputGroup>
-                    <Input type={showPassword ? 'text' : 'password'} />
-                    <InputRightElement h={'full'}>
-                        <Button variant={'ghost'} onClick={() => setShowPassword((showPassword) => !showPassword)}>
-                            {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                        </Button>
-                    </InputRightElement>
-                </InputGroup>
-            </FormControl>
-        </>
-    );
-};
-
-const FormStep2 = () => {
-    const [gender, setGender] = useState(null);
-    const [avatarFile, setAvatarFile] = useState();
-    return (
-        <>
-            <FormLabel>Gender</FormLabel>
-            <RadioGroup onChange={setGender} value={gender}>
-                <Stack direction='row'>
-                    <Radio value='true'>Male</Radio>
-                    <Radio value='false'>Female</Radio>
-                </Stack>
-            </RadioGroup>
-            <FormControl id='avatar' isRequired>
-                <FormLabel>Avatar</FormLabel>
-                <FilePicker
-                    onFileChange={() => {setAvatarFile()}}
-                    placeholder='Choose your avatar'
-                    clearButtonLabel='remove'
-                    multipleFiles={false}
-                    accept='application/img'
-                    hideClearButton={false}
-                />
-            </FormControl>
-            <FormControl id='birthDate' isRequired>
-                <FormLabel>Date of birth</FormLabel>
-                <Input type='date' />
-            </FormControl>
-            <FormControl id='phoneNumber' isRequired>
-                <FormLabel>Phone number</FormLabel>
-                <InputGroup>
-                    <InputLeftAddon children='+84' />
-                    <Input type='tel' />
-                </InputGroup>
-            </FormControl>
-            <FormControl id='location' isRequired>
-                <FormLabel>Location</FormLabel>
-                <Input type='text' />
-            </FormControl>
-        </>
-    );
-};
+import { useForm } from 'react-hook-form';
+import { CountryDropdown } from 'react-country-region-selector';
 
 export default function SignUp() {
     const { signUp, error } = useSignUp();
     const toast = useToast();
     const [step, setStep] = useState(1);
     const [progress, setProgress] = useState(50);
+    const [avatarFile, setAvatarFile] = useState();
+    const [country, setCountry] = useState('');
 
-    const handleSubmit = async (e) => {
+    const {
+        handleSubmit,
+        register,
+        formState: { errors, isSubmitting },
+    } = useForm();
+
+    const onSubmit = async (data) => {
+        toast({
+            title: 'Submitted',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+        });
+        console.log(data);
+
         console.log('submitting...');
-        e.preventDefault();
         const form = document.querySelector('#form');
         const formData = new FormData(form);
+        for (let key in data) {
+            formData.append(key, data[key]);
+        }
+        formData.set('location', country);
+        // formData.set('avatar', avatarFile);
+        for (var value of formData.values()) {
+            console.log(value);
+        }
         await signUp(formData);
+    };
+
+    const FormStep1 = () => {
+        const [showPassword, setShowPassword] = useState(false);
+        return (
+            <>
+                <FormControl id='userName' isRequired>
+                    <FormLabel>Username</FormLabel>
+                    <Input type='text' {...register('userName', {})} />
+                </FormControl>
+                <FormControl id='channelName' isRequired>
+                    <FormLabel>Channel's name</FormLabel>
+                    <Input type='text' {...register('channelName', {})} />
+                </FormControl>
+                <FormControl id='email' isRequired>
+                    <FormLabel>Email address</FormLabel>
+                    <Input type='email' {...register('email', {})} />
+                </FormControl>
+                <FormControl id='password' isRequired>
+                    <FormLabel>Password</FormLabel>
+                    <InputGroup>
+                        <Input type={showPassword ? 'text' : 'password'} {...register('password', {})} />
+                        <InputRightElement h={'full'}>
+                            <Button variant={'ghost'} onClick={() => setShowPassword((showPassword) => !showPassword)}>
+                                {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                            </Button>
+                        </InputRightElement>
+                    </InputGroup>
+                </FormControl>
+                <FormControl id='retypePassword' isRequired>
+                    <FormLabel>Retype Password</FormLabel>
+                    <InputGroup>
+                        <Input type={showPassword ? 'text' : 'password'} />
+                        <InputRightElement h={'full'}>
+                            <Button variant={'ghost'} onClick={() => setShowPassword((showPassword) => !showPassword)}>
+                                {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                            </Button>
+                        </InputRightElement>
+                    </InputGroup>
+                </FormControl>
+            </>
+        );
+    };
+
+    const FormStep2 = () => {
+        const [gender, setGender] = useState(null);
+        return (
+            <>
+                <FormLabel>Gender</FormLabel>
+                <RadioGroup id='gender' onChange={setGender} value={gender} {...register('gender', {})}>
+                    <Stack direction='row'>
+                        <Radio value='true'>Male</Radio>
+                        <Radio value='false'>Female</Radio>
+                    </Stack>
+                </RadioGroup>
+                <FormControl id='avatar' isRequired>
+                    <FormLabel>Avatar</FormLabel>
+                    {/* <FilePicker
+                        onFileChange={(file) => {
+                            // setAvatarFile(file);
+                            let reader = new FileReader();
+                            setAvatarFile(reader.readAsDataURL(file));
+                        }}
+                        placeholder='Choose your avatar'
+                        clearButtonLabel='remove'
+                        multipleFiles={false}
+                        accept='application/png'
+                        hideClearButton={false}
+                        {...register('avatar', {})}
+                    /> */}
+                    <input type='file' {...register('avatar', {})} />
+                </FormControl>
+                <FormControl id='birthDate' isRequired>
+                    <FormLabel>Date of birth</FormLabel>
+                    <Input type='date' {...register('birthDate', {})} />
+                </FormControl>
+                <FormControl id='phoneNumber' isRequired>
+                    <FormLabel>Phone number</FormLabel>
+                    <InputGroup>
+                        <InputLeftAddon children='+84' />
+                        <Input type='tel' {...register('phoneNumber', {})} />
+                    </InputGroup>
+                </FormControl>
+                <FormControl id='location' isRequired>
+                    <FormLabel>Location</FormLabel>
+                    {/* <Input type='text' {...register('location', {})} /> */}
+                    <CountryDropdown
+                        value={''}
+                        onChange={(val) => {
+                            setCountry(val);
+                        }}
+                    />
+                </FormControl>
+            </>
+        );
     };
 
     return (
@@ -141,6 +178,8 @@ export default function SignUp() {
                     p={8}
                     rounded='lg'
                     as='form'
+                    onSubmit={handleSubmit(onSubmit)}
+                    id='form'
                 >
                     <Stack p={4}>
                         <Progress hasStripe value={progress} mb='5%' isAnimated></Progress>
@@ -185,16 +224,8 @@ export default function SignUp() {
                                         _hover={{
                                             bg: 'red.500',
                                         }}
-                                        onClick={() => {
-                                            handleSubmit();
-                                            toast({
-                                                title: 'Account created.',
-                                                description: "We've created your account for you.",
-                                                status: 'success',
-                                                duration: 3000,
-                                                isClosable: true,
-                                            });
-                                        }}
+                                        isLoading={isSubmitting}
+                                        type='submit'
                                     >
                                         Sign in
                                     </Button>
@@ -202,13 +233,15 @@ export default function SignUp() {
                             </Flex>
                         </ButtonGroup>
                         <Stack pt={6}>
-                            <LinkRouter to='/signin'>
-                                <Text align={'center'}>
-                                    Already a user? <Link color={'red.400'}>Sign in</Link>
-                                </Text>
-                            </LinkRouter>
+                            <Text align={'center'}>
+                                Already a user?{' '}
+                                <Link as={LinkRouter} to='/signin' color={'red.400'}>
+                                    Sign in
+                                </Link>
+                            </Text>
                         </Stack>
                         {error && <h1>{error}</h1>}
+                        <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
                     </Stack>
                 </Box>
             </Stack>

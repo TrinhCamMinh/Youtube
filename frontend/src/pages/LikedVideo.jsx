@@ -12,6 +12,9 @@ const Wrapper = styled.div`
 
 const PageHeading = styled.h1`
     font-size: 32px;
+    font-weight: bold;
+    color: red;
+    margin-bottom: 30px;
 `;
 
 const DateGroup = styled.h3`

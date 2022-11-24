@@ -18,6 +18,7 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import { Link } from 'react-router-dom';
 import { Box, useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Wrapper = styled.div`
     padding: 18px 26px;
@@ -43,7 +44,7 @@ const Item = styled.div`
     padding: 7.5px;
     border-radius: 10px;
     &:hover {
-        background-color: rgba(9,9,9,.2);
+        background-color: rgba(9, 9, 9, 0.2);
     }
 `;
 
@@ -71,10 +72,12 @@ const Title = styled.h2`
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: red
+    color: red;
 `;
 
 const Menu = ({ lightMode, setLightMode }) => {
+    const { user } = useAuthContext();
+
     const { colorMode, toggleColorMode } = useColorMode();
 
     return (
@@ -124,16 +127,20 @@ const Menu = ({ lightMode, setLightMode }) => {
                         Liked videos
                     </Item>
                 </Link>
-                <Hr />
-                <Login>
-                    Sign in to do more
-                    <Link to='signin' style={{ textDecoration: 'none' }}>
-                        <Button>
-                            <AccountCircleOutlinedIcon />
-                            Sign In
-                        </Button>
-                    </Link>
-                </Login>
+                {!user ? (
+                    <>
+                        <Hr />
+                        <Login>
+                            Sign in to do more
+                            <Link to='signin' style={{ textDecoration: 'none' }}>
+                                <Button>
+                                    <AccountCircleOutlinedIcon />
+                                    Sign In
+                                </Button>
+                            </Link>
+                        </Login>
+                    </>
+                ) : null}
                 <Hr />
                 <Title>Subcribed Channel</Title>
                 <Item></Item>

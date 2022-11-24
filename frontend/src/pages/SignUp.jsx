@@ -24,7 +24,6 @@ import { useState } from 'react';
 import { Link as LinkRouter } from 'react-router-dom';
 import { useSignUp } from '../hooks/useSignUp';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import FilePicker from 'chakra-ui-file-picker';
 import { useForm } from 'react-hook-form';
 import { CountryDropdown } from 'react-country-region-selector';
 
@@ -58,7 +57,7 @@ export default function SignUp() {
             formData.append(key, data[key]);
         }
         formData.set('location', country);
-        // formData.set('avatar', avatarFile);
+        formData.set('avatar', avatarFile);
         for (var value of formData.values()) {
             console.log(value);
         }
@@ -120,20 +119,12 @@ export default function SignUp() {
                 </RadioGroup>
                 <FormControl id='avatar' isRequired>
                     <FormLabel>Avatar</FormLabel>
-                    {/* <FilePicker
-                        onFileChange={(file) => {
-                            // setAvatarFile(file);
-                            let reader = new FileReader();
-                            setAvatarFile(reader.readAsDataURL(file));
+                    <input
+                        type='file'
+                        onChange={(e) => {
+                            setAvatarFile(e.target.files[0]);
                         }}
-                        placeholder='Choose your avatar'
-                        clearButtonLabel='remove'
-                        multipleFiles={false}
-                        accept='application/png'
-                        hideClearButton={false}
-                        {...register('avatar', {})}
-                    /> */}
-                    <input type='file' {...register('avatar', {})} />
+                    />
                 </FormControl>
                 <FormControl id='birthDate' isRequired>
                     <FormLabel>Date of birth</FormLabel>
@@ -148,13 +139,13 @@ export default function SignUp() {
                 </FormControl>
                 <FormControl id='location' isRequired>
                     <FormLabel>Location</FormLabel>
-                    {/* <Input type='text' {...register('location', {})} /> */}
-                    <CountryDropdown
+                    <Input type='text' {...register('location', {})} />
+                    {/* <CountryDropdown
                         value={''}
                         onChange={(val) => {
                             setCountry(val);
                         }}
-                    />
+                    /> */}
                 </FormControl>
             </>
         );

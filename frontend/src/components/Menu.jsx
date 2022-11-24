@@ -19,16 +19,6 @@ import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import { Link } from 'react-router-dom';
 import { Box, useColorMode, useColorModeValue } from '@chakra-ui/react';
 
-const Container = styled.div`
-    flex: 1;
-    background-color: ${({ theme }) => theme.bgLighter};
-    height: 100%;
-    color: ${({ theme }) => theme.text};
-    font-size: 14px;
-    font-weight: 300;
-    position: sticky;
-    top: 0;
-`;
 const Wrapper = styled.div`
     padding: 18px 26px;
 `;

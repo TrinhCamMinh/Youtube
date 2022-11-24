@@ -1,11 +1,10 @@
-import { Flex, Box, HStack, Stack, Button, Heading, Text, useColorModeValue, Link } from '@chakra-ui/react';
+import { Flex, Box, HStack, Stack, Heading, Text, useColorModeValue, Link } from '@chakra-ui/react';
 import { Link as LinkRouter } from 'react-router-dom';
 import { useSignUp } from '../hooks/useSignUp';
 
 export default function SignUp() {
     const { signUp, error } = useSignUp();
     const handleSubmit = async (e) => {
-        console.log('submitting...');
         e.preventDefault();
         const form = document.querySelector('#form');
         const formData = new FormData(form);

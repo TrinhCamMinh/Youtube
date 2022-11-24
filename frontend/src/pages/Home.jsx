@@ -27,14 +27,6 @@ const Home = () => {
             <Section>Videos</Section>
             <VideoContainer>
                 <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
             </VideoContainer>
         </Box>
     );

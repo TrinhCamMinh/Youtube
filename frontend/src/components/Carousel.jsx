@@ -35,49 +35,94 @@ export default function Carousel() {
                 className='mySwiper'
             >
                 <SwiperSlide>
-                    <img src='https://media.istockphoto.com/id/1009725920/photo/astronaut-in-space-giving-thumbs-up-cosmonaut-floating-above-planet-earth-3d-render.jpg?s=612x612&w=0&k=20&c=1znqU-HXeZ4o6OeyOejUxGrnBC_aEIb0lVQSuuIbIBE=' />
+                    <img
+                        src='https://media.istockphoto.com/id/1009725920/photo/astronaut-in-space-giving-thumbs-up-cosmonaut-floating-above-planet-earth-3d-render.jpg?s=612x612&w=0&k=20&c=1znqU-HXeZ4o6OeyOejUxGrnBC_aEIb0lVQSuuIbIBE='
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://img.freepik.com/premium-photo/astronaut-outer-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-13360.jpg?w=2000' />
+                    <img
+                        src='https://img.freepik.com/premium-photo/astronaut-outer-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-13360.jpg?w=2000'
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000'></img>
+                    <img
+                        src='https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000'
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://media.istockphoto.com/id/1009725920/photo/astronaut-in-space-giving-thumbs-up-cosmonaut-floating-above-planet-earth-3d-render.jpg?s=612x612&w=0&k=20&c=1znqU-HXeZ4o6OeyOejUxGrnBC_aEIb0lVQSuuIbIBE=' />
+                    <img
+                        src='https://media.istockphoto.com/id/1009725920/photo/astronaut-in-space-giving-thumbs-up-cosmonaut-floating-above-planet-earth-3d-render.jpg?s=612x612&w=0&k=20&c=1znqU-HXeZ4o6OeyOejUxGrnBC_aEIb0lVQSuuIbIBE='
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://img.freepik.com/premium-photo/astronaut-outer-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-13360.jpg?w=2000' />
+                    <img
+                        src='https://img.freepik.com/premium-photo/astronaut-outer-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-13360.jpg?w=2000'
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000'></img>
+                    <img
+                        src='https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000'
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://media.istockphoto.com/id/1009725920/photo/astronaut-in-space-giving-thumbs-up-cosmonaut-floating-above-planet-earth-3d-render.jpg?s=612x612&w=0&k=20&c=1znqU-HXeZ4o6OeyOejUxGrnBC_aEIb0lVQSuuIbIBE=' />
+                    <img
+                        src='https://media.istockphoto.com/id/1009725920/photo/astronaut-in-space-giving-thumbs-up-cosmonaut-floating-above-planet-earth-3d-render.jpg?s=612x612&w=0&k=20&c=1znqU-HXeZ4o6OeyOejUxGrnBC_aEIb0lVQSuuIbIBE='
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://img.freepik.com/premium-photo/astronaut-outer-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-13360.jpg?w=2000' />
+                    <img
+                        src='https://img.freepik.com/premium-photo/astronaut-outer-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-13360.jpg?w=2000'
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000'></img>
+                    <img
+                        src='https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000'
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://media.istockphoto.com/id/1009725920/photo/astronaut-in-space-giving-thumbs-up-cosmonaut-floating-above-planet-earth-3d-render.jpg?s=612x612&w=0&k=20&c=1znqU-HXeZ4o6OeyOejUxGrnBC_aEIb0lVQSuuIbIBE=' />
+                    <img
+                        src='https://media.istockphoto.com/id/1009725920/photo/astronaut-in-space-giving-thumbs-up-cosmonaut-floating-above-planet-earth-3d-render.jpg?s=612x612&w=0&k=20&c=1znqU-HXeZ4o6OeyOejUxGrnBC_aEIb0lVQSuuIbIBE='
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://img.freepik.com/premium-photo/astronaut-outer-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-13360.jpg?w=2000' />
+                    <img
+                        src='https://img.freepik.com/premium-photo/astronaut-outer-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-13360.jpg?w=2000'
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000'></img>
+                    <img
+                        src='https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000'
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://media.istockphoto.com/id/1009725920/photo/astronaut-in-space-giving-thumbs-up-cosmonaut-floating-above-planet-earth-3d-render.jpg?s=612x612&w=0&k=20&c=1znqU-HXeZ4o6OeyOejUxGrnBC_aEIb0lVQSuuIbIBE=' />
+                    <img
+                        src='https://media.istockphoto.com/id/1009725920/photo/astronaut-in-space-giving-thumbs-up-cosmonaut-floating-above-planet-earth-3d-render.jpg?s=612x612&w=0&k=20&c=1znqU-HXeZ4o6OeyOejUxGrnBC_aEIb0lVQSuuIbIBE='
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://img.freepik.com/premium-photo/astronaut-outer-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-13360.jpg?w=2000' />
+                    <img
+                        src='https://img.freepik.com/premium-photo/astronaut-outer-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-13360.jpg?w=2000'
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src='https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000'></img>
+                    <img
+                        src='https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000'
+                        alt='youtube short'
+                    />
                 </SwiperSlide>
             </Swiper>
         </Container>

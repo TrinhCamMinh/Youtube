@@ -4,6 +4,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useLogout } from '../hooks/useLogout';
 import { Box, useColorModeValue } from '@chakra-ui/react';
 
 const Container = styled.div`
@@ -58,6 +59,12 @@ const Button = styled.button`
 `;
 const Navbar = () => {
     const { user } = useAuthContext();
+    const { logout } = useLogout();
+
+    const handleLogOut = async () => {
+        await logout();
+    };
+
     return (
         <Box bg={useColorModeValue('white', 'black.200')}>
             <Container>
@@ -68,7 +75,19 @@ const Navbar = () => {
                     </Search>
                     <Link to='signin' style={{ textDecoration: 'none' }}>
                         {user ? (
-                            <h1>{user.userName}</h1>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                <img
+                                    src={user.avatar}
+                                    alt='user avatar'
+                                    style={{ width: '27px', height: '25px', borderRadius: '6px' }}
+                                />
+                                <small>{user.userName}</small>
+                                <i
+                                    className='fa-solid fa-right-from-bracket'
+                                    style={{ color: '#ef3038' }}
+                                    onClick={handleLogOut}
+                                ></i>
+                            </div>
                         ) : (
                             <Button>
                                 <AccountCircleOutlinedIcon />

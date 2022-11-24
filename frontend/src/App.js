@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import Menu from './components/Menu';
 import Navbar from './components/Navbar';
-import { darkTheme, lightTheme, theme } from './utils/Theme';
+import { theme } from './utils/Theme';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Video from './pages/Video';
@@ -13,7 +13,7 @@ import WatchLater from './pages/WatchLater';
 import Profile from './pages/Profile';
 import History from './pages/History';
 import UserProfileEdit from './pages/ProfileEdit';
-import { ChakraProvider, useColorMode } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 
 const Container = styled.div`
     display: flex;

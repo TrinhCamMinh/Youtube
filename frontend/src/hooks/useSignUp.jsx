@@ -14,6 +14,7 @@ export const useSignUp = () => {
             console.log('singUp fail');
         } else {
             console.log('signUp success');
+            localStorage.setItem('user', JSON.stringify(json));
             dispatch({ type: 'LOGIN', payload: json });
         }
         return json;

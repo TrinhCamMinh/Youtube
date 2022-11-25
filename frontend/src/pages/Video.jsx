@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useVideo } from '../hooks/useVideo';
+import { useAuthContext } from '../hooks/useAuthContext';
 import styled from 'styled-components';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbDownOffAltOutlinedIcon from '@mui/icons-material/ThumbDownOffAltOutlined';
@@ -9,6 +10,7 @@ import AddTaskOutlinedIcon from '@mui/icons-material/AddTaskOutlined';
 import Comments from '../components/Comments';
 import Card from '../components/Card';
 import { format } from 'timeago.js';
+import LoginRequiredModal from '../components/Modal';
 import {
     Modal,
     ModalOverlay,
@@ -22,7 +24,6 @@ import {
     Box,
     useColorModeValue,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     display: flex;
@@ -75,6 +76,7 @@ const Hr = styled.hr`
 const Recommendation = styled.div`
     flex: 2;
 `;
+
 const Channel = styled.div`
     display: flex;
     justify-content: space-between;
@@ -125,18 +127,47 @@ const Subscribe = styled.button`
 
 const Video = () => {
     const { id } = useParams();
-    const { getSpecificVideo } = useVideo();
+    const { user } = useAuthContext();
+    const [showModal, setShowModal] = useState(false);
+    const { getVideo, getSpecificVideo } = useVideo();
+    const [allVideo, setAllVideo] = useState(null);
     const [video, setVideo] = useState(null);
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const fetchVideo = async () => {
+    const fetchAllVideo = async () => {
+        const data = await getVideo();
+        setAllVideo(data);
+    };
+
+    const fetchSpecificVideo = async () => {
         const data = await getSpecificVideo(id);
         setVideo(data);
     };
 
+    const handleLike = () => {
+        if (user) {
+            console.log(`liked with login`);
+            setShowModal(false);
+        } else {
+            console.log(`liked without login`);
+            setShowModal(true);
+        }
+    };
+
+    const handleSave = () => {
+        if (user) {
+            console.log(`save with login`);
+            setShowModal(false);
+        } else {
+            console.log(`save without login`);
+            setShowModal(true);
+        }
+    };
+
     useEffect(() => {
-        fetchVideo();
+        fetchSpecificVideo();
+        fetchAllVideo();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -171,9 +202,9 @@ const Video = () => {
                                     height='580'
                                     src={`https://www.youtube.com/embed/${video.video}`}
                                     title={video.title}
-                                    frameborder='0'
+                                    frameBorder='0'
                                     allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                                    allowfullscreen
+                                    allowFullScreen
                                 ></iframe>
                             </VideoWrapper>
                             <Title>{video.title}</Title>
@@ -182,8 +213,9 @@ const Video = () => {
                                     {video.view} views • {format(video.createdAt)}
                                 </Info>
                                 <Buttons>
-                                    <Button onClick={onOpen}>
+                                    <Button onClick={handleLike}>
                                         <ThumbUpOutlinedIcon /> {video.like}
+                                        {showModal && <LoginRequiredModal />}
                                     </Button>
                                     <Button>
                                         <ThumbDownOffAltOutlinedIcon /> Dislike
@@ -191,8 +223,9 @@ const Video = () => {
                                     <Button>
                                         <ReplyOutlinedIcon /> Share
                                     </Button>
-                                    <Button>
+                                    <Button onClick={handleSave}>
                                         <AddTaskOutlinedIcon /> Save
+                                        {showModal && <LoginRequiredModal />}
                                     </Button>
                                 </Buttons>
                             </Details>
@@ -214,10 +247,10 @@ const Video = () => {
                     )}
                 </Content>
                 <Recommendation>
-                    <Card type='sm' />
-                    <Card type='sm' />
-                    <Card type='sm' />
-                    <Card type='sm' />
+                    {allVideo &&
+                        allVideo.map((item, index) => {
+                            return <Card key={index} type='sm' item={item} />;
+                        })}
                 </Recommendation>
             </Container>
         </Box>

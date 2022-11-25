@@ -17,7 +17,7 @@ const commentSchema = new Schema(
             default: 0,
         },
         comment: {
-            type: Array,
+            type: Object,
             require: true,
         },
     },

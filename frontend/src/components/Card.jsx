@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useVideo } from '../hooks/useVideo';
+import { useAvatar } from '../hooks/useAvatar';
 import { format } from 'timeago.js';
 
 const Container = styled.div`
@@ -58,48 +58,41 @@ const Info = styled.div`
     ${'' /* color: ${({ theme }) => theme.textSoft}; */}
 `;
 
-const Card = ({ type }) => {
-    const [videos, setVideos] = useState(null);
-    const { getVideo } = useVideo();
+const Card = ({ type, item }) => {
+    const [avatar, setAvatar] = useState(null);
+    const { getUserAvatar } = useAvatar();
 
-    const getData = async () => {
-        const data = await getVideo();
-        setVideos(data);
+    const fetchUserAvatar = async (id) => {
+        const data = await getUserAvatar(id);
+        setAvatar(data);
     };
 
     useEffect(() => {
-        getData();
+        if (item) {
+            fetchUserAvatar(item.ownerID);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <>
-            {videos &&
-                videos.map((video, index) => {
-                    return (
-                        <Link key={index} to={`/video/${video._id}`} style={{ textDecoration: 'none' }}>
-                            <Container type={type}>
-                                <Image
-                                    type={type}
-                                    src={`https://img.youtube.com/vi/${video.thumbnail}/maxresdefault.jpg`}
-                                />
-                                <Details type={type}>
-                                    <ChannelImage
-                                        type={type}
-                                        src='https://img.youtube.com/vi/QPxwXAWLji4/maxresdefault.jpg'
-                                    />
-                                    <Texts>
-                                        <Title>{video.title}</Title>
-                                        <ChannelName>Test channel</ChannelName>
-                                        <Info>
-                                            {video.view} views • {format(video.createdAt)}
-                                        </Info>
-                                    </Texts>
-                                </Details>
-                            </Container>
-                        </Link>
-                    );
-                })}
+            {item && (
+                <Link to={`/video/${item._id}`} style={{ textDecoration: 'none' }}>
+                    <Container type={type}>
+                        <Image type={type} src={`https://img.youtube.com/vi/${item.thumbnail}/maxresdefault.jpg`} />
+                        <Details type={type}>
+                            {type !== 'sm' && <ChannelImage type={type} src={`http://localhost:5000${avatar}`} />}
+                            <Texts>
+                                <Title>{item.title}</Title>
+                                <ChannelName>Test channel</ChannelName>
+                                <Info>
+                                    {item.view} views • {format(item.createdAt)}
+                                </Info>
+                            </Texts>
+                        </Details>
+                    </Container>
+                </Link>
+            )}
         </>
     );
 };

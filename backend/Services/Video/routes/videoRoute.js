@@ -1,6 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { getVideo, getSpecificVideo, postVideo, updateVideoLike } = require('../controller/videoController');
+const {
+    getVideo,
+    getSpecificVideo,
+    postVideo,
+    updateVideoLike,
+    updateVideoView,
+} = require('../controller/videoController');
 const { getSubscribeChannel, postSubscribe } = require('../controller/subscribedController');
 const { getLikeVideo, postLike } = require('../controller/likedVideoController');
 const { getWatchedVideo, postWatchedVideo } = require('../controller/watchedVideoController');
@@ -23,5 +29,6 @@ router.post('/watched', postWatchedVideo);
 
 //* [PUT] methods
 router.put('/like/:videoID', updateVideoLike);
+router.put('/view/:videoID', updateVideoView);
 
 module.exports = router;

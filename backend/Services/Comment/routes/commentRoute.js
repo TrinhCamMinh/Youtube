@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { getComment, postComment, putCommentLike } = require('../controller/commentController');
+const { getAllComment, getComment, postComment, putCommentLike } = require('../controller/commentController');
 
 //* [GET] methods
-router.get('/:videoId', (req, res) => {
-    res.json('test comment');
-});
+router.get('/', getAllComment);
+router.get('/:videoID', getComment);
 
 //* [POST methods
 router.post('/', postComment);

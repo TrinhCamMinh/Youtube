@@ -20,12 +20,12 @@ const videoSchema = new Schema(
             require: true,
         },
         like: {
-            type: String,
+            type: Number,
             require: true,
             default: 0,
         },
         view: {
-            type: String,
+            type: Number,
             require: true,
             default: 0,
         },

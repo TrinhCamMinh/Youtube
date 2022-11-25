@@ -1,9 +1,19 @@
 const commentModel = require('../model/commentModel');
 
 //* [GET] methods
-const getComment = async (req, res) => {
+const getAllComment = async (req, res) => {
     try {
         const data = await commentModel.find({});
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+};
+
+const getComment = async (req, res) => {
+    try {
+        const { videoID } = req.params;
+        const data = await commentModel.find({ videoID });
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json(error.message);
@@ -13,10 +23,9 @@ const getComment = async (req, res) => {
 //* [POST] methods
 const postComment = async (req, res) => {
     try {
-        const { videoID, userID, liked, commentAvatar, commentTitle, commentContent } = req.body;
+        const { videoID, userID, liked, commentAvatar, commentContent } = req.body;
         const comment = {
             commentAvatar,
-            commentTitle,
             commentContent,
         };
         const data = await commentModel.create({ videoID, userID, liked, comment });
@@ -39,6 +48,7 @@ const putCommentLike = async (req, res) => {
 };
 
 module.exports = {
+    getAllComment,
     getComment,
     postComment,
     putCommentLike,

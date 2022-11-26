@@ -68,7 +68,6 @@ const Navbar = () => {
     };
 
     const handleSearch = async () => {
-        console.log('navigate');
         navigate(`/search/${searchRef.current.value}`);
     };
 

@@ -7,7 +7,7 @@ const subscribedSchema = new Schema(
             type: String,
             require: true,
         },
-        videoID: {
+        channelID: {
             type: String,
             require: true,
         },

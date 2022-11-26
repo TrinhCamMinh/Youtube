@@ -11,15 +11,19 @@ import {
     Heading,
     Text,
     useColorModeValue,
+    useToast,
 } from '@chakra-ui/react';
 import { Link as LinkRouter } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useLogin } from '../hooks/useLogin';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 export default function SignIn() {
     const userNameRef = useRef();
     const passwordRef = useRef();
     const { login, error } = useLogin();
+    const toast = useToast();
+    const { user } = useAuthContext();
 
     const handleLogin = async () => {
         await login(userNameRef.current.value, passwordRef.current.value);
@@ -55,13 +59,29 @@ export default function SignIn() {
                                 as={LinkRouter}
                                 onClick={() => {
                                     handleLogin();
+                                    // eslint-disable-next-line no-lone-blocks
+                                    {
+                                        user
+                                            ? toast({
+                                                  title: 'Login successful',
+                                                  status: 'success',
+                                                  duration: 3000,
+                                                  isClosable: true,
+                                              })
+                                            : toast({
+                                                  title: 'Login failed',
+                                                  status: 'error',
+                                                  duration: 3000,
+                                                  isClosable: true,
+                                              });
+                                    }
                                 }}
                                 bg={'red.400'}
                                 color={'white'}
                                 _hover={{
                                     bg: 'red.500',
                                 }}
-                                // to='/'
+                                to={user ? '/' : '/signin'}
                             >
                                 Sign in
                             </Button>

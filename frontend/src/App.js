@@ -12,7 +12,6 @@ import SignUp from './pages/SignUp';
 import WatchLater from './pages/WatchLater';
 import Profile from './pages/Profile';
 import History from './pages/History';
-import UserProfileEdit from './pages/ProfileEdit';
 import Search from './pages/Search';
 import { ChakraProvider } from '@chakra-ui/react';
 
@@ -47,7 +46,6 @@ function App() {
                                     <Route path='/later' element={<WatchLater />} />
                                     <Route path='/history' element={<History />} />
                                     <Route path='/profile' element={<Profile />} />
-                                    <Route path='/edit-profile' element={<UserProfileEdit />} />
                                     <Route path='/video'>
                                         <Route path=':id' element={<Video />} />
                                     </Route>

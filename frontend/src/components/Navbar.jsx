@@ -1,11 +1,11 @@
-import React, { useRef} from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useLogout } from '../hooks/useLogout';
-import { Box, useColorModeValue } from '@chakra-ui/react';
+import { Box, useColorModeValue, Input, InputGroup, InputRightAddon } from '@chakra-ui/react';
 
 const Container = styled.div`
     position: sticky;
@@ -21,28 +21,6 @@ const Wrapper = styled.div`
     height: 100%;
     padding: 5px 20px;
     position: relative;
-`;
-
-const Search = styled.div`
-    width: 40%;
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 15px;
-    border: 1px solid #303030;
-    border-radius: 30px;
-    font-size: 16px;
-`;
-
-const Input = styled.input`
-    border: none;
-    background-color: transparent;
-    outline: none;
-    ${'' /* color: ${({ theme }) => theme.text}; */}
 `;
 
 const Button = styled.button`
@@ -75,10 +53,15 @@ const Navbar = () => {
         <Box bg={useColorModeValue('white', 'black.200')}>
             <Container>
                 <Wrapper>
-                    <Search>
-                        <Input placeholder='Search' ref={searchRef} />
-                        <SearchOutlinedIcon style={{ color: 'text' }} onClick={handleSearch} />
-                    </Search>
+                    <InputGroup w={'55vw'}>
+                        <Input my={'0'} mx={'auto'} rounded={'full'} placeholder='Search' ref={searchRef} />
+                        <InputRightAddon
+                            mr={'22vw'}
+                            rounded={'full'}
+                            children={<SearchOutlinedIcon style={{ color: 'text' }} onClick={handleSearch} />}
+                        />
+                    </InputGroup>
+
                     {user ? (
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                             <Link to='profile' style={{ textDecoration: 'none' }}>

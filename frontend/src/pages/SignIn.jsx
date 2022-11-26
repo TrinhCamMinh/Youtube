@@ -13,13 +13,14 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 import { Link as LinkRouter } from 'react-router-dom';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useLogin } from '../hooks/useLogin';
 
 export default function SignIn() {
     const userNameRef = useRef();
     const passwordRef = useRef();
-    const { login, error } = useLogin();
+    const { login,  loginError } = useLogin();
+    const [error, setError] = useState('');
 
     const handleLogin = async () => {
         await login(userNameRef.current.value, passwordRef.current.value);
@@ -37,8 +38,8 @@ export default function SignIn() {
                 <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
                     <Stack spacing={4}>
                         <FormControl id='email'>
-                            <FormLabel>Email address</FormLabel>
-                            <Input type='email' ref={userNameRef} />
+                            <FormLabel>Username</FormLabel>
+                            <Input type='text' ref={userNameRef} />
                         </FormControl>
                         <FormControl id='password'>
                             <FormLabel>Password</FormLabel>
@@ -49,28 +50,32 @@ export default function SignIn() {
                                 <Checkbox>Remember me</Checkbox>
                                 <Link color={'red.400'}>Forgot password?</Link>
                             </Stack>
+                            <Text color={'red.500'}>{error ? console.log(error) : 'Error will display here'}</Text>
                             <Button
-                                onClick={handleLogin}
+                            mt={1}
+                                as={LinkRouter}
+                                onClick={() => {handleLogin(); setError(loginError)}}
                                 bg={'red.400'}
                                 color={'white'}
                                 _hover={{
                                     bg: 'red.500',
                                 }}
+                                // to='/'
                             >
                                 Sign in
                             </Button>
                             <Stack pt={6}>
-                                <LinkRouter to='/signup'>
-                                    <Text align={'center'}>
-                                        Not a user? <Link color={'red.400'}>Sign up</Link>
-                                    </Text>
-                                </LinkRouter>
+                                <Text align={'center'}>
+                                    Already a user?{' '}
+                                    <Link as={LinkRouter} to='/signup' color={'red.400'}>
+                                        Sign up
+                                    </Link>
+                                </Text>
                             </Stack>
                         </Stack>
                     </Stack>
                 </Box>
             </Stack>
-            {error && <h1>{error}</h1>}
         </Flex>
     );
 }

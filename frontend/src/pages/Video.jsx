@@ -19,7 +19,7 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
-    Button as ButtonCU,
+    Button,
     useDisclosure,
     Box,
     useColorModeValue,
@@ -61,12 +61,12 @@ const Buttons = styled.div`
     ${'' /* color: ${({ theme }) => theme.text}; */}
 `;
 
-const Button = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-`;
+// const Button = styled.div`
+//     display: flex;
+//     align-items: center;
+//     gap: 5px;
+//     cursor: pointer;
+// `;
 
 const Hr = styled.hr`
     margin: 15px 0px;
@@ -79,7 +79,8 @@ const Recommendation = styled.div`
 
 const Channel = styled.div`
     display: flex;
-    justify-content: space-between;
+    ${'' /* justify-content: space-between; */}
+    gap: 40px;
 `;
 
 const ChannelInfo = styled.div`
@@ -129,12 +130,13 @@ const Video = () => {
     const { id } = useParams();
     const { user } = useAuthContext();
     const { getVideo, getSpecificVideo, getSubscribeVideo, likeVideo, viewVideo, subscribeVideo } = useVideo();
+    const [subscribeChannel, setSubscribeChannel] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [ownerID, setOwnerID] = useState(null);
     const [allVideo, setAllVideo] = useState(null);
     const [video, setVideo] = useState(null);
-    const [subscribeChannel, setSubscribeChannel] = useState(null);
-    const [ownerID, setOwnerID] = useState(null);
-    const { isOpen, onClose } = useDisclosure();
+    const [content, setContent] = useState('');
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     const fetchAllVideo = async () => {
         const data = await getVideo();
@@ -203,13 +205,13 @@ const Video = () => {
                                 <ModalContent>
                                     <ModalHeader color={'red.500'}>LOGIN REQUIRED!!!</ModalHeader>
                                     <ModalCloseButton />
-                                    <ModalBody>You need to sign in to do this function</ModalBody>
+                                    <ModalBody>You need to sign in to {content}</ModalBody>
                                     <ModalFooter>
-                                        <ButtonCU variant='ghost'>Close</ButtonCU>
+                                        <Button variant='ghost'>Close</Button>
                                         <Link to='/signin'>
-                                            <ButtonCU colorScheme='red' mr={3} onClick={onClose}>
+                                            <Button colorScheme='red' mr={3} onClick={onClose}>
                                                 Sign in
-                                            </ButtonCU>
+                                            </Button>
                                         </Link>
                                     </ModalFooter>
                                 </ModalContent>
@@ -217,8 +219,8 @@ const Video = () => {
                             {/* end modal */}
                             <VideoWrapper>
                                 <iframe
-                                    width='1032'
-                                    height='580'
+                                    width='965'
+                                    height='540'
                                     src={`https://www.youtube.com/embed/${video.video}`}
                                     title={video.title}
                                     frameBorder='0'
@@ -232,19 +234,30 @@ const Video = () => {
                                     {video.view} views • {format(video.createdAt)}
                                 </Info>
                                 <Buttons>
-                                    <Button onClick={() => handleLike(video._id)}>
+                                    <Button
+                                        rounded={'full'}
+                                        onClick={() => {
+                                            setContent('like this video');
+                                            user ? handleLike(video._id) : onOpen();
+                                        }}
+                                    >
                                         <ThumbUpOutlinedIcon /> {video.like}
                                         {showModal && <LoginRequiredModal />}
                                     </Button>
-                                    <Button>
+                                    <Button rounded={'full'}>
                                         <ThumbDownOffAltOutlinedIcon /> Dislike
                                     </Button>
-                                    <Button>
+                                    <Button rounded={'full'}>
                                         <ReplyOutlinedIcon /> Share
                                     </Button>
-                                    <Button onClick={handleSave}>
+                                    <Button
+                                        rounded={'full'}
+                                        onClick={() => {
+                                            setContent('save this video');
+                                            user ? handleSave() : onOpen();
+                                        }}
+                                    >
                                         <AddTaskOutlinedIcon /> Save
-                                        {showModal && <LoginRequiredModal />}
                                     </Button>
                                 </Buttons>
                             </Details>

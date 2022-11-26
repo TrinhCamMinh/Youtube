@@ -4,6 +4,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Comment from './Comment';
+import { Button } from '@chakra-ui/react';
 
 const Container = styled.div``;
 
@@ -57,7 +58,7 @@ const Comments = () => {
                     <NewComment>
                         <Avatar src={`http://localhost:5000${user.avatar}`} />
                         <Input placeholder='Add a comment...' ref={inputRef} />
-                        <button onClick={() => handleSubmitComment(inputRef.current.value)}>Comment</button>
+                        <Button onClick={() => handleSubmitComment(inputRef.current.value)}>Comment</Button>
                     </NewComment>
                     {comment &&
                         comment.map((item, index) => {

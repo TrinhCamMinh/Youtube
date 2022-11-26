@@ -284,8 +284,8 @@ const Video = () => {
                                     colorScheme={subscribeChannel && subscribeChannel.length > 0 ? 'gray' : 'red'}
                                     onClick={() => {
                                         subscribeChannel && subscribeChannel.length > 0
-                                            ? handleSubscribeChannel(video.ownerID)
-                                            : console.log('ready to unsubscribe');
+                                            ? console.log('ready to unsubscribe')
+                                            : handleSubscribeChannel(video.ownerID);
                                     }}
                                 >
                                     {subscribeChannel && subscribeChannel.length > 0 ? 'SUBSCRIBED' : 'SUBSCRIBE'}

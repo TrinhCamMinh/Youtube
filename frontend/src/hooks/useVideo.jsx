@@ -16,8 +16,30 @@ export const useVideo = () => {
             method: 'PUT',
         });
         const json = await response.json();
-        if (!response.ok) console.log('like fail');
-        else console.log('like success');
+        return json;
+    };
+
+    const getAllSubscribeVideo = async (userID) => {
+        const response = await fetch(`http://localhost:7000/api/video/subscribed/all/${userID}`);
+        const json = await response.json();
+        return json;
+    };
+
+    const getSubscribeVideo = async (userID, channelID) => {
+        const response = await fetch(
+            `http://localhost:7000/api/video/subscribed?userID=${userID}&channelID=${channelID}`,
+        );
+        const json = await response.json();
+        return json;
+    };
+
+    const subscribeVideo = async (userID, channelID) => {
+        const response = await fetch(`http://localhost:7000/api/video/subscribe`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userID, channelID }),
+        });
+        const json = await response.json();
         return json;
     };
 
@@ -35,5 +57,14 @@ export const useVideo = () => {
         return json;
     };
 
-    return { getVideo, getSpecificVideo, likeVideo, viewVideo, searchVideo };
+    return {
+        getVideo,
+        getSpecificVideo,
+        getAllSubscribeVideo,
+        getSubscribeVideo,
+        likeVideo,
+        subscribeVideo,
+        viewVideo,
+        searchVideo,
+    };
 };

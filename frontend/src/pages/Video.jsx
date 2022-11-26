@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useVideo } from '../hooks/useVideo';
 import { useAuthContext } from '../hooks/useAuthContext';
-import { useSubscribe } from '../hooks/useSubscribe';
 import styled from 'styled-components';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbDownOffAltOutlinedIcon from '@mui/icons-material/ThumbDownOffAltOutlined';
@@ -129,13 +128,13 @@ const Subscribe = styled.button`
 const Video = () => {
     const { id } = useParams();
     const { user } = useAuthContext();
+    const { getVideo, getSpecificVideo, getSubscribeVideo, likeVideo, viewVideo, subscribeVideo } = useVideo();
     const [showModal, setShowModal] = useState(false);
-    const { getVideo, getSpecificVideo, likeVideo, viewVideo } = useVideo();
-    const { getSubscribe, postSubscribe } = useSubscribe();
     const [allVideo, setAllVideo] = useState(null);
     const [video, setVideo] = useState(null);
-
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [subscribeChannel, setSubscribeChannel] = useState(null);
+    const [ownerID, setOwnerID] = useState(null);
+    const { isOpen, onClose } = useDisclosure();
 
     const fetchAllVideo = async () => {
         const data = await getVideo();
@@ -145,6 +144,18 @@ const Video = () => {
     const fetchSpecificVideo = async () => {
         const data = await getSpecificVideo(id);
         setVideo(data);
+        setOwnerID(data.ownerID);
+    };
+
+    const fetchSubscribeChannel = async () => {
+        if (user) {
+            const data = await getSubscribeVideo(user._id, ownerID);
+            setSubscribeChannel(data);
+        }
+    };
+
+    const handleSubscribeChannel = async (channelID) => {
+        await subscribeVideo(user._id, channelID);
     };
 
     const updateView = async () => {
@@ -156,17 +167,14 @@ const Video = () => {
             await likeVideo(id);
             setShowModal(false);
         } else {
-            console.log(`liked without login`);
             setShowModal(true);
         }
     };
 
     const handleSave = () => {
         if (user) {
-            console.log(`save with login`);
             setShowModal(false);
         } else {
-            console.log(`save without login`);
             setShowModal(true);
         }
     };
@@ -177,6 +185,11 @@ const Video = () => {
         updateView();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        fetchSubscribeChannel();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ownerID]);
 
     return (
         <Box bg={useColorModeValue('gray.50', 'black.200')}>
@@ -245,7 +258,13 @@ const Video = () => {
                                         <Description>{video.description}</Description>
                                     </ChannelDetail>
                                 </ChannelInfo>
-                                <Subscribe onClick={onOpen}>SUBSCRIBE</Subscribe>
+                                {subscribeChannel && subscribeChannel.length > 0 ? (
+                                    <h1>Already</h1>
+                                ) : (
+                                    <Subscribe onClick={() => handleSubscribeChannel(video.ownerID)}>
+                                        SUBSCRIBE
+                                    </Subscribe>
+                                )}
                             </Channel>
                             <Hr />
                             <Comments />

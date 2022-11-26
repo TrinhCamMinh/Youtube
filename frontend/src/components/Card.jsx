@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAvatar } from '../hooks/useAvatar';
+import { useUser } from '../hooks/useUser';
 import { format } from 'timeago.js';
 
 const Container = styled.div`
@@ -59,17 +59,24 @@ const Info = styled.div`
 `;
 
 const Card = ({ type, item }) => {
+    const { getUserAvatar, getUserChannelName } = useUser();
     const [avatar, setAvatar] = useState(null);
-    const { getUserAvatar } = useAvatar();
+    const [channelName, setChannelName] = useState(null);
 
     const fetchUserAvatar = async (id) => {
         const data = await getUserAvatar(id);
         setAvatar(data);
     };
 
+    const fetchUserChannelName = async (id) => {
+        const data = await getUserChannelName(id);
+        setChannelName(data);
+    };
+
     useEffect(() => {
         if (item) {
             fetchUserAvatar(item.ownerID);
+            fetchUserChannelName(item.ownerID)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -84,7 +91,7 @@ const Card = ({ type, item }) => {
                             {type !== 'sm' && <ChannelImage type={type} src={`http://localhost:5000${avatar}`} />}
                             <Texts>
                                 <Title>{item.title}</Title>
-                                <ChannelName>Test channel</ChannelName>
+                                <ChannelName>{channelName}</ChannelName>
                                 <Info>
                                     {item.view} views • {format(item.createdAt)}
                                 </Info>

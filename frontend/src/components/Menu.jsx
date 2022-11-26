@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import LamaTube from '../img/logo.png';
 import HomeIcon from '@mui/icons-material/Home';
@@ -19,6 +19,8 @@ import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import { Link } from 'react-router-dom';
 import { Box, useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useVideo } from '../hooks/useVideo';
+import { useUser } from '../hooks/useUser';
 
 const Wrapper = styled.div`
     padding: 18px 26px;
@@ -77,13 +79,43 @@ const Title = styled.h2`
 
 const Menu = ({ lightMode, setLightMode }) => {
     const { user } = useAuthContext();
-
+    const { getAllSubscribeVideo } = useVideo();
+    const { getUser } = useUser();
     const { colorMode, toggleColorMode } = useColorMode();
+    const [channelID, setChannelID] = useState(null);
+    const [channel, setChannel] = useState([]);
+
+    const fetchAllSubscribeChannel = async () => {
+        if (user) {
+            const data = await getAllSubscribeVideo(user._id);
+            setChannelID(data);
+        }
+    };
+
+    const fetchSubscribedChannel = (channelID) => {
+        const fetch = async (userID) => {
+            const data = await getUser(userID);
+            setChannel((prev) => [...prev, data]);
+        };
+        if (channelID) {
+            channelID.map((item) => fetch(item.channelID));
+        }
+    };
+
+    useEffect(() => {
+        fetchAllSubscribeChannel();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user]);
+
+    useEffect(() => {
+        fetchSubscribedChannel(channelID);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [channelID]);
 
     return (
         <Box bg={useColorModeValue('white', 'black.200')}>
-            {/* <Container> */}
             <Wrapper>
+                {channel && console.log(channel)}
                 <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Logo>
                         <Img src={LamaTube} />
@@ -142,9 +174,23 @@ const Menu = ({ lightMode, setLightMode }) => {
                     </>
                 ) : null}
                 <Hr />
-                <Title>Subcribed Channel</Title>
-                <Item></Item>
-                <Item></Item>
+                <Title>Subscribed Channel</Title>
+                {channel &&
+                    channel.map((item, index) => {
+                        return (
+                            <div
+                                style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '8px' }}
+                                key={index}
+                            >
+                                <img
+                                    style={{ borderRadius: '6px', width: '40px' }}
+                                    src={`http://localhost:5000/${item.avatar}`}
+                                    alt='channel avatar'
+                                />
+                                <h1>{item.channelName}</h1>
+                            </div>
+                        );
+                    })}
                 <Hr />
                 <Title>Collections</Title>
                 <Item>

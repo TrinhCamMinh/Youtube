@@ -25,7 +25,6 @@ import { Link as LinkRouter } from 'react-router-dom';
 import { useSignUp } from '../hooks/useSignUp';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useForm } from 'react-hook-form';
-// import { CountryDropdown } from 'react-country-region-selector';
 
 export default function SignUp() {
     const { signUp, error } = useSignUp();
@@ -55,9 +54,7 @@ export default function SignUp() {
             duration: 3000,
             isClosable: true,
         });
-        console.log(data);
 
-        console.log('submitting...');
         const form = document.querySelector('#form');
         const formData = new FormData(form);
         for (let key in data) {
@@ -65,9 +62,6 @@ export default function SignUp() {
         }
         formData.set('gender', gender);
         formData.set('avatar', avatarFile);
-        for (var value of formData.values()) {
-            console.log(value);
-        }
         await signUp(formData);
     };
 
@@ -148,12 +142,6 @@ export default function SignUp() {
                 <FormControl id='location'>
                     <FormLabel>Location</FormLabel>
                     <Input type='text' {...register('location', {})} />
-                    {/* <CountryDropdown
-                        value={''}
-                        onChange={(val) => {
-                            setCountry(val);
-                        }}
-                    /> */}
                 </FormControl>
             </>
         );
@@ -183,7 +171,7 @@ export default function SignUp() {
                     <Stack p={4}>
                         <Progress hasStripe value={progress} mb='5%' isAnimated></Progress>
                         {step === 1 ? <FormStep1 /> : <FormStep2 />}
-                        <Text color={'red.500'}>{error ? console.log(error) : 'Error will display here'}</Text>
+                        <Text color={'red.500'}>{error && <small>{error}</small>}</Text>
                         <ButtonGroup mt='5%' w='100%'>
                             <Flex mt={'20px'} w='100%' justifyContent='space-between'>
                                 <Button

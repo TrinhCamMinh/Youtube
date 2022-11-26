@@ -19,8 +19,7 @@ import { useLogin } from '../hooks/useLogin';
 export default function SignIn() {
     const userNameRef = useRef();
     const passwordRef = useRef();
-    const { login,  loginError } = useLogin();
-    const [error, setError] = useState('');
+    const { login, error } = useLogin();
 
     const handleLogin = async () => {
         await login(userNameRef.current.value, passwordRef.current.value);
@@ -50,11 +49,13 @@ export default function SignIn() {
                                 <Checkbox>Remember me</Checkbox>
                                 <Link color={'red.400'}>Forgot password?</Link>
                             </Stack>
-                            <Text color={'red.500'}>{error ? console.log(error) : 'Error will display here'}</Text>
+                            <Text color={'red.500'}>{error && <small>{error}</small>}</Text>
                             <Button
-                            mt={1}
+                                mt={1}
                                 as={LinkRouter}
-                                onClick={() => {handleLogin(); setError(loginError)}}
+                                onClick={() => {
+                                    handleLogin();
+                                }}
                                 bg={'red.400'}
                                 color={'white'}
                                 _hover={{

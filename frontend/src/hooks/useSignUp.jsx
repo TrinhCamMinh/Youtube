@@ -10,10 +10,8 @@ export const useSignUp = () => {
         });
         const json = await response.json();
         if (!response.ok) {
-            setError(json.error);
-            console.log('singUp fail');
+            setError(json);
         } else {
-            console.log('signUp success');
             localStorage.setItem('user', JSON.stringify(json));
             dispatch({ type: 'LOGIN', payload: json });
         }

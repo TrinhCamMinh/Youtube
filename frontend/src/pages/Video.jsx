@@ -115,17 +115,6 @@ const Description = styled.p`
     font-size: 14px;
 `;
 
-const Subscribe = styled.button`
-    background-color: #cc1a00;
-    font-weight: 500;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    height: max-content;
-    padding: 10px 20px;
-    cursor: pointer;
-`;
-
 const Video = () => {
     const { id } = useParams();
     const { user } = useAuthContext();
@@ -137,12 +126,6 @@ const Video = () => {
     const [video, setVideo] = useState(null);
     const [content, setContent] = useState('');
     const { isOpen, onOpen, onClose } = useDisclosure();
-
-    let isSubscribe = '';
-
-    if (user) {
-        isSubscribe = true;
-    } else isSubscribe = false;
 
     const fetchAllVideo = async () => {
         const data = await getVideo();

@@ -176,7 +176,7 @@ const Video = () => {
     }, [ownerID]);
 
     return (
-        <Box bg={useColorModeValue('gray.50', 'black.200')}>
+        <Box bg={useColorModeValue('white', 'black.200')}>
             <Container>
                 <Content>
                     {video && (

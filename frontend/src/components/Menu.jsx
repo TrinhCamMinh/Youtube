@@ -17,7 +17,7 @@ import SettingsBrightnessOutlinedIcon from '@mui/icons-material/SettingsBrightne
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import { Link } from 'react-router-dom';
-import { Box, useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { Box, useColorMode, useColorModeValue, Divider } from '@chakra-ui/react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useVideo } from '../hooks/useVideo';
 import { useUser } from '../hooks/useUser';
@@ -48,11 +48,6 @@ const Item = styled.div`
     &:hover {
         background-color: rgba(9, 9, 9, 0.2);
     }
-`;
-
-const Hr = styled.hr`
-    margin: 15px 0px;
-    border: 0.5px solid ${({ theme }) => theme.soft};
 `;
 
 const Login = styled.div``;
@@ -136,7 +131,7 @@ const Menu = ({ lightMode, setLightMode }) => {
                     <SubscriptionsOutlinedIcon />
                     Subscriptions
                 </Item>
-                <Hr />
+                <Divider my={'2'} />
                 <Item>
                     <VideoLibraryOutlinedIcon />
                     Library
@@ -161,7 +156,7 @@ const Menu = ({ lightMode, setLightMode }) => {
                 </Link>
                 {!user ? (
                     <>
-                        <Hr />
+                        <Divider />
                         <Login>
                             Sign in to do more
                             <Link to='signin' style={{ textDecoration: 'none' }}>
@@ -173,7 +168,7 @@ const Menu = ({ lightMode, setLightMode }) => {
                         </Login>
                     </>
                 ) : null}
-                <Hr />
+                <Divider my={'2'} />
                 <Title>Subscribed Channel</Title>
                 {channel &&
                     channel.map((item, index) => {
@@ -191,7 +186,7 @@ const Menu = ({ lightMode, setLightMode }) => {
                             </div>
                         );
                     })}
-                <Hr />
+                <Divider my={'2'} />
                 <Title>Collections</Title>
                 <Item>
                     <LibraryMusicOutlinedIcon />
@@ -217,7 +212,7 @@ const Menu = ({ lightMode, setLightMode }) => {
                     <LiveTvOutlinedIcon />
                     Live
                 </Item>
-                <Hr />
+                <Divider my={'2'} />
                 <Item
                     onClick={() => {
                         setLightMode(lightMode);

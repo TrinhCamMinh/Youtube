@@ -23,6 +23,8 @@ import {
     useDisclosure,
     Box,
     useColorModeValue,
+    Flex,
+    Text,
 } from '@chakra-ui/react';
 
 const Container = styled.div`
@@ -39,7 +41,7 @@ const VideoWrapper = styled.div`
 
 const Title = styled.h1`
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 600;
     margin-top: 20px;
     margin-bottom: 10px;
     ${'' /* color: ${({ theme }) => theme.text}; */}
@@ -47,8 +49,9 @@ const Title = styled.h1`
 
 const Details = styled.div`
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
+    flex-direction: column;
 `;
 
 const Info = styled.span`
@@ -61,18 +64,13 @@ const Buttons = styled.div`
     ${'' /* color: ${({ theme }) => theme.text}; */}
 `;
 
-const Hr = styled.hr`
-    margin: 15px 0px;
-    border: 0.5px solid ${({ theme }) => theme.soft};
-`;
-
 const Recommendation = styled.div`
     flex: 2;
 `;
 
 const Channel = styled.div`
     display: flex;
-    ${'' /* justify-content: space-between; */}
+    justify-content: space-between;
     gap: 40px;
 `;
 
@@ -175,6 +173,8 @@ const Video = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ownerID]);
 
+    console.log(video);
+
     return (
         <Box bg={useColorModeValue('white', 'black.200')}>
             <Container>
@@ -211,12 +211,30 @@ const Video = () => {
                                 ></iframe>
                             </VideoWrapper>
                             <Title>{video.title}</Title>
-                            <Details>
-                                <Info>
-                                    {video.view} views • {format(video.createdAt)}
-                                </Info>
+                            <Channel>
+                                <ChannelInfo>
+                                    <Image src='https://picsum.photos/200/200' />
+                                    <ChannelDetail>
+                                        <ChannelName>{video.ownerID}</ChannelName>
+                                        <ChannelCounter>200K subscribers</ChannelCounter>
+                                    </ChannelDetail>
+                                    <Button
+                                        px={'30px'}
+                                        rounded={'full'}
+                                        colorScheme={subscribeChannel && subscribeChannel.length > 0 ? 'gray' : 'red'}
+                                        onClick={() => {
+                                            subscribeChannel && subscribeChannel.length > 0
+                                                ? console.log('ready to unsubscribe')
+                                                : handleSubscribeChannel(video.ownerID);
+                                        }}
+                                    >
+                                        {subscribeChannel && subscribeChannel.length > 0 ? 'Subcribed' : 'Subscribe'}
+                                    </Button>
+                                </ChannelInfo>
                                 <Buttons>
                                     <Button
+                                        as={Flex}
+                                        gap='2'
                                         rounded={'full'}
                                         onClick={() => {
                                             setContent('like this video');
@@ -226,13 +244,15 @@ const Video = () => {
                                         <ThumbUpOutlinedIcon /> {video.like}
                                         {showModal && <LoginRequiredModal />}
                                     </Button>
-                                    <Button rounded={'full'}>
+                                    <Button rounded={'full'} as={Flex} gap='2'>
                                         <ThumbDownOffAltOutlinedIcon /> Dislike
                                     </Button>
-                                    <Button rounded={'full'}>
+                                    <Button rounded={'full'} as={Flex} gap='2'>
                                         <ReplyOutlinedIcon /> Share
                                     </Button>
                                     <Button
+                                        as={Flex}
+                                        gap='2'
                                         rounded={'full'}
                                         onClick={() => {
                                             setContent('save this video');
@@ -242,32 +262,15 @@ const Video = () => {
                                         <AddTaskOutlinedIcon /> Save
                                     </Button>
                                 </Buttons>
-                            </Details>
-                            <Hr />
-                            <Channel>
-                                <ChannelInfo>
-                                    <Image src='https://picsum.photos/200/200' />
-                                    <ChannelDetail>
-                                        <ChannelName>DMT Channel</ChannelName>
-                                        <ChannelCounter>200K subscribers</ChannelCounter>
-                                        <Description>{video.description}</Description>
-                                    </ChannelDetail>
-                                </ChannelInfo>
-
-                                <Button
-                                    px={'60px'}
-                                    rounded={'full'}
-                                    colorScheme={subscribeChannel && subscribeChannel.length > 0 ? 'gray' : 'red'}
-                                    onClick={() => {
-                                        subscribeChannel && subscribeChannel.length > 0
-                                            ? console.log('ready to unsubscribe')
-                                            : handleSubscribeChannel(video.ownerID);
-                                    }}
-                                >
-                                    {subscribeChannel && subscribeChannel.length > 0 ? 'SUBSCRIBED' : 'SUBSCRIBE'}
-                                </Button>
                             </Channel>
-                            <Hr />
+                            <Box colorScheme='gray' rounded={'lg'} p={'5'} mb={'5'}>
+                                <Details>
+                                    <Text as='b' mb={'2'}>
+                                        {video.view} views • {format(video.createdAt)}
+                                    </Text>
+                                    <Description>{video.description}</Description>
+                                </Details>
+                            </Box>
                             <Comments />
                         </>
                     )}

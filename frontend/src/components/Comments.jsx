@@ -58,7 +58,9 @@ const Comments = () => {
                     <NewComment>
                         <Avatar src={`http://localhost:5000${user.avatar}`} />
                         <Input placeholder='Add a comment...' ref={inputRef} />
-                        <Button onClick={() => handleSubmitComment(inputRef.current.value)}>Comment</Button>
+                        <Button rounded={'full'} onClick={() => handleSubmitComment(inputRef.current.value)}>
+                            Comment
+                        </Button>
                     </NewComment>
                     {comment &&
                         comment.map((item, index) => {

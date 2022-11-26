@@ -61,13 +61,6 @@ const Buttons = styled.div`
     ${'' /* color: ${({ theme }) => theme.text}; */}
 `;
 
-// const Button = styled.div`
-//     display: flex;
-//     align-items: center;
-//     gap: 5px;
-//     cursor: pointer;
-// `;
-
 const Hr = styled.hr`
     margin: 15px 0px;
     border: 0.5px solid ${({ theme }) => theme.soft};

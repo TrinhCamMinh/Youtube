@@ -25,6 +25,7 @@ import {
     useColorModeValue,
     Flex,
     Text,
+    Card as CardCU,
 } from '@chakra-ui/react';
 
 const Container = styled.div`
@@ -52,10 +53,6 @@ const Details = styled.div`
     align-items: flex-start;
     justify-content: space-between;
     flex-direction: column;
-`;
-
-const Info = styled.span`
-    ${'' /* color: ${({ theme }) => theme.textSoft}; */}
 `;
 
 const Buttons = styled.div`
@@ -223,30 +220,46 @@ const Video = () => {
                                         rounded={'full'}
                                         colorScheme={subscribeChannel && subscribeChannel.length > 0 ? 'gray' : 'red'}
                                         onClick={() => {
-                                            subscribeChannel && subscribeChannel.length > 0
-                                                ? console.log('ready to unsubscribe')
-                                                : handleSubscribeChannel(video.ownerID);
+                                            // eslint-disable-next-line no-lone-blocks
+                                            {
+                                                !user
+                                                    ? onOpen()
+                                                    : subscribeChannel && subscribeChannel.length > 0
+                                                    ? console.log('ready to unsubscribe')
+                                                    : handleSubscribeChannel(video.ownerID);
+                                            }
                                         }}
                                     >
                                         {subscribeChannel && subscribeChannel.length > 0 ? 'Subcribed' : 'Subscribe'}
                                     </Button>
                                 </ChannelInfo>
                                 <Buttons>
-                                    <Button
-                                        as={Flex}
-                                        gap='2'
-                                        rounded={'full'}
-                                        onClick={() => {
-                                            setContent('like this video');
-                                            user ? handleLike(video._id) : onOpen();
-                                        }}
-                                    >
-                                        <ThumbUpOutlinedIcon /> {video.like}
-                                        {showModal && <LoginRequiredModal />}
-                                    </Button>
-                                    <Button rounded={'full'} as={Flex} gap='2'>
-                                        <ThumbDownOffAltOutlinedIcon /> Dislike
-                                    </Button>
+                                    <Box>
+                                        <Button
+                                            as={Flex}
+                                            gap='2'
+                                            borderLeftRadius='full'
+                                            onClick={() => {
+                                                setContent('like this video');
+                                                user ? handleLike(video._id) : onOpen();
+                                            }}
+                                        >
+                                            <ThumbUpOutlinedIcon /> {video.like}
+                                            {showModal && <LoginRequiredModal />}
+                                        </Button>
+
+                                        <Button
+                                            borderRightRadius={'full'}
+                                            as={Flex}
+                                            gap='2'
+                                            onClick={() => {
+                                                setContent("don't like this video");
+                                                onOpen();
+                                            }}
+                                        >
+                                            <ThumbDownOffAltOutlinedIcon />
+                                        </Button>
+                                    </Box>
                                     <Button rounded={'full'} as={Flex} gap='2'>
                                         <ReplyOutlinedIcon /> Share
                                     </Button>
@@ -263,14 +276,14 @@ const Video = () => {
                                     </Button>
                                 </Buttons>
                             </Channel>
-                            <Box colorScheme='gray' rounded={'lg'} p={'5'} mb={'5'}>
+                            <CardCU colorScheme='gray' rounded={'lg'} p={'5'} mb={'5'}>
                                 <Details>
                                     <Text as='b' mb={'2'}>
                                         {video.view} views • {format(video.createdAt)}
                                     </Text>
                                     <Description>{video.description}</Description>
                                 </Details>
-                            </Box>
+                            </CardCU>
                             <Comments />
                         </>
                     )}

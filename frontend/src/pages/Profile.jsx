@@ -199,7 +199,14 @@ const Home = () => {
                     Edit Profile
                 </Button>
             </Profile>
-            <Box w={'25vw'} my={'5'} borderWidth={'2px'} bg='gray.100' rounded={'lg'} p={4}>
+            <Box
+                w={'25vw'}
+                my={'5'}
+                borderWidth={'2px'}
+                bg={useColorModeValue('gray.50', 'gray.700')}
+                rounded={'lg'}
+                p={4}
+            >
                 <UnorderedList>
                     <ListItem>DoB: 14/03/2002</ListItem>
                     <ListItem>Email: nguyentrieuduong14032002@gmail.com</ListItem>

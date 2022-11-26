@@ -34,7 +34,7 @@ const Home = () => {
     }, []);
 
     return (
-        <Box bg={useColorModeValue('gray.50', 'black.200')}>
+        <Box bg={useColorModeValue('white', 'black.200')}>
             <Section>Shorts</Section>
             <Carousel />
             <Section>Videos</Section>

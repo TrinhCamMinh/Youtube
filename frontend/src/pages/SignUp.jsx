@@ -183,6 +183,7 @@ export default function SignUp() {
                     <Stack p={4}>
                         <Progress hasStripe value={progress} mb='5%' isAnimated></Progress>
                         {step === 1 ? <FormStep1 /> : <FormStep2 />}
+                        <Text color={'red.500'}>{error ? console.log(error) : 'Error will display here'}</Text>
                         <ButtonGroup mt='5%' w='100%'>
                             <Flex mt={'20px'} w='100%' justifyContent='space-between'>
                                 <Button
@@ -235,7 +236,7 @@ export default function SignUp() {
                             <Text align={'center'}>
                                 Already a user?{' '}
                                 <Link as={LinkRouter} to='/signin' color={'red.400'}>
-                                    Sign in
+                                    Sign up
                                 </Link>
                             </Text>
                         </Stack>

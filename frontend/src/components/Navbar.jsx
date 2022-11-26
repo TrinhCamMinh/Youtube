@@ -81,21 +81,21 @@ const Navbar = () => {
                         <SearchOutlinedIcon style={{ color: 'text' }} onClick={handleSearch} />
                     </Search>
                     {user ? (
-                        <Link to='profile' style={{ textDecoration: 'none' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                            <Link to='profile' style={{ textDecoration: 'none' }}>
                                 <img
                                     src={`http://localhost:5000/${user.avatar}`}
                                     alt='user avatar'
                                     style={{ width: '27px', height: '25px', borderRadius: '6px' }}
                                 />
-                                <small>{user.userName}</small>
-                                <i
-                                    className='fa-solid fa-right-from-bracket'
-                                    style={{ color: '#ef3038' }}
-                                    onClick={handleLogOut}
-                                ></i>
-                            </div>
-                        </Link>
+                            </Link>
+                            <small>{user.userName}</small>
+                            <i
+                                className='fa-solid fa-right-from-bracket'
+                                style={{ color: '#ef3038' }}
+                                onClick={handleLogOut}
+                            ></i>
+                        </div>
                     ) : (
                         <Link to='signin' style={{ textDecoration: 'none' }}>
                             <Button>

@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useComment } from '../hooks/useComment';
-import React, { useState, useEffect } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Comment from './Comment';
 
@@ -30,12 +31,18 @@ const Input = styled.input`
 
 const Comments = () => {
     const { id } = useParams();
-    const { getComment } = useComment();
+    const { user } = useAuthContext();
+    const { getComment, postComment } = useComment();
+    const inputRef = useRef();
     const [comment, setComment] = useState(null);
 
     const fetchComment = async () => {
         const data = await getComment(id);
         setComment(data);
+    };
+
+    const handleSubmitComment = async (value) => {
+        await postComment(id, user._id, user.avatar, value);
     };
 
     useEffect(() => {
@@ -45,14 +52,19 @@ const Comments = () => {
 
     return (
         <Container>
-            <NewComment>
-                <Avatar src='https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo' />
-                <Input placeholder='Add a comment...' />
-            </NewComment>
-            {comment &&
-                comment.map((item, index) => {
-                    return <Comment key={index} item={item} />;
-                })}
+            {user && (
+                <>
+                    <NewComment>
+                        <Avatar src={`http://localhost:5000${user.avatar}`} />
+                        <Input placeholder='Add a comment...' ref={inputRef} />
+                        <button onClick={() => handleSubmitComment(inputRef.current.value)}>Comment</button>
+                    </NewComment>
+                    {comment &&
+                        comment.map((item, index) => {
+                            return <Comment key={index} item={item} />;
+                        })}
+                </>
+            )}
         </Container>
     );
 };

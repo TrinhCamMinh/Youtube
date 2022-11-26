@@ -13,10 +13,6 @@ const getUser = async (req, res) => {
     }
 };
 
-const searchVideo = (req, res) => {
-    res.json('user searching');
-};
-
 const getWatchedVideo = (req, res) => {
     res.json("get user's watched video");
 };
@@ -127,5 +123,4 @@ module.exports = {
     getWatchLaterVideo,
     getSubscribedChannel,
     updateUserAccount,
-    searchVideo,
 };

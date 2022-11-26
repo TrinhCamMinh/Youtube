@@ -13,7 +13,6 @@ const {
     getWatchLaterVideo,
     getSubscribedChannel,
     updateUserAccount,
-    searchVideo,
 } = require('../controller/userController');
 const upload = require('../middleware/uploadFiles');
 
@@ -22,7 +21,6 @@ router.get('/watched/:userId', getWatchedVideo);
 router.get('/watchLater/:userId', getWatchLaterVideo);
 router.get('/liked/:userID', getLikedVideo);
 router.get('/subscribe/:userId', getSubscribedChannel);
-router.get('/search/:query', searchVideo);
 router.get('/:userId', getUser);
 
 //* [POST] methods

@@ -38,8 +38,7 @@ const Text = styled.span`
 const Comment = ({ item }) => {
     return (
         <Container>
-            {console.log(item)}
-            <Avatar src={item.comment.commentAvatar} />
+            <Avatar src={`http://localhost:5000${item.comment.commentAvatar}`} />
             <Details>
                 <Name>
                     {item.userID}

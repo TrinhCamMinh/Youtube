@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useLogout } from '../hooks/useLogout';
 import { Box, useColorModeValue } from '@chakra-ui/react';
@@ -60,9 +60,16 @@ const Button = styled.button`
 const Navbar = () => {
     const { user } = useAuthContext();
     const { logout } = useLogout();
+    const searchRef = useRef();
+    const navigate = useNavigate();
 
     const handleLogOut = async () => {
         await logout();
+    };
+
+    const handleSearch = async () => {
+        console.log('navigate');
+        navigate(`/search/${searchRef.current.value}`);
     };
 
     return (
@@ -70,8 +77,8 @@ const Navbar = () => {
             <Container>
                 <Wrapper>
                     <Search>
-                        <Input placeholder='Search' />
-                        <SearchOutlinedIcon style={{ color: 'text' }} />
+                        <Input placeholder='Search' ref={searchRef} />
+                        <SearchOutlinedIcon style={{ color: 'text' }} onClick={handleSearch} />
                     </Search>
                     {user ? (
                         <Link to='profile' style={{ textDecoration: 'none' }}>

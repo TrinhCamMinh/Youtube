@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useVideo } from '../hooks/useVideo';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useSubscribe } from '../hooks/useSubscribe';
 import styled from 'styled-components';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbDownOffAltOutlinedIcon from '@mui/icons-material/ThumbDownOffAltOutlined';
@@ -129,7 +130,8 @@ const Video = () => {
     const { id } = useParams();
     const { user } = useAuthContext();
     const [showModal, setShowModal] = useState(false);
-    const { getVideo, getSpecificVideo } = useVideo();
+    const { getVideo, getSpecificVideo, likeVideo, viewVideo } = useVideo();
+    const { getSubscribe, postSubscribe } = useSubscribe();
     const [allVideo, setAllVideo] = useState(null);
     const [video, setVideo] = useState(null);
 
@@ -145,9 +147,13 @@ const Video = () => {
         setVideo(data);
     };
 
-    const handleLike = () => {
+    const updateView = async () => {
+        await viewVideo(id);
+    };
+
+    const handleLike = async (id) => {
         if (user) {
-            console.log(`liked with login`);
+            await likeVideo(id);
             setShowModal(false);
         } else {
             console.log(`liked without login`);
@@ -168,6 +174,7 @@ const Video = () => {
     useEffect(() => {
         fetchSpecificVideo();
         fetchAllVideo();
+        updateView();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -184,7 +191,6 @@ const Video = () => {
                                     <ModalHeader color={'red.500'}>LOGIN REQUIRED!!!</ModalHeader>
                                     <ModalCloseButton />
                                     <ModalBody>You need to sign in to do this function</ModalBody>
-
                                     <ModalFooter>
                                         <ButtonCU variant='ghost'>Close</ButtonCU>
                                         <Link to='/signin'>
@@ -213,7 +219,7 @@ const Video = () => {
                                     {video.view} views • {format(video.createdAt)}
                                 </Info>
                                 <Buttons>
-                                    <Button onClick={handleLike}>
+                                    <Button onClick={() => handleLike(video._id)}>
                                         <ThumbUpOutlinedIcon /> {video.like}
                                         {showModal && <LoginRequiredModal />}
                                     </Button>
@@ -232,7 +238,7 @@ const Video = () => {
                             <Hr />
                             <Channel>
                                 <ChannelInfo>
-                                    <Image src='https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo' />
+                                    <Image src='https://picsum.photos/200/200' />
                                     <ChannelDetail>
                                         <ChannelName>DMT Channel</ChannelName>
                                         <ChannelCounter>200K subscribers</ChannelCounter>
@@ -242,7 +248,7 @@ const Video = () => {
                                 <Subscribe onClick={onOpen}>SUBSCRIBE</Subscribe>
                             </Channel>
                             <Hr />
-                            <Comments onClick={onOpen} />
+                            <Comments />
                         </>
                     )}
                 </Content>

@@ -19,6 +19,16 @@ const getSpecificVideo = async (req, res) => {
     }
 };
 
+const searchVideo = async (req, res) => {
+    try {
+        const { query } = req.params;
+        const data = await VideoModel.find({ title: query });
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+};
+
 //* [POST] methods
 const postVideo = async (req, res) => {
     try {
@@ -63,4 +73,5 @@ module.exports = {
     postVideo,
     updateVideoLike,
     updateVideoView,
+    searchVideo,
 };

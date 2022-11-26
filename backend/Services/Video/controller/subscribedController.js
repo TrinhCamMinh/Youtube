@@ -3,7 +3,8 @@ const subscribeModel = require('../model/subscribedModel');
 //* [GET] methods
 const getSubscribeChannel = async (req, res) => {
     try {
-        const data = await subscribeModel.find({});
+        const { userID } = req.params;
+        const data = await subscribeModel.find({ userID });
         res.status(200).json(data);
     } catch (error) {
         res.status(500).json(error.message);

@@ -113,6 +113,7 @@ const Video = () => {
         likeVideo,
         postLikeVideo,
         postSaveVideo,
+        postWatchedVideo,
         viewVideo,
         subscribeVideo,
     } = useVideo();
@@ -173,6 +174,7 @@ const Video = () => {
         fetchSpecificVideo();
         fetchAllVideo();
         updateView();
+        postWatchedVideo(user._id, id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

@@ -110,7 +110,6 @@ const Menu = ({ lightMode, setLightMode }) => {
     return (
         <Box bg={useColorModeValue('white', 'black.200')}>
             <Wrapper>
-                {channel && console.log(channel)}
                 <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Logo>
                         <Img src={LamaTube} />

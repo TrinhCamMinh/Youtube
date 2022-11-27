@@ -18,7 +18,7 @@ const { getWatchedVideo, postWatchedVideo } = require('../controller/watchedVide
 const { getWatchLateVideo, postWatchLateVideo } = require('../controller/watchLateVideoController');
 
 //* [GET] methods
-router.get('/like/:userID', getLikeVideo);
+router.get('/liked/:userID', getLikeVideo);
 router.get('/watched/:userID', getWatchedVideo);
 router.get('/watchLater/:userID', getWatchLateVideo);
 router.get('/subscribed', getSubscribeChannel);

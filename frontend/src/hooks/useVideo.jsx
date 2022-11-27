@@ -11,6 +11,12 @@ export const useVideo = () => {
         return json;
     };
 
+    const getLikedVideo = async (userID) => {
+        const response = await fetch(`http://localhost:7000/api/video/liked/${userID}`);
+        const json = await response.json();
+        return json;
+    };
+
     const likeVideo = async (id) => {
         const response = await fetch(`http://localhost:7000/api/video/like/${id}`, {
             method: 'PUT',
@@ -60,6 +66,7 @@ export const useVideo = () => {
     return {
         getVideo,
         getSpecificVideo,
+        getLikedVideo,
         getAllSubscribeVideo,
         getSubscribeVideo,
         likeVideo,

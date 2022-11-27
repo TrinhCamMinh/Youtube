@@ -73,6 +73,22 @@ export const useVideo = () => {
         return json;
     };
 
+    const getSavedVideo = async (userID) => {
+        const response = await fetch(`http://localhost:7000/api/video//watchLater/${userID}`);
+        const json = await response.json();
+        return json;
+    };
+
+    const postSaveVideo = async (userID, videoID) => {
+        const response = await fetch(`http://localhost:7000/api/video/watchLater`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userID, videoID }),
+        });
+        const json = await response.json();
+        return json;
+    };
+
     return {
         getVideo,
         getSpecificVideo,
@@ -84,5 +100,7 @@ export const useVideo = () => {
         subscribeVideo,
         viewVideo,
         searchVideo,
+        getSavedVideo,
+        postSaveVideo,
     };
 };

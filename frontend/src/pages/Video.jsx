@@ -106,8 +106,16 @@ const Description = styled.p`
 const Video = () => {
     const { id } = useParams();
     const { user } = useAuthContext();
-    const { getVideo, getSpecificVideo, getSubscribeVideo, likeVideo, postLikeVideo, viewVideo, subscribeVideo } =
-        useVideo();
+    const {
+        getVideo,
+        getSpecificVideo,
+        getSubscribeVideo,
+        likeVideo,
+        postLikeVideo,
+        postSaveVideo,
+        viewVideo,
+        subscribeVideo,
+    } = useVideo();
     const [subscribeChannel, setSubscribeChannel] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [ownerID, setOwnerID] = useState(null);
@@ -152,8 +160,9 @@ const Video = () => {
         }
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         if (user) {
+            await postSaveVideo(user._id, id);
             setShowModal(false);
         } else {
             setShowModal(true);

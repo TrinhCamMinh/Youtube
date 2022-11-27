@@ -53,13 +53,13 @@ const Home = () => {
 
     useEffect(() => {
         fetchSaveVideoID();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
     useEffect(() => {
         fetchSavedVideo(saveVideoID);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [saveVideoID]);
-
-    useEffect(() => {}, [saveVideoID]);
 
     return (
         <Box bg={useColorModeValue('white', 'black.200')}>

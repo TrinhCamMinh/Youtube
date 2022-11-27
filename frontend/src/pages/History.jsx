@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Card from '../components/Card';
+import { useVideo } from '../hooks/useVideo';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Wrapper = styled.div`
     display: flex;
@@ -23,17 +25,47 @@ const DateGroup = styled.h3`
 `;
 
 const Home = () => {
+    const { getSavedVideo, getSpecificVideo } = useVideo();
+    const { user } = useAuthContext();
+    const [watchedVideoID, setWatchedVideoID] = useState(null);
+    const [watchedVideo, setWatchedVideo] = useState([]);
+
+    const fetchWatchedVideoID = async () => {
+        if (user) {
+            const data = await getSavedVideo(user._id);
+            setWatchedVideoID(data);
+        }
+    };
+
+    const fetchWatchedVideo = (watchedVideoID) => {
+        const fetch = async (id) => {
+            const data = await getSpecificVideo(id);
+            setWatchedVideo((prev) => [...prev, data]);
+        };
+        if (watchedVideoID) {
+            watchedVideoID.map((item) => fetch(item.videoID));
+        }
+    };
+
+    useEffect(() => {
+        fetchWatchedVideoID();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user]);
+
+    useEffect(() => {
+        fetchWatchedVideo(watchedVideoID);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [watchedVideoID]);
+
     return (
         <>
             <PageHeading>History</PageHeading>
             <DateGroup>Today</DateGroup>
             <Wrapper>
-                <Card type='sm' />
-                <Card type='sm' />
-                <Card type='sm' />
-                <Card type='sm' />
-                <Card type='sm' />
-                <Card type='sm' />
+                {watchedVideo &&
+                    watchedVideo.map((item, index) => {
+                        return <Card key={index} item={item} />;
+                    })}
             </Wrapper>
         </>
     );

@@ -44,7 +44,7 @@ const Title = styled.h1`
     font-size: 18px;
     font-weight: 600;
     margin-top: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     ${'' /* color: ${({ theme }) => theme.text}; */}
 `;
 
@@ -124,6 +124,8 @@ const Video = () => {
     const [video, setVideo] = useState(null);
     const [content, setContent] = useState('');
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [liked, setLiked] = useState();
+    const [saved, setSaved] = useState();
 
     const fetchAllVideo = async () => {
         const data = await getVideo();
@@ -155,6 +157,7 @@ const Video = () => {
         if (user) {
             await likeVideo(id);
             await postLikeVideo(user._id, id);
+            setLiked(true);
             setShowModal(false);
         } else {
             setShowModal(true);
@@ -164,6 +167,7 @@ const Video = () => {
     const handleSave = async () => {
         if (user) {
             await postSaveVideo(user._id, id);
+            setSaved(true);
             setShowModal(false);
         } else {
             setShowModal(true);
@@ -254,6 +258,7 @@ const Video = () => {
                                                 setContent('like this video');
                                                 user ? handleLike() : onOpen();
                                             }}
+                                            colorScheme={liked ? 'red' : 'gray'}
                                         >
                                             <ThumbUpOutlinedIcon /> {video.like}
                                             {showModal && <LoginRequiredModal />}
@@ -282,6 +287,7 @@ const Video = () => {
                                             setContent('save this video');
                                             user ? handleSave() : onOpen();
                                         }}
+                                        colorScheme={saved ? 'red' : 'gray'}
                                     >
                                         <AddTaskOutlinedIcon /> Save
                                     </Button>

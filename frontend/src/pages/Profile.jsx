@@ -225,20 +225,13 @@ const Home = () => {
                             Edit Profile
                         </Button>
                     </Profile>
-                    <Box
-                        w={'25vw'}
-                        my={'5'}
-                        borderWidth={'2px'}
-                        // bg={useColorModeValue('gray.50', 'gray.700')}
-                        rounded={'lg'}
-                        p={4}
-                    >
+                    <Box w={'25vw'} my={'5'} borderWidth={'2px'} rounded={'lg'} p={4}>
                         <UnorderedList>
                             <ListItem>User Name: {user.userName}</ListItem>
                             <ListItem>Date of Birth: {user.birthDate}</ListItem>
                             <ListItem>Email: {user.email}</ListItem>
                             <ListItem>Location: {user.location}</ListItem>
-                            <ListItem>Gender: {user.gender ? 'male' : 'female'}</ListItem>
+                            <ListItem>Gender: {user.gender ? 'Male' : 'Female'}</ListItem>
                             <ListItem>Phone number: {user.phoneNumber}</ListItem>
                         </UnorderedList>
                     </Box>

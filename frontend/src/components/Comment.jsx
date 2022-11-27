@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { format } from 'timeago.js';
 
 const Container = styled.div`
     display: flex;
@@ -42,7 +43,7 @@ const Comment = ({ item }) => {
             <Details>
                 <Name>
                     {item.userID}
-                    <Date>{item.createdAt}</Date>
+                    <Date>{format(item.createdAt)}</Date>
                 </Name>
                 <Text>{item.comment.commentContent}</Text>
             </Details>

@@ -29,6 +29,7 @@ export default function Carousel() {
 
     useEffect(() => {
         fetchShortVideo();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -54,18 +55,6 @@ export default function Carousel() {
                             </SwiperSlide>
                         );
                     })}
-                <SwiperSlide>
-                    <img src='https://picsum.photos/200' alt='youtube short' />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src='https://picsum.photos/200/300' alt='youtube short' />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img
-                        src='https://img.freepik.com/premium-photo/astronaut-outer-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-13360.jpg?w=2000'
-                        alt='youtube short'
-                    />
-                </SwiperSlide>
             </Swiper>
         </Container>
     );

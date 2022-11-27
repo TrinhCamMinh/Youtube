@@ -7,9 +7,9 @@ import { useAuthContext } from '../hooks/useAuthContext';
 
 const Wrapper = styled.div`
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    width: 25vw;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 15px;
 `;
 
 const PageHeading = styled.h1`

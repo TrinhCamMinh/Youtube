@@ -131,10 +131,12 @@ const Menu = ({ lightMode, setLightMode }) => {
                     Subscriptions
                 </Item>
                 <Divider my={'2'} />
-                <Item>
-                    <VideoLibraryOutlinedIcon />
-                    Library
-                </Item>
+                <Link to='createShort' style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Item>
+                        <VideoLibraryOutlinedIcon />
+                        Shorts
+                    </Item>
+                </Link>
                 <Link to='history' style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Item>
                         <HistoryOutlinedIcon />

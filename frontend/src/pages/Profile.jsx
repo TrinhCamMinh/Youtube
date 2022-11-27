@@ -88,142 +88,149 @@ const Home = () => {
 
     return (
         <Container>
-            {/* Modal */}
-            <Modal size={'md'} isCentered isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader color={'red.500'}>User profile edit</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        <FormControl my={'2'} id='avatar'>
-                            <FormLabel>User Avatar</FormLabel>
-                            <Stack direction={['column', 'row']} spacing={6}>
-                                <Center>
-                                    <Avatar size='xl' src={`http://localhost:5000/${user.avatar}`}>
-                                        <AvatarBadge
-                                            as={IconButton}
-                                            size='sm'
-                                            rounded='full'
-                                            top='-10px'
-                                            colorScheme='red'
-                                            aria-label='remove Image'
-                                            icon={<SmallCloseIcon />}
-                                        />
-                                    </Avatar>
-                                </Center>
-                                <Center w='full'>
-                                    <input w='full' type='file' />
-                                    Change avatar
-                                </Center>
-                            </Stack>
-                        </FormControl>
-                        <FormControl id='userName' isRequired>
-                            <FormLabel>User name</FormLabel>
-                            <Input placeholder='user name' _placeholder={{ color: 'gray.500' }} type='text' />
-                        </FormControl>
-                        <FormControl id='email' isRequired>
-                            <FormLabel>Email address</FormLabel>
-                            <Input
-                                placeholder='your-email@example.com'
-                                _placeholder={{ color: 'gray.500' }}
-                                type='email'
-                            />
-                        </FormControl>
-                        <FormControl id='password' isRequired>
-                            <FormLabel>Password</FormLabel>
-                            <Input placeholder='password' _placeholder={{ color: 'gray.500' }} type='password' />
-                        </FormControl>
-                        <FormControl id='birthDate' isRequired>
-                            <FormLabel>Date of birth</FormLabel>
-                            <Input placeholder='birthday' _placeholder={{ color: 'gray.500' }} type='text' />
-                        </FormControl>
-                        <FormControl id='gender' isRequired>
-                            <FormLabel>Gender</FormLabel>
-                            <RadioGroup id='gender' onChange={setGender} value={gender}>
-                                <Stack direction='row'>
-                                    <Radio value='true'>Male</Radio>
-                                    <Radio value='false'>Female</Radio>
-                                </Stack>
-                            </RadioGroup>
-                        </FormControl>
-                        <FormControl id='password' isRequired>
-                            <FormLabel>Password</FormLabel>
-                            <Input placeholder='password' _placeholder={{ color: 'gray.500' }} type='text' />
-                        </FormControl>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button
-                            bg={'red.400'}
-                            color={'white'}
-                            w='50%'
-                            _hover={{
-                                bg: 'red.500',
-                            }}
-                            mr={'1'}
-                            onClick={onClose}
-                        >
-                            Cancel
+            {user && (
+                <>
+                    <Modal size={'md'} isCentered isOpen={isOpen} onClose={onClose}>
+                        <ModalOverlay />
+                        <ModalContent>
+                            <ModalHeader color={'red.500'}>User profile edit</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody>
+                                <FormControl my={'2'} id='avatar'>
+                                    <FormLabel>User Avatar</FormLabel>
+                                    <Stack direction={['column', 'row']} spacing={6}>
+                                        <Center>
+                                            <Avatar size='xl' src={`http://localhost:5000/${user.avatar}`}>
+                                                <AvatarBadge
+                                                    as={IconButton}
+                                                    size='sm'
+                                                    rounded='full'
+                                                    top='-10px'
+                                                    colorScheme='red'
+                                                    aria-label='remove Image'
+                                                    icon={<SmallCloseIcon />}
+                                                />
+                                            </Avatar>
+                                        </Center>
+                                        <Center w='full'>
+                                            <input w='full' type='file' />
+                                            Change avatar
+                                        </Center>
+                                    </Stack>
+                                </FormControl>
+                                <FormControl id='userName' isRequired>
+                                    <FormLabel>User name</FormLabel>
+                                    <Input placeholder='user name' _placeholder={{ color: 'gray.500' }} type='text' />
+                                </FormControl>
+                                <FormControl id='email' isRequired>
+                                    <FormLabel>Email address</FormLabel>
+                                    <Input
+                                        placeholder='your-email@example.com'
+                                        _placeholder={{ color: 'gray.500' }}
+                                        type='email'
+                                    />
+                                </FormControl>
+                                <FormControl id='password' isRequired>
+                                    <FormLabel>Password</FormLabel>
+                                    <Input
+                                        placeholder='password'
+                                        _placeholder={{ color: 'gray.500' }}
+                                        type='password'
+                                    />
+                                </FormControl>
+                                <FormControl id='birthDate' isRequired>
+                                    <FormLabel>Date of birth</FormLabel>
+                                    <Input placeholder='birthday' _placeholder={{ color: 'gray.500' }} type='text' />
+                                </FormControl>
+                                <FormControl id='gender' isRequired>
+                                    <FormLabel>Gender</FormLabel>
+                                    <RadioGroup id='gender' onChange={setGender} value={gender}>
+                                        <Stack direction='row'>
+                                            <Radio value='true'>Male</Radio>
+                                            <Radio value='false'>Female</Radio>
+                                        </Stack>
+                                    </RadioGroup>
+                                </FormControl>
+                                <FormControl id='password' isRequired>
+                                    <FormLabel>Password</FormLabel>
+                                    <Input placeholder='password' _placeholder={{ color: 'gray.500' }} type='text' />
+                                </FormControl>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button
+                                    bg={'red.400'}
+                                    color={'white'}
+                                    w='50%'
+                                    _hover={{
+                                        bg: 'red.500',
+                                    }}
+                                    mr={'1'}
+                                    onClick={onClose}
+                                >
+                                    Cancel
+                                </Button>
+                                <Button
+                                    bg={'blue.400'}
+                                    color={'white'}
+                                    w='50%'
+                                    _hover={{
+                                        bg: 'blue.500',
+                                    }}
+                                    ml={'1'}
+                                    onClick={() => {
+                                        toast({
+                                            title: 'Submitted',
+                                            status: 'success',
+                                            duration: 3000,
+                                            isClosable: true,
+                                        });
+                                    }}
+                                >
+                                    Submit
+                                </Button>
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
+                    <Profile>
+                        <Profile>
+                            <UserAvatar src={`http://localhost:5000/${user.avatar}`} />
+                            <UserInfo>
+                                <ChannelName>{user.channelName}</ChannelName>
+                                <Username>@{user.userName}</Username>
+                                <SubcriberCount>1000 subcribers</SubcriberCount>
+                            </UserInfo>
+                        </Profile>
+                        <Button rounded={'full'} onClick={onOpen}>
+                            Edit Profile
                         </Button>
-                        <Button
-                            bg={'blue.400'}
-                            color={'white'}
-                            w='50%'
-                            _hover={{
-                                bg: 'blue.500',
-                            }}
-                            ml={'1'}
-                            onClick={() => {
-                                toast({
-                                    title: 'Submitted',
-                                    status: 'success',
-                                    duration: 3000,
-                                    isClosable: true,
-                                });
-                            }}
-                        >
-                            Submit
-                        </Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
-            <Profile>
-                <Profile>
-                    <UserAvatar src={`http://localhost:5000/${user.avatar}`} />
-                    <UserInfo>
-                        <ChannelName>{user.channelName}</ChannelName>
-                        <Username>@{user.userName}</Username>
-                        <SubcriberCount>1000 subcribers</SubcriberCount>
-                    </UserInfo>
-                </Profile>
-                <Button rounded={'full'} onClick={onOpen}>
-                    Edit Profile
-                </Button>
-            </Profile>
-            <Box
-                w={'25vw'}
-                my={'5'}
-                borderWidth={'2px'}
-                bg={useColorModeValue('gray.50', 'gray.700')}
-                rounded={'lg'}
-                p={4}
-            >
-                <UnorderedList>
-                    <ListItem>DoB: 14/03/2002</ListItem>
-                    <ListItem>Email: nguyentrieuduong14032002@gmail.com</ListItem>
-                    <ListItem>Location: Vietnam</ListItem>
-                    <ListItem>Gender: Male</ListItem>
-                    <ListItem>Phone number: 0399129859</ListItem>
-                </UnorderedList>
-            </Box>
-            <Text as='b' fontSize={'4xl'} mt={'60px'}>
-                Uploaded Video
-            </Text>
-            <Wrapper>
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-            </Wrapper>
+                    </Profile>
+                    <Box
+                        w={'25vw'}
+                        my={'5'}
+                        borderWidth={'2px'}
+                        // bg={useColorModeValue('gray.50', 'gray.700')}
+                        rounded={'lg'}
+                        p={4}
+                    >
+                        <UnorderedList>
+                            <ListItem>DoB: 14/03/2002</ListItem>
+                            <ListItem>Email: nguyentrieuduong14032002@gmail.com</ListItem>
+                            <ListItem>Location: Vietnam</ListItem>
+                            <ListItem>Gender: Male</ListItem>
+                            <ListItem>Phone number: 0399129859</ListItem>
+                        </UnorderedList>
+                    </Box>
+                    <Text as='b' fontSize={'4xl'} mt={'60px'}>
+                        Uploaded Video
+                    </Text>
+                    <Wrapper>
+                        <Card />
+                        <Card />
+                        <Card />
+                        <Card />
+                    </Wrapper>
+                </>
+            )}
         </Container>
     );
 };

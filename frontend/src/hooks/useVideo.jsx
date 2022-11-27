@@ -105,6 +105,21 @@ export const useVideo = () => {
         return json;
     };
 
+    const getShortVideo = async () => {
+        const response = await fetch(`http://localhost:7000/api/video/short/`);
+        const json = await response.json();
+        return json;
+    };
+
+    const postShortVideo = async (form) => {
+        const response = await fetch(`http://localhost:7000/api/video/short/`, {
+            method: 'POST',
+            body: form,
+        });
+        const json = await response.json();
+        return json;
+    };
+
     return {
         getVideo,
         getSpecificVideo,
@@ -112,6 +127,7 @@ export const useVideo = () => {
         postLikeVideo,
         getAllSubscribeVideo,
         getSubscribeVideo,
+        getShortVideo,
         likeVideo,
         subscribeVideo,
         viewVideo,
@@ -120,5 +136,6 @@ export const useVideo = () => {
         postSaveVideo,
         getWatchedVideo,
         postWatchedVideo,
+        postShortVideo,
     };
 };

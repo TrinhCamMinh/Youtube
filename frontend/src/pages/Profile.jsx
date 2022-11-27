@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
+import { useUser } from '../hooks/useUser';
 import styled from 'styled-components';
 import Card from '../components/Card';
 import { useAuthContext } from '../hooks/useAuthContext';
@@ -15,12 +16,9 @@ import {
     ModalBody,
     ModalCloseButton,
     useDisclosure,
-    useColorModeValue,
     useToast,
     FormControl,
     FormLabel,
-    Radio,
-    RadioGroup,
     Input,
     Stack,
     Avatar,
@@ -81,10 +79,24 @@ const SubcriberCount = styled.p`
 const Home = () => {
     const { user } = useAuthContext();
     const toast = useToast();
+    const { updateUserAccount } = useUser();
+    const userNameRef = useRef();
+    const emailRef = useRef();
+    const phoneNumberRef = useRef();
+    const locationRef = useRef();
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const { gender, setGender } = useState();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await updateUserAccount(
+            user._id,
+            userNameRef.current.value,
+            emailRef.current.value,
+            phoneNumberRef.current.value,
+            locationRef.current.value,
+        );
+    };
 
     return (
         <Container>
@@ -120,36 +132,43 @@ const Home = () => {
                                 </FormControl>
                                 <FormControl id='userName' isRequired>
                                     <FormLabel>User name</FormLabel>
-                                    <Input placeholder='user name' _placeholder={{ color: 'gray.500' }} type='text' />
+                                    <Input
+                                        name='userName'
+                                        placeholder='user name'
+                                        _placeholder={{ color: 'gray.500' }}
+                                        type='text'
+                                        ref={userNameRef}
+                                    />
                                 </FormControl>
                                 <FormControl id='email' isRequired>
                                     <FormLabel>Email address</FormLabel>
                                     <Input
+                                        name='email'
                                         placeholder='your-email@example.com'
                                         _placeholder={{ color: 'gray.500' }}
                                         type='email'
-                                    />
-                                </FormControl>
-                                <FormControl id='password' isRequired>
-                                    <FormLabel>Password</FormLabel>
-                                    <Input
-                                        placeholder='password'
-                                        _placeholder={{ color: 'gray.500' }}
-                                        type='password'
+                                        ref={emailRef}
                                     />
                                 </FormControl>
                                 <FormControl id='birthDate' isRequired>
-                                    <FormLabel>Date of birth</FormLabel>
-                                    <Input placeholder='birthday' _placeholder={{ color: 'gray.500' }} type='text' />
+                                    <FormLabel>Phone number</FormLabel>
+                                    <Input
+                                        placeholder='Phone Number'
+                                        _placeholder={{ color: 'gray.500' }}
+                                        type='text'
+                                        name='phoneNumber'
+                                        ref={phoneNumberRef}
+                                    />
                                 </FormControl>
-                                <FormControl id='gender' isRequired>
-                                    <FormLabel>Gender</FormLabel>
-                                    <RadioGroup id='gender' onChange={setGender} value={gender}>
-                                        <Stack direction='row'>
-                                            <Radio value='true'>Male</Radio>
-                                            <Radio value='false'>Female</Radio>
-                                        </Stack>
-                                    </RadioGroup>
+                                <FormControl id='birthDate' isRequired>
+                                    <FormLabel>Location</FormLabel>
+                                    <Input
+                                        placeholder='Location'
+                                        _placeholder={{ color: 'gray.500' }}
+                                        type='text'
+                                        name='location'
+                                        ref={locationRef}
+                                    />
                                 </FormControl>
                                 <FormControl id='password' isRequired>
                                     <FormLabel>Password</FormLabel>
@@ -170,6 +189,7 @@ const Home = () => {
                                     Cancel
                                 </Button>
                                 <Button
+                                    type='submit'
                                     bg={'blue.400'}
                                     color={'white'}
                                     w='50%'
@@ -177,13 +197,14 @@ const Home = () => {
                                         bg: 'blue.500',
                                     }}
                                     ml={'1'}
-                                    onClick={() => {
+                                    onClick={(e) => {
                                         toast({
                                             title: 'Submitted',
                                             status: 'success',
                                             duration: 3000,
                                             isClosable: true,
                                         });
+                                        handleSubmit(e);
                                     }}
                                 >
                                     Submit
@@ -213,20 +234,18 @@ const Home = () => {
                         p={4}
                     >
                         <UnorderedList>
-                            <ListItem>DoB: 14/03/2002</ListItem>
-                            <ListItem>Email: nguyentrieuduong14032002@gmail.com</ListItem>
-                            <ListItem>Location: Vietnam</ListItem>
-                            <ListItem>Gender: Male</ListItem>
-                            <ListItem>Phone number: 0399129859</ListItem>
+                            <ListItem>User Name: {user.userName}</ListItem>
+                            <ListItem>Date of Birth: {user.birthDate}</ListItem>
+                            <ListItem>Email: {user.email}</ListItem>
+                            <ListItem>Location: {user.location}</ListItem>
+                            <ListItem>Gender: {user.gender ? 'male' : 'female'}</ListItem>
+                            <ListItem>Phone number: {user.phoneNumber}</ListItem>
                         </UnorderedList>
                     </Box>
                     <Text as='b' fontSize={'4xl'} mt={'60px'}>
                         Uploaded Video
                     </Text>
                     <Wrapper>
-                        <Card />
-                        <Card />
-                        <Card />
                         <Card />
                     </Wrapper>
                 </>

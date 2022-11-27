@@ -19,14 +19,14 @@ import { useLogin } from '../hooks/useLogin';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 export default function SignIn() {
-    const userNameRef = useRef();
+    const emailRef = useRef();
     const passwordRef = useRef();
     const { login, error } = useLogin();
     const toast = useToast();
     const { user } = useAuthContext();
 
     const handleLogin = async () => {
-        await login(userNameRef.current.value, passwordRef.current.value);
+        await login(emailRef.current.value, passwordRef.current.value);
     };
 
     return (
@@ -41,8 +41,8 @@ export default function SignIn() {
                 <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
                     <Stack spacing={4}>
                         <FormControl id='email'>
-                            <FormLabel>Username</FormLabel>
-                            <Input type='text' ref={userNameRef} />
+                            <FormLabel>Email</FormLabel>
+                            <Input type='email' ref={emailRef} />
                         </FormControl>
                         <FormControl id='password'>
                             <FormLabel>Password</FormLabel>

@@ -13,6 +13,7 @@ import WatchLater from './pages/WatchLater';
 import Profile from './pages/Profile';
 import History from './pages/History';
 import Search from './pages/Search';
+import CreateShort from './pages/CreateShort';
 import { ChakraProvider } from '@chakra-ui/react';
 
 const Container = styled.div`
@@ -50,6 +51,7 @@ function App() {
                                         <Route path=':id' element={<Video />} />
                                     </Route>
                                     <Route path='/search/:query' element={<Search />} />
+                                    <Route path='/createShort' element={<CreateShort />} />
                                 </Route>
                             </Routes>
                         </Wrapper>

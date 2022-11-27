@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const upload = require('../middleware/uploadFile');
 const {
     getVideo,
     getSpecificVideo,
@@ -16,8 +17,10 @@ const {
 const { getLikeVideo, postLike } = require('../controller/likedVideoController');
 const { getWatchedVideo, postWatchedVideo } = require('../controller/watchedVideoController');
 const { getWatchLateVideo, postWatchLateVideo } = require('../controller/watchLateVideoController');
+const { getShortVideo, postShortVideo } = require('../controller/shortVideoController');
 
 //* [GET] methods
+router.get('/short/', getShortVideo);
 router.get('/liked/:userID', getLikeVideo);
 router.get('/watched/:userID', getWatchedVideo);
 router.get('/watchLater/:userID', getWatchLateVideo);
@@ -28,11 +31,12 @@ router.get('/:id', getSpecificVideo);
 router.get('/', getVideo);
 
 //* [POST] methods
-router.post('/', postVideo);
+router.post('/short',upload.single('image'), postShortVideo);
 router.post('/like', postLike);
 router.post('/subscribe', postSubscribe);
 router.post('/watchLater', postWatchLateVideo);
 router.post('/watched', postWatchedVideo);
+router.post('/', postVideo);
 
 //* [PUT] methods
 router.put('/like/:videoID', updateVideoLike);

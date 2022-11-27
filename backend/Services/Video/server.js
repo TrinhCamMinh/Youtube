@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -7,6 +8,7 @@ const videoRoute = require('./routes/videoRoute');
 
 //middleware
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '/upload')));
 app.use(cors());
 
 //* routes

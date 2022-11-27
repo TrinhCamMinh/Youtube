@@ -10,7 +10,6 @@ const cors = require('cors');
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '/upload')));
-console.log(path.join(__dirname, '/upload'));
 
 //* routes
 app.use('/api/user', userRoute);

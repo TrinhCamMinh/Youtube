@@ -17,6 +17,16 @@ export const useVideo = () => {
         return json;
     };
 
+    const postLikeVideo = async (userID, videoID) => {
+        const response = await fetch(`http://localhost:7000/api/video/like`, {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ userID, videoID }),
+        });
+        const json = await response.json();
+        return json;
+    };
+
     const likeVideo = async (id) => {
         const response = await fetch(`http://localhost:7000/api/video/like/${id}`, {
             method: 'PUT',
@@ -67,6 +77,7 @@ export const useVideo = () => {
         getVideo,
         getSpecificVideo,
         getLikedVideo,
+        postLikeVideo,
         getAllSubscribeVideo,
         getSubscribeVideo,
         likeVideo,

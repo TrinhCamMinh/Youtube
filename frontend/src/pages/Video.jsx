@@ -106,7 +106,8 @@ const Description = styled.p`
 const Video = () => {
     const { id } = useParams();
     const { user } = useAuthContext();
-    const { getVideo, getSpecificVideo, getSubscribeVideo, likeVideo, viewVideo, subscribeVideo } = useVideo();
+    const { getVideo, getSpecificVideo, getSubscribeVideo, likeVideo, postLikeVideo, viewVideo, subscribeVideo } =
+        useVideo();
     const [subscribeChannel, setSubscribeChannel] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [ownerID, setOwnerID] = useState(null);
@@ -141,9 +142,10 @@ const Video = () => {
         await viewVideo(id);
     };
 
-    const handleLike = async (id) => {
+    const handleLike = async () => {
         if (user) {
             await likeVideo(id);
+            await postLikeVideo(user._id, id);
             setShowModal(false);
         } else {
             setShowModal(true);
@@ -169,8 +171,6 @@ const Video = () => {
         fetchSubscribeChannel();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ownerID]);
-
-    console.log(video);
 
     return (
         <Box bg={useColorModeValue('white', 'black.200')}>
@@ -241,7 +241,7 @@ const Video = () => {
                                             borderLeftRadius='full'
                                             onClick={() => {
                                                 setContent('like this video');
-                                                user ? handleLike(video._id) : onOpen();
+                                                user ? handleLike() : onOpen();
                                             }}
                                         >
                                             <ThumbUpOutlinedIcon /> {video.like}

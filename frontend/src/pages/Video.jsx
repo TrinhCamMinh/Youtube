@@ -125,6 +125,7 @@ const Video = () => {
     const [content, setContent] = useState('');
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [liked, setLiked] = useState();
+    const [numLiked, setNumLiked] = useState();
     const [saved, setSaved] = useState();
 
     const fetchAllVideo = async () => {
@@ -136,6 +137,7 @@ const Video = () => {
         const data = await getSpecificVideo(id);
         setVideo(data);
         setOwnerID(data.ownerID);
+        setNumLiked(data.like);
     };
 
     const fetchSubscribeChannel = async () => {
@@ -175,12 +177,14 @@ const Video = () => {
     };
 
     useEffect(() => {
-        fetchSpecificVideo();
-        fetchAllVideo();
-        updateView();
-        postWatchedVideo(user._id, id);
+        if (user) {
+            fetchSpecificVideo();
+            fetchAllVideo();
+            updateView();
+            postWatchedVideo(user._id, id);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         fetchSubscribeChannel();
@@ -245,7 +249,7 @@ const Video = () => {
                                             }
                                         }}
                                     >
-                                        {subscribeChannel && subscribeChannel.length > 0 ? 'Subcribed' : 'Subscribe'}
+                                        {subscribeChannel && subscribeChannel.length > 0 ? 'Subscribed' : 'Subscribe'}
                                     </Button>
                                 </ChannelInfo>
                                 <Buttons>
@@ -255,12 +259,14 @@ const Video = () => {
                                             gap='2'
                                             borderLeftRadius='full'
                                             onClick={() => {
+                                                setNumLiked(numLiked + 1);
                                                 setContent('like this video');
                                                 user ? handleLike() : onOpen();
                                             }}
                                             colorScheme={liked ? 'red' : 'gray'}
                                         >
-                                            <ThumbUpOutlinedIcon /> {video.like}
+                                            <ThumbUpOutlinedIcon />
+                                            {numLiked}
                                             {showModal && <LoginRequiredModal />}
                                         </Button>
 

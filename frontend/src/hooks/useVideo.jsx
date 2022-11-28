@@ -120,6 +120,12 @@ export const useVideo = () => {
         return json;
     };
 
+    const getAllUserVideo = async (id) => {
+        const response = await fetch(`http://localhost:7000/api/video/user/${id}`);
+        const json = await response.json();
+        return json;
+    };
+
     return {
         getVideo,
         getSpecificVideo,
@@ -137,5 +143,6 @@ export const useVideo = () => {
         getWatchedVideo,
         postWatchedVideo,
         postShortVideo,
+        getAllUserVideo,
     };
 };

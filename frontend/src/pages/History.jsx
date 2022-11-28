@@ -24,14 +24,14 @@ const DateGroup = styled.h3`
 `;
 
 const Home = () => {
-    const { getSavedVideo, getSpecificVideo } = useVideo();
+    const { getWatchedVideo, getSpecificVideo } = useVideo();
     const { user } = useAuthContext();
     const [watchedVideoID, setWatchedVideoID] = useState(null);
     const [watchedVideo, setWatchedVideo] = useState([]);
 
     const fetchWatchedVideoID = async () => {
         if (user) {
-            const data = await getSavedVideo(user._id);
+            const data = await getWatchedVideo(user._id);
             setWatchedVideoID(data);
         }
     };

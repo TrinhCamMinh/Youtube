@@ -19,6 +19,16 @@ const getSpecificVideo = async (req, res) => {
     }
 };
 
+const getAllUserVideo = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = await VideoModel.find({ ownerID: id });
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+};
+
 const searchVideo = async (req, res) => {
     try {
         const { query } = req.params;
@@ -70,6 +80,7 @@ const updateVideoView = async (req, res) => {
 module.exports = {
     getVideo,
     getSpecificVideo,
+    getAllUserVideo,
     postVideo,
     updateVideoLike,
     updateVideoView,

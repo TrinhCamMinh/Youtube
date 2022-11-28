@@ -59,7 +59,6 @@ const Home = () => {
 
     return (
         <>
-            {console.log(video)}
             <PageHeading>Liked Video</PageHeading>
             <DateGroup>Today</DateGroup>
             <Wrapper>

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useUser } from '../hooks/useUser';
 import styled from 'styled-components';
 import { format } from 'timeago.js';
 
@@ -37,12 +38,24 @@ const Text = styled.span`
 `;
 
 const Comment = ({ item }) => {
+    const { getUser } = useUser();
+    const [name, setName] = useState(null);
+
+    const fetchUserName = async () => {
+        const data = await getUser(item.userID);
+        setName(data);
+    };
+
+    useEffect(() => {
+        fetchUserName();
+    }, []);
+
     return (
         <Container>
             <Avatar src={`http://localhost:5000${item.comment.commentAvatar}`} />
             <Details>
                 <Name>
-                    {item.userID}
+                    {name && name.userName}
                     <Date>{format(item.createdAt)}</Date>
                 </Name>
                 <Text>{item.comment.commentContent}</Text>

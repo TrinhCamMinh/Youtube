@@ -8,6 +8,7 @@ const {
     updateVideoLike,
     updateVideoView,
     searchVideo,
+    getAllUserVideo,
 } = require('../controller/videoController');
 const {
     getAllUserSubscribeChannel,
@@ -27,11 +28,12 @@ router.get('/watchLater/:userID', getWatchLateVideo);
 router.get('/subscribed', getSubscribeChannel);
 router.get('/subscribed/all/:userID', getAllUserSubscribeChannel);
 router.get('/search/:query', searchVideo);
+router.get('/user/:id', getAllUserVideo);
 router.get('/:id', getSpecificVideo);
 router.get('/', getVideo);
 
 //* [POST] methods
-router.post('/short',upload.single('image'), postShortVideo);
+router.post('/short', upload.single('image'), postShortVideo);
 router.post('/like', postLike);
 router.post('/subscribe', postSubscribe);
 router.post('/watchLater', postWatchLateVideo);

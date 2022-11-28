@@ -28,6 +28,7 @@ export const useUser = () => {
         const json = await response.json();
         if (response.ok) {
             console.log('update success');
+            localStorage.setItem('user', JSON.stringify(json));
             dispatch({ type: 'LOGIN', payload: json });
         }
         return json;

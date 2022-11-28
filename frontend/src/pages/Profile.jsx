@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useUser } from '../hooks/useUser';
 import styled from 'styled-components';
 import Card from '../components/Card';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useVideo } from '../hooks/useVideo';
 import {
     Box,
     Button,
@@ -77,6 +78,8 @@ const SubcriberCount = styled.p`
 `;
 
 const Home = () => {
+    const { getAllUserVideo } = useVideo();
+    const [video, setVideo] = useState();
     const { user } = useAuthContext();
     const toast = useToast();
     const { updateUserAccount } = useUser();
@@ -97,6 +100,15 @@ const Home = () => {
             locationRef.current.value,
         );
     };
+
+    const fetchUserVideo = async () => {
+        const data = await getAllUserVideo(user._id);
+        setVideo(data);
+    };
+
+    useEffect(() => {
+        fetchUserVideo();
+    }, []);
 
     return (
         <Container>
@@ -239,7 +251,10 @@ const Home = () => {
                         Uploaded Video
                     </Text>
                     <Wrapper>
-                        <Card />
+                        {video &&
+                            video.map((item, index) => {
+                                return <Card key={index} item={item} />;
+                            })}
                     </Wrapper>
                 </>
             )}

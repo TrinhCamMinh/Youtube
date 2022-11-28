@@ -5,11 +5,14 @@ import './index.css';
 import { theme } from './utils/Theme';
 import { ColorModeScript } from '@chakra-ui/react';
 import { AuthProvider } from './contexts/AuthContext';
+import { CommentContextProvider } from './contexts/CommentContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <AuthProvider>
-        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-        <App />
+        <CommentContextProvider>
+            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+            <App />
+        </CommentContextProvider>
     </AuthProvider>,
 );

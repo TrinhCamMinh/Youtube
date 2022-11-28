@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useComment } from '../hooks/useComment';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useCommentContext } from '../hooks/useCommentContext';
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Comment from './Comment';
@@ -33,17 +34,17 @@ const Input = styled.input`
 const Comments = () => {
     const { id } = useParams();
     const { user } = useAuthContext();
+    const { comment } = useCommentContext();
     const { getComment, postComment } = useComment();
     const inputRef = useRef();
-    const [comment, setComment] = useState(null);
 
     const fetchComment = async () => {
-        const data = await getComment(id);
-        setComment(data);
+        await getComment(id);
     };
 
     const handleSubmitComment = async (value) => {
         await postComment(id, user._id, user.avatar, value);
+        inputRef.current.value = '';
     };
 
     useEffect(() => {
@@ -58,7 +59,12 @@ const Comments = () => {
                     <NewComment>
                         <Avatar src={`http://localhost:5000${user.avatar}`} />
                         <Input placeholder='Add a comment...' ref={inputRef} />
-                        <Button rounded={'full'} onClick={() => handleSubmitComment(inputRef.current.value)}>
+                        <Button
+                            rounded={'full'}
+                            onClick={() =>
+                                inputRef.current.value.length > 0 && handleSubmitComment(inputRef.current.value)
+                            }
+                        >
                             Comment
                         </Button>
                     </NewComment>

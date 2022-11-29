@@ -37,6 +37,7 @@ const Comments = () => {
     const { comment } = useCommentContext();
     const { getComment, postComment } = useComment();
     const inputRef = useRef();
+    const [content, setContent] = useState();
 
     const fetchComment = async () => {
         await getComment(id);
@@ -58,12 +59,17 @@ const Comments = () => {
                 <>
                     <NewComment>
                         <Avatar src={`http://localhost:5000${user.avatar}`} />
-                        <Input placeholder='Add a comment...' ref={inputRef} />
+                        <Input
+                            placeholder='Add a comment...'
+                            ref={inputRef}
+                            onChange={(e) => setContent(e.target.value)}
+                        />
                         <Button
                             rounded={'full'}
                             onClick={() =>
                                 inputRef.current.value.length > 0 && handleSubmitComment(inputRef.current.value)
                             }
+                            colorScheme={content ? 'red' : 'gray'}
                         >
                             Comment
                         </Button>

@@ -177,9 +177,9 @@ const Video = () => {
     };
 
     useEffect(() => {
+        fetchSpecificVideo();
+        fetchAllVideo();
         if (user) {
-            fetchSpecificVideo();
-            fetchAllVideo();
             updateView();
             postWatchedVideo(user._id, id);
         }

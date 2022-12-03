@@ -5,7 +5,7 @@
 - On first terminal, run command "*cd backend/Services/User && npm install*" after that "*npm run server*" to run **the User Service**
 - On second terminal, run command "*cd backend/Services/Video && npm install*" after that "*npm run server*" to run **the Video Service**
 - On third terminal, run command "*cd backend/Services/Comment && npm install*" after that "*npm run server*" to run **the Comment Service**
-- On fourth terminal, run command "cd frontend && npm install" after that "npm start"
+- On fourth terminal, run command "*cd frontend && npm install*" after that "*npm start*"
 
 ### 2. How to use our website?
 - Use one of these account to login and start using:

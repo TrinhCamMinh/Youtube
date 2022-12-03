@@ -10,6 +10,6 @@
 ### 2. How to use our website?
 - Use one of these account to login and start using:
   - Nguyen Trieu Duong: email: "trieuduongivn@gmail.com" , password: "Duong14032002#"
-  - Trinh Cam Minh: email: "trinhcamminh@gmail.com" , password: "Binhphu1517!"
+  - Trinh Cam Minh: email: "trinhcamminh25112002@gmail.com" , password: "Binhphu1517!"
   - Tran Le Minh Tri: email" "trik24@gmail.com", password: "Tranleminhtri123!"
-  *Or use can sign up your account*
+  *Or you can sign up your account*

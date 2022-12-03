@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useVideo } from '../hooks/useVideo';
+import { useUser } from '../hooks/useUser';
 import { useAuthContext } from '../hooks/useAuthContext';
 import styled from 'styled-components';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
@@ -106,6 +107,7 @@ const Description = styled.p`
 const Video = () => {
     const { id } = useParams();
     const { user } = useAuthContext();
+    const { getUser } = useUser();
     const {
         getVideo,
         getSpecificVideo,
@@ -122,6 +124,7 @@ const Video = () => {
     const [ownerID, setOwnerID] = useState(null);
     const [allVideo, setAllVideo] = useState(null);
     const [video, setVideo] = useState(null);
+    const [channelName, setChannelName] = useState(null);
     const [content, setContent] = useState('');
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [liked, setLiked] = useState();
@@ -144,6 +147,13 @@ const Video = () => {
         if (user) {
             const data = await getSubscribeVideo(user._id, ownerID);
             setSubscribeChannel(data);
+        }
+    };
+
+    const fetchChannelName = async () => {
+        if (ownerID) {
+            const data = await getUser(ownerID);
+            setChannelName(data.channelName);
         }
     };
 
@@ -188,6 +198,7 @@ const Video = () => {
 
     useEffect(() => {
         fetchSubscribeChannel();
+        fetchChannelName();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ownerID]);
 
@@ -231,7 +242,7 @@ const Video = () => {
                                 <ChannelInfo>
                                     <Image src='https://picsum.photos/200/200' />
                                     <ChannelDetail>
-                                        <ChannelName>{video.ownerID}</ChannelName>
+                                        {channelName && <ChannelName>{channelName}</ChannelName>}
                                         <ChannelCounter>200K subscribers</ChannelCounter>
                                     </ChannelDetail>
                                     <Button
